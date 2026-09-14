@@ -1,10 +1,10 @@
 {
-"liquidbounce.module.fishGuard.description": "血肉挂机钓鱼，遭攻击时经 OneBot 发 QQ 预警",
-"liquidbounce.module.simmcChannel.description": "simmc 发言频道提醒",
-"liquidbounce.module.adminActionLog.description": "管理操作记录：管理员对你做了什么，聊天框显示",
-"liquidbounce.module.arcaneRange.description": "奥术释放距离估算",
-"liquidbounce.module.entitySizeNormalize.description": "小体积玩家视觉拉齐（仅视觉，碰撞箱不变）",
-"liquidbounce.module.packetCapture.description": "数据包捕获"
+  "liquidbounce.module.fishGuard.description": "血肉挂机钓鱼，遭攻击时经 OneBot 发 QQ 预警",
+  "liquidbounce.module.simmcChannel.description": "simmc 发言频道提醒",
+  "liquidbounce.module.adminActionLog.description": "管理操作记录：管理员对你做了什么，聊天框显示",
+  "liquidbounce.module.arcaneRange.description": "奥术释放距离估算",
+  "liquidbounce.module.entitySizeNormalize.description": "小体积玩家视觉拉齐（仅视觉，碰撞箱不变）",
+  "liquidbounce.module.packetCapture.description": "数据包捕获",
   "modmenu.descriptionTranslation.liquidbounce": "一个基于mixin注入的免费Minecraft作弊客户端。",
   "liquidbounce.command.autotranslate.description": "调整自动翻译的设置。",
   "liquidbounce.command.autotranslate.subcommand.language.description": "查看你的语言代码。",

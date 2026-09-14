@@ -1,10 +1,10 @@
 {
-"liquidbounce.module.fishGuard.description": "AFK fishing with OneBot QQ alerts when attacked",
-"liquidbounce.module.simmcChannel.description": "simmc chat channel notifier",
-"liquidbounce.module.adminActionLog.description": "Logs what staff do to you, shown in chat",
-"liquidbounce.module.arcaneRange.description": "Arcane cast-range estimator",
-"liquidbounce.module.entitySizeNormalize.description": "Visually normalises small player models (visual only)",
-"liquidbounce.module.packetCapture.description": "Packet capture"
+  "liquidbounce.module.fishGuard.description": "AFK fishing with OneBot QQ alerts when attacked",
+  "liquidbounce.module.simmcChannel.description": "simmc chat channel notifier",
+  "liquidbounce.module.adminActionLog.description": "Logs what staff do to you, shown in chat",
+  "liquidbounce.module.arcaneRange.description": "Arcane cast-range estimator",
+  "liquidbounce.module.entitySizeNormalize.description": "Visually normalises small player models (visual only)",
+  "liquidbounce.module.packetCapture.description": "Packet capture",
   "modmenu.descriptionTranslation.liquidbounce": "A free mixin-based injection hacked-client for Minecraft.",
   "liquidbounce.command.autotranslate.description": "Modify automatic translation settings.",
   "liquidbounce.command.autotranslate.subcommand.language.description": "View your language code.",

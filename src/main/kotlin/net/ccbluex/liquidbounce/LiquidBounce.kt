@@ -517,11 +517,18 @@ object LiquidBounce : EventListener {
                 .thenCompose {
                     val prepareDispatcher = prepareExecutor.asCoroutineDispatcher()
                     val applyDispatcher = applyExecutor.asCoroutineDispatcher()
-                    @Suppress("UNCHECKED_CAST") // Kotlin Unit to Java Void
+
+                    // initializeClient 返回 CompletableFuture<Unit>，而本接口签名要求 CompletableFuture<Void>。
+                    // 这里绝对不能写 `as CompletableFuture<Void>`：泛型会被擦除，那个转换在运行时
+                    // 完全不起作用，future 里装的仍然是 kotlin.Unit；等它 complete 时 CompletableFuture
+                    // 的桥接方法会把它强转成 Void 并抛 ClassCastException，导致资源重载 future
+                    // 永远无法正常完成 —— MinecraftClient.render() 每帧轮询该 future，
+                    // 于是游戏永久停在加载遮罩上（表现为持续黑屏）。
+                    // thenAccept 消费掉 Unit 并返回真正的 CompletableFuture<Void>，类型是对得上的。
                     initializeClient(
                         workerDispatcher = prepareDispatcher,
                         renderThreadDispatcher = applyDispatcher,
-                    ) as CompletableFuture<Void>
+                    ).thenAccept { }
                 }
         }
 
