@@ -21,8 +21,6 @@ package net.ccbluex.liquidbounce.injection.mixins.minecraft.render.entity;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleSwordBlock;
-import net.ccbluex.liquidbounce.features.module.modules.render.nametags.ModuleNametags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
@@ -46,31 +44,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AvatarRenderer.class)
 public abstract class MixinAvatarRenderer {
 
-    @Inject(method = "getArmPose(Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;", at = @At("HEAD"), cancellable = true)
-    private static void injectArmPose(
-        Avatar player, ItemStack stack, InteractionHand hand, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
-        LocalPlayer localPlayer = Minecraft.getInstance().player;
-        if (player == localPlayer
-            && ModuleSwordBlock.INSTANCE.getApplyToThirdPersonView()
-        ) {
-            switch (hand) {
-                case MAIN_HAND -> {
-                    if (ModuleSwordBlock.shouldAnimateSwordBlock(localPlayer, stack)) {
-                        cir.setReturnValue(HumanoidModel.ArmPose.BLOCK);
-                    }
-                }
-                case OFF_HAND -> {
-                    if (ModuleSwordBlock.INSTANCE.shouldHideOffhand()) {
-                        cir.setReturnValue(HumanoidModel.ArmPose.EMPTY);
-                    }
-                }
-            }
-        }
-    }
 
-    @WrapWithCondition(method = "submitNameTag(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitNameTag(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/phys/Vec3;ILnet/minecraft/network/chat/Component;ZIDLnet/minecraft/client/renderer/state/CameraRenderState;)V"))
-    private boolean disableVanillaNametag(SubmitNodeCollector instance, PoseStack poseStack, Vec3 vec3, int i, Component component, boolean b, int j, double v, CameraRenderState cameraRenderState, @Local(argsOnly = true) AvatarRenderState state) {
-        return ModuleNametags.INSTANCE.shouldRenderVanillaNametag(state);
-    }
 
 }

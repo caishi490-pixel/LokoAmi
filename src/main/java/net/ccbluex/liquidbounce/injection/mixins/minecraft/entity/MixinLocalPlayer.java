@@ -18,6 +18,7 @@
  */
 package net.ccbluex.liquidbounce.injection.mixins.minecraft.entity;
 
+import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleSprint;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -27,16 +28,8 @@ import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.EventState;
 import net.ccbluex.liquidbounce.event.events.*;
 import net.ccbluex.liquidbounce.features.module.modules.exploit.ModulePortalMenu;
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleEntityControl;
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleNoPush;
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleSprint;
-import net.ccbluex.liquidbounce.features.module.modules.movement.NoPushBy;
-import net.ccbluex.liquidbounce.features.module.modules.movement.noslow.ModuleNoSlow;
-import net.ccbluex.liquidbounce.features.module.modules.player.ModuleNoEntityInteract;
-import net.ccbluex.liquidbounce.features.module.modules.player.ModuleReach;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFreeCam;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleNoSwing;
-import net.ccbluex.liquidbounce.features.module.modules.world.ModuleLiquidPlace;
 import net.ccbluex.liquidbounce.integration.interop.protocol.rest.v1.game.PlayerData;
 import net.ccbluex.liquidbounce.integration.interop.protocol.rest.v1.game.PlayerInventoryData;
 import net.ccbluex.liquidbounce.integration.screen.ScreenManager;
@@ -192,10 +185,6 @@ public abstract class MixinLocalPlayer extends MixinPlayer implements LocalPlaye
      */
     @Inject(method = "moveTowardsClosestSpace", at = @At("HEAD"), cancellable = true)
     private void hookPushOut(double x, double z, CallbackInfo ci) {
-        if (!ModuleNoPush.canPush(NoPushBy.BLOCKS)) {
-            ci.cancel();
-            return;
-        }
 
         final PlayerPushOutEvent pushOutEvent = new PlayerPushOutEvent();
         EventManager.INSTANCE.callEvent(pushOutEvent);
@@ -270,24 +259,13 @@ public abstract class MixinLocalPlayer extends MixinPlayer implements LocalPlaye
         }
 
         // Through Walls Reach
-        if (ModuleReach.INSTANCE.getRunning()) {
-            var throughWallsRange = ModuleReach.INSTANCE.getEntity().getInteractionThroughWallsRange$liquidbounce();
-
-            if (throughWallsRange > 0.0) {
-                var hitEntityResult = EntityRaytracingKt.findEntityInCrosshair(throughWallsRange, rotation, null);
-
-                if (hitEntityResult != null && hitEntityResult.getType() == HitResult.Type.ENTITY) {
-                    return hitEntityResult;
-                }
-            }
-        }
 
 
         return RaytracingKt.traceFromPlayer(
             rotation,
             Math.max(blockInteractionRange, entityInteractionRange),
             ClipContext.Block.OUTLINE,
-            ModuleLiquidPlace.INSTANCE.getRunning(),
+            false,
             tickDelta
         );
     }
@@ -304,7 +282,7 @@ public abstract class MixinLocalPlayer extends MixinPlayer implements LocalPlaye
 
     @ModifyExpressionValue(method = "pick(Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/projectile/ProjectileUtil;getEntityHitResult(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/AABB;Ljava/util/function/Predicate;D)Lnet/minecraft/world/phys/EntityHitResult;"))
     private static @Nullable EntityHitResult hookEntityHitResult(@Nullable EntityHitResult original) {
-        return original == null || !ModuleNoEntityInteract.INSTANCE.test(original) ? null : original;
+        return original;
     }
 
     /**
@@ -341,9 +319,6 @@ public abstract class MixinLocalPlayer extends MixinPlayer implements LocalPlaye
      */
     @ModifyExpressionValue(method = "isSlowDueToUsingItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem()Z"))
     private boolean hookSprintAffectStart(boolean original) {
-        if (ModuleNoSlow.INSTANCE.getRunning()) {
-            return false;
-        }
 
         return original;
     }
@@ -393,9 +368,6 @@ public abstract class MixinLocalPlayer extends MixinPlayer implements LocalPlaye
 
     @ModifyReturnValue(method = "getJumpRidingScale", at = @At("RETURN"))
     private float hookMountJumpStrength(float original) {
-        if (ModuleEntityControl.getEnforceJumpStrength()) {
-            return 1f;
-        }
 
         return original;
     }
@@ -433,9 +405,6 @@ public abstract class MixinLocalPlayer extends MixinPlayer implements LocalPlaye
 
     @ModifyExpressionValue(method = "canStartSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/ClientInput;hasForwardImpulse()Z"))
     private boolean hookIsWalking(boolean original) {
-        if (!ModuleSprint.INSTANCE.getShouldSprintOmnidirectional()) {
-            return original;
-        }
 
         float movementForward = input.getMoveVector().y;
         float movementSideways = input.getMoveVector().x;

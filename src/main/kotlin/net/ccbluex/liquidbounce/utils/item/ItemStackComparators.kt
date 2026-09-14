@@ -18,7 +18,6 @@
  */
 package net.ccbluex.liquidbounce.utils.item
 
-import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.ScaffoldBlockItemSelection
 import net.ccbluex.liquidbounce.utils.client.mc
 import net.ccbluex.liquidbounce.utils.sorting.ComparatorChain
 import net.minecraft.core.BlockPos
@@ -45,13 +44,6 @@ private fun ItemStack.block(): Block = (this.item as BlockItem).block
 
 private fun ItemStack.defaultBlockState(): BlockState = this.block().defaultBlockState()
 
-object PreferFavourableBlocks : Comparator<ItemStack> {
-    override fun compare(o1: ItemStack, o2: ItemStack): Int {
-        return compareValuesBy(o1, o2) {
-            !ScaffoldBlockItemSelection.isBlockUnfavourable(it)
-        }
-    }
-}
 
 object PreferSolidBlocks : Comparator<ItemStack> {
     override fun compare(o1: ItemStack, o2: ItemStack): Int {

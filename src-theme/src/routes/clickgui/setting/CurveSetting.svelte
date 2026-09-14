@@ -40,7 +40,7 @@
     const EPS = 1e-9;
     // Points at the exact edges of the x-axis are locked. This margin prevents additional points from being locked.
     const EDGE_MARGIN = 1e-6;
-    const COLOR_ACCENT = "#4677ff"; // NOTE: This should be read from a color file in the future.
+    const COLOR_ACCENT = "#F0508C"; // NOTE: This should be read from a color file in the future.
     const COLOR_GRID = "#333333";
     const COLOR_DIMMED_TEXT = "rgba(211, 211, 211, 255)";
 

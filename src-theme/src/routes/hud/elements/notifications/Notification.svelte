@@ -48,7 +48,7 @@
     }
 
     &.info {
-      background-color: #4677ff;
+      background-color: #F0508C;
       background-image: url("/img/hud/notification/icon-info.svg");
     }
 

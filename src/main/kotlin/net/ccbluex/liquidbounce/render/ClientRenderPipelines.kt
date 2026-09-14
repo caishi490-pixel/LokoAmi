@@ -269,9 +269,7 @@ object ClientRenderPipelines {
     fun relativeQuads(useColor: Boolean) = if (useColor) QuadsRelativeToCamera else QuadsRelativeToCameraNoColor
 
     /**
-     * @see net.ccbluex.liquidbounce.features.module.modules.render.ModuleStorageESP
-     * @see net.ccbluex.liquidbounce.features.module.modules.render.ModuleBlockESP
-     */
+             */
     private val OutlineQuads = newPipeline("outline_quads") {
         withSnippet(RenderPipelines.DEBUG_FILLED_SNIPPET)
         withSnippet(RenderPipelines.GLOBALS_SNIPPET)

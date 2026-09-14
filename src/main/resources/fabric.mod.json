@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "liquidbounce",
+  "id": "lokoami",
   "version": "${version}",
-  "name": "LiquidBounce",
+  "name": "LokoAmi",
   "description": "A free mixin-based injection hacked-client for Minecraft using the Fabric modding toolchain.",
   "authors": [
     "CCBlueX"
@@ -15,7 +15,7 @@
     "email": "support@liquidbounce.net"
   },
   "license": "GNU General Public License v3.0",
-  "icon": "resources/liquidbounce/icon_64x64.png",
+  "icon": "resources/lokoami/icon_64x64.png",
   "environment": "client",
   "entrypoints": {
     "main": []
@@ -28,7 +28,7 @@
     }
   },
   "mixins": [
-    "liquidbounce.mixins.json"
+    "lokoami.mixins.json"
   ],
   "depends": {
     "minecraft": ["${minecraft_version}"],
@@ -42,5 +42,5 @@
   "breaks": {
     "viafabricplus": "<${viafabricplus_version}"
   },
-  "accessWidener": "liquidbounce.accesswidener"
+  "accessWidener": "lokoami.accesswidener"
 }

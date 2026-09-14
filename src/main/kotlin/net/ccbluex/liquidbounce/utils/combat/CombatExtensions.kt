@@ -28,7 +28,6 @@ import net.ccbluex.liquidbounce.config.types.list.Tagged
 import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.event.events.AttackEntityEvent
 import net.ccbluex.liquidbounce.features.global.GlobalSettingsTarget
-import net.ccbluex.liquidbounce.features.module.modules.combat.criticals.ModuleCriticals
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFreeCam
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFreeLook
 import net.ccbluex.liquidbounce.utils.block.SwingMode
@@ -259,13 +258,6 @@ fun attackEntity(entity: Entity, swing: SwingMode, keepSprint: Boolean = false) 
                     this.magicCrit(entity)
                 }
 
-                if (ModuleCriticals.wouldDoCriticalHit(true)) {
-                    world.playSound(
-                        null, x, y, z, SoundEvents.PLAYER_ATTACK_CRIT,
-                        soundSource, 1.0f, 1.0f
-                    )
-                    crit(entity)
-                }
             }
         } else {
             if (interaction.playerMode != GameType.SPECTATOR) {

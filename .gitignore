@@ -14,3 +14,8 @@
 /.kotlin/
 .DS_Store
 *.log
+
+# --- LokoAmi 追加：开发过程中的备份与临时产物，不应提交 ---
+.bak-*/
+*.bak-*
+build-log.txt

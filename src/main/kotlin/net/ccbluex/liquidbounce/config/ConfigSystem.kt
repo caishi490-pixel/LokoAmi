@@ -29,7 +29,7 @@ import net.ccbluex.liquidbounce.config.types.Config
 import net.ccbluex.liquidbounce.config.types.Value
 import net.ccbluex.liquidbounce.config.types.group.ModeValueGroup
 import net.ccbluex.liquidbounce.config.types.group.ValueGroup
-import net.ccbluex.liquidbounce.features.module.modules.combat.killaura.ModuleKillAura
+import net.ccbluex.liquidbounce.features.module.ModuleManager
 import net.ccbluex.liquidbounce.utils.client.mc
 import net.ccbluex.liquidbounce.utils.io.createZipArchive
 import net.ccbluex.liquidbounce.utils.io.extractZip
@@ -262,10 +262,7 @@ object ConfigSystem {
             .map { valueElement -> valueElement.asJsonObject }
             .associateBy { valueObj -> valueObj["name"].asString!! }
 
-        // Migration Code for KillAura's Range Values
-        if (valueGroup is ModuleKillAura) {
-            valueGroup.range.migrateFromValues(values)
-        }
+        // NOTE: KillAura 的旧版 Range 值迁移代码已移除（该模块已从本客户端删除）
 
         for (value in valueGroup.inner) {
             val currentElement = values[value.name]

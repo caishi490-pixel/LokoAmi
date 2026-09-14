@@ -19,12 +19,10 @@
 package net.ccbluex.liquidbounce.injection.mixins.minecraft.render;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.ccbluex.liquidbounce.features.module.modules.combat.aimbot.ModuleDroneControl;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFreeCam;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFreeLook;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleQuickPerspectiveSwap;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleSmoothCamera;
-import net.ccbluex.liquidbounce.features.module.modules.render.cameraclip.ModuleCameraClip;
 import net.minecraft.client.Camera;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,7 +89,7 @@ public abstract class MixinCamera {
             }
 
             float scale = focusedEntity instanceof LivingEntity livingEntity ? livingEntity.getScale() : 1.0F;
-            float desiredCameraDistance = ModuleCameraClip.INSTANCE.getRunning() ? ModuleCameraClip.INSTANCE.getDistance() : 4f;
+            float desiredCameraDistance = 4f;
 
             if (!rearView) {
                 move(-getMaxZoom(desiredCameraDistance * scale), 0.0f, 0.0f);
@@ -99,12 +97,6 @@ public abstract class MixinCamera {
 
             ci.cancel();
             return;
-        }
-        var screen = ModuleDroneControl.INSTANCE.getScreen();
-
-        if (screen != null) {
-            this.setPosition(screen.getCameraPos());
-            this.setRotation(screen.getCameraRotation().x, screen.getCameraRotation().y);
         }
     }
 
@@ -115,15 +107,7 @@ public abstract class MixinCamera {
         }
     }
 
-    @ModifyConstant(method = "getMaxZoom", constant = @Constant(intValue = 8))
-    private int hookCameraClip(int constant) {
-        return ModuleCameraClip.INSTANCE.getRunning() ? 0 : constant;
-    }
 
-    @ModifyExpressionValue(method = "setup", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;getMaxZoom(F)F"))
-    private float modifyDesiredCameraDistance(float original) {
-        return ModuleCameraClip.INSTANCE.getRunning() ? getMaxZoom(ModuleCameraClip.INSTANCE.getDistance()) : original;
-    }
 
     @Redirect(method = "setup", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;add(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"))
     private Vec3 modifyPositionVehicle(Vec3 instance, Vec3 vec) {

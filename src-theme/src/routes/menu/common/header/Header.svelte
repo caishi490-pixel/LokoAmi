@@ -57,7 +57,7 @@
     {#if $location === "/title" && isAnniversary()}
         <AnimatedLogo/>
     {:else}
-        <img class="logo" src="img/lb-logo.svg" alt="LiquidBounce logo">
+        <img class="logo" src="img/lb-logo.svg" alt="LokoAmi logo">
     {/if}
 
     <Notifications />

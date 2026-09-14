@@ -24,9 +24,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.ccbluex.liquidbounce.features.module.modules.render.*;
-import net.ccbluex.liquidbounce.features.module.modules.render.esp.ModuleESP;
-import net.ccbluex.liquidbounce.features.module.modules.render.esp.modes.EspGlowMode;
-import net.ccbluex.liquidbounce.features.module.modules.render.nametags.ModuleNametags;
 import net.ccbluex.liquidbounce.interfaces.EntityRenderStateAddition;
 import net.ccbluex.liquidbounce.render.engine.type.Color4b;
 import net.ccbluex.liquidbounce.utils.combat.CombatExtensionsKt;
@@ -70,15 +67,6 @@ public abstract class MixinEntityRenderer<T extends Entity, S extends EntityRend
         }
     }
 
-    @Inject(method = "submit", at = @At("HEAD"))
-    private void renderMobOwners(S state, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraState, CallbackInfo ci) {
-        var entity = ((EntityRenderStateAddition) state).liquid_bounce$getEntity();
-        var ownerName = ModuleMobOwners.INSTANCE.getOwnerInfoText(entity);
-
-        if (ownerName != null) {
-            renderLabel(entity, ownerName, matrices, queue, state.lightCoords);
-        }
-    }
 
     @SuppressWarnings("unused")
     @Unique
@@ -115,10 +103,6 @@ public abstract class MixinEntityRenderer<T extends Entity, S extends EntityRend
         matrices.popPose();
     }
 
-    @WrapWithCondition(method = "submitNameTag", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitNameTag(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/phys/Vec3;ILnet/minecraft/network/chat/Component;ZIDLnet/minecraft/client/renderer/state/CameraRenderState;)V"))
-    private boolean disableVanillaNametag(SubmitNodeCollector instance, PoseStack poseStack, Vec3 vec3, int i, Component component, boolean b, int j, double v, CameraRenderState cameraRenderState, @Local(argsOnly = true) S state) {
-        return ModuleNametags.INSTANCE.shouldRenderVanillaNametag(state);
-    }
 
     @Inject(method = "extractRenderState", at = @At("HEAD"))
     private void hookInjectEntityIntoState(T entity, S state, float tickDelta, CallbackInfo ci) {
@@ -132,18 +116,7 @@ public abstract class MixinEntityRenderer<T extends Entity, S extends EntityRend
 
     @Unique
     private static boolean liquid_bounce$shouldRenderOutline(Entity entity) {
-        if (ModuleItemESP.GlowMode.INSTANCE.getRunning() && ModuleItemESP.INSTANCE.shouldRender(entity)) {
-            return true;
-        } else if (EspGlowMode.INSTANCE.getRunning() && CombatExtensionsKt.shouldBeShown(entity) && EspGlowMode.INSTANCE.shouldRender(entity)) {
-            return true;
-        } else if (ModuleTNTTimer.INSTANCE.getRunning() && ModuleTNTTimer.INSTANCE.getEsp() && entity instanceof PrimedTnt) {
-            return true;
-        } else if (ModuleStorageESP.GlowMode.INSTANCE.getRunning()) {
-            var category = ModuleStorageESP.categorize(entity);
-            return category != null && category.shouldRender(entity);
-        } else {
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -153,18 +126,6 @@ public abstract class MixinEntityRenderer<T extends Entity, S extends EntityRend
      */
     @WrapOperation(method = "extractRenderState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getTeamColor()I"))
     private int injectTeamColor(Entity entity, Operation<Integer> operation) {
-        if (entity instanceof LivingEntity livingEntity && EspGlowMode.INSTANCE.getRunning() && EspGlowMode.INSTANCE.shouldRender(livingEntity)) {
-            return ModuleESP.INSTANCE.getColor(livingEntity).argb();
-        } else if (ModuleItemESP.GlowMode.INSTANCE.getRunning() && ModuleItemESP.INSTANCE.shouldRender(entity)) {
-            return ModuleItemESP.INSTANCE.getColor().argb();
-        } else if (entity instanceof PrimedTnt tntEntity && ModuleTNTTimer.INSTANCE.getRunning() && ModuleTNTTimer.INSTANCE.getEsp()) {
-            return ModuleTNTTimer.INSTANCE.getTntColor(tntEntity.getFuse()).argb();
-        } else if (ModuleStorageESP.GlowMode.INSTANCE.getRunning()) {
-            var category = ModuleStorageESP.categorize(entity);
-            if (category != null && category.shouldRender(entity)) {
-                return category.getColor().argb();
-            }
-        }
 
         return operation.call(entity);
     }

@@ -21,7 +21,6 @@ package net.ccbluex.liquidbounce.injection.mixins.minecraft.item;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleHitbox;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.component.AttackRange;
@@ -34,15 +33,5 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(AttackRange.class)
 public abstract class MixinAttackRange {
 
-    @ModifyExpressionValue(
-        method = "isInRange(Lnet/minecraft/world/entity/LivingEntity;Ljava/util/function/ToDoubleFunction;D)Z",
-        at = @At(value = "FIELD", target = "Lnet/minecraft/world/item/component/AttackRange;hitboxMargin:F", opcode = Opcodes.GETFIELD)
-    )
-    private static float applyHitboxMargin(float original, @Local(argsOnly = true) LivingEntity entity) {
-        if (entity == Minecraft.getInstance().player && ModuleHitbox.INSTANCE.getRunning() && ModuleHitbox.INSTANCE.getApplyToComponent()) {
-            return ModuleHitbox.INSTANCE.getSize() + original;
-        }
-        return original;
-    }
 
 }

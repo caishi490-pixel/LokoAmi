@@ -87,7 +87,7 @@ object LanguageManager : ValueGroup("Language") {
             runCatching {
                 languageRegistry.computeIfAbsent(choice) {
                     val languageFile = javaClass.getResourceAsStream(
-                        "/resources/liquidbounce/lang/${choice.code}.json"
+                        "/resources/lokoami/lang/${choice.code}.json"
                     )
                     val translations = languageFile!!.readJson<HashMap<String, String>>()
 

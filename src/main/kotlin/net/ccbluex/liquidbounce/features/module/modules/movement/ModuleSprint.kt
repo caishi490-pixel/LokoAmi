@@ -25,7 +25,6 @@ import net.ccbluex.liquidbounce.event.events.SprintEvent
 import net.ccbluex.liquidbounce.event.handler
 import net.ccbluex.liquidbounce.features.module.ClientModule
 import net.ccbluex.liquidbounce.features.module.ModuleCategories
-import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.features.ScaffoldSprintControlFeature
 import net.ccbluex.liquidbounce.utils.aiming.RotationManager
 import net.ccbluex.liquidbounce.utils.aiming.RotationsValueGroup
 import net.ccbluex.liquidbounce.utils.aiming.data.Rotation
@@ -65,8 +64,7 @@ object ModuleSprint : ClientModule("Sprint", ModuleCategories.MOVEMENT) {
     private val stopOn by multiEnumChoice("StopOn", StopOn.entries)
 
     val shouldSprintOmnidirectional: Boolean
-        get() = running && sprintMode == SprintMode.OMNIDIRECTIONAL ||
-            ScaffoldSprintControlFeature.allowOmnidirectionalSprint
+        get() = running && sprintMode == SprintMode.OMNIDIRECTIONAL
 
     val shouldIgnoreBlindness
         get() = running && Ignore.BLINDNESS in ignore

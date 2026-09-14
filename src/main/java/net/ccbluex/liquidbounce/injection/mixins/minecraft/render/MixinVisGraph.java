@@ -18,7 +18,6 @@
  */
 package net.ccbluex.liquidbounce.injection.mixins.minecraft.render;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleXRay;
 import net.minecraft.client.renderer.chunk.VisGraph;
 import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,8 +29,5 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinVisGraph {
     @Inject(method = "setOpaque", at = @At("HEAD"), cancellable = true)
     private void onMarkClosed(BlockPos pos, CallbackInfo cir) {
-        if (ModuleXRay.INSTANCE.getRunning()) {
-            cir.cancel();
-        }
     }
 }

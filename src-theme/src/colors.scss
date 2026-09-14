@@ -1,50 +1,53 @@
-$accent-color: #4677ff;
+// LokoAmi 配色 · 蓝粉（与启动页设计稿 v3 统一）
+// base #0A1628(深海蓝黑) / accent #F0508C(玫粉) / accent2 #38BDF8(天蓝)
 
-$clickgui-base-color: black;
-$clickgui-text-color: white;
-$clickgui-text-dimmed-color: rgba(211, 211, 211, 255);
-$clickgui-grid-color: rgba(128, 128, 128, 0.25);
+$accent-color: #F0508C;
 
-$tabgui-base-color: black;
-$tabgui-text-color: white;
-$tabgui-text-dimmed-color: rgba(211, 211, 211, 255);
+$clickgui-base-color: #0A1628;
+$clickgui-text-color: #EAF2FF;
+$clickgui-text-dimmed-color: #8FA6C4;
+$clickgui-grid-color: rgba(240, 80, 140, 0.20);
 
-$arraylist-base-color: black;
-$arraylist-text-color: white;
-$arraylist-tag-color: #AAAAAA;
+$tabgui-base-color: #0A1628;
+$tabgui-text-color: #EAF2FF;
+$tabgui-text-dimmed-color: #8FA6C4;
 
-$targethud-base-color: black;
-$targethud-text-color: white;
-$targethud-text-dimmed-color: rgba(211, 211, 211, 255);
+$arraylist-base-color: #0A1628;
+$arraylist-text-color: #EAF2FF;
+$arraylist-tag-color: #8FA6C4;
 
-$blockcounter-base-color: black;
+$targethud-base-color: #0A1628;
+$targethud-text-color: #EAF2FF;
+$targethud-text-dimmed-color: #8FA6C4;
 
-$hotbar-base-color: black;
-$hotbar-text-color: white;
+$blockcounter-base-color: #0A1628;
+
+$hotbar-base-color: #0A1628;
+$hotbar-text-color: #EAF2FF;
 /* TODO: currently unused */
 $hotbar-experience-color: #88C657;
-$hotbar-health-color: #FC4130;
+$hotbar-health-color: #F0508C;
 $hotbar-hunger-color: #B88458;
 
 $menu-account-premium-color: #67D24A;
-$menu-base-color: black;
-$menu-text-color: white;
-$menu-text-dimmed-color: rgba(211, 211, 211, 255);
-$menu-error-color: #fc4130;
-$menu-button-loader-color: white;
+$menu-base-color: #0A1628;
+$menu-text-color: #EAF2FF;
+$menu-text-dimmed-color: #8FA6C4;
+$menu-error-color: #FC4130;
+$menu-button-loader-color: #F0508C;
 
-$scoreboard-base-color: black;
+$scoreboard-base-color: #0A1628;
 
-$keystrokes-base-color: black;
-$keystrokes-text-color: white;
+$keystrokes-base-color: #0A1628;
+$keystrokes-text-color: #EAF2FF;
 
-$item-damage-base-color: black;
+$item-damage-base-color: #0A1628;
 
-$keybinds-base-color: black;
-$keybinds-text-color: white;
-$keybinds-enabled-color: #4dac68;
+$keybinds-base-color: #0A1628;
+$keybinds-text-color: #EAF2FF;
+$keybinds-enabled-color: #38BDF8;
 
-$effects-amplifier-color: #FC4130;
-$effects-name-color: white;
-$effects-background-color: rgba(0, 0, 0, 0.5);
-$effects-duration-color: white;
+$effects-amplifier-color: #F0508C;
+$effects-name-color: #EAF2FF;
+$effects-background-color: rgba(10, 22, 40, 0.62);
+$effects-duration-color: #EAF2FF;

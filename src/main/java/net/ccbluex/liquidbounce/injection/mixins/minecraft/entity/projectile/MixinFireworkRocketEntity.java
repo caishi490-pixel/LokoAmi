@@ -23,7 +23,6 @@ package net.ccbluex.liquidbounce.injection.mixins.minecraft.entity.projectile;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.ccbluex.liquidbounce.additions.FireworkRocketEntityAddition;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.ModuleExtendedFirework;
 import net.ccbluex.liquidbounce.utils.aiming.RotationManager;
 import net.ccbluex.liquidbounce.utils.aiming.features.MovementCorrection;
 import net.minecraft.client.Minecraft;
@@ -58,17 +57,6 @@ public abstract class MixinFireworkRocketEntity implements FireworkRocketEntityA
         return rotation.directionVector();
     }
 
-    @ModifyArgs(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;add(DDD)Lnet/minecraft/world/phys/Vec3;", ordinal = 0))
-    private void hookExtendedFirework(Args args, @Local(ordinal = 0) Vec3 rotation, @Local(ordinal = 1) Vec3 velocity) {
-        if (attachedToEntity != Minecraft.getInstance().player
-                || !ModuleExtendedFirework.INSTANCE.getRunning()
-        ) return;
-
-        var multiplier = ModuleExtendedFirework.getVelocityMultiplier();
-        args.set(0, rotation.x * multiplier.x + (rotation.x * multiplier.y - velocity.x) * multiplier.z);
-        args.set(1, rotation.y * multiplier.x + (rotation.y * multiplier.y - velocity.y) * multiplier.z);
-        args.set(2, rotation.z * multiplier.x + (rotation.z * multiplier.y - velocity.z) * multiplier.z);
-    }
 
     @Override
     public @Nullable LivingEntity liquidbounce$getShooter() {

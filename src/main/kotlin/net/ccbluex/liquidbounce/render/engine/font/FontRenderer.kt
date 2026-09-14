@@ -20,7 +20,7 @@ package net.ccbluex.liquidbounce.render.engine.font
 
 import it.unimi.dsi.fastutil.ints.IntArrayList
 import it.unimi.dsi.fastutil.ints.IntStack
-import net.ccbluex.liquidbounce.features.module.modules.misc.nameprotect.sanitizeForeignInput
+import net.ccbluex.liquidbounce.render.engine.font.processor.sanitizeForeignInput
 import net.ccbluex.liquidbounce.render.AbstractFontRenderer
 import net.ccbluex.liquidbounce.render.ClientRenderPipelines
 import net.ccbluex.liquidbounce.render.FontFace

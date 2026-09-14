@@ -28,4 +28,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "LiquidBounce"
+rootProject.name = "LokoAmi"

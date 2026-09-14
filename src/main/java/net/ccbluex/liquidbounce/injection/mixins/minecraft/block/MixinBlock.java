@@ -22,7 +22,6 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.events.BlockSlipperinessMultiplierEvent;
 import net.ccbluex.liquidbounce.event.events.BlockVelocityMultiplierEvent;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleXRay;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,15 +31,6 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Block.class)
 public abstract class MixinBlock {
 
-    @ModifyReturnValue(method = "shouldRenderFace", at = @At("RETURN"))
-    private static boolean injectXRay(boolean original, BlockState state, BlockState otherState, Direction side) {
-        var xRay = ModuleXRay.INSTANCE;
-        if (xRay.getRunning()) {
-            return xRay.shouldRender(state, otherState, side);
-        }
-
-        return original;
-    }
 
     /**
      * Hook velocity multiplier event

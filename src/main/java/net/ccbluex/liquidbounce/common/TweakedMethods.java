@@ -18,7 +18,6 @@
  */
 package net.ccbluex.liquidbounce.common;
 
-import net.ccbluex.liquidbounce.features.module.modules.exploit.ModuleGhostHand;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -32,21 +31,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class TweakedMethods {
 
     public static BlockHitResult tweakedRaycast(BlockGetter blockView, ClipContext context) {
-        if (ModuleGhostHand.INSTANCE.getRunning()) {
-            var returned = BlockGetter.traverseBlocks(context.getFrom(), context.getTo(), context, (contextx, pos) -> {
-                BlockState blockState = blockView.getBlockState(pos);
-
-                if (!ModuleGhostHand.INSTANCE.getTargetedBlocks().contains(blockState.getBlock()))
-                    return null;
-
-                VoxelShape voxelShape = contextx.getBlockShape(blockState, blockView, pos);
-
-                return blockView.clipWithInteractionOverride(contextx.getFrom(), contextx.getTo(), pos, voxelShape, blockState);
-            }, (contextx) -> null);
-
-            if (returned != null)
-                return returned;
-        }
 
         return BlockGetter.traverseBlocks(context.getFrom(), context.getTo(), context, (contextx, pos) -> {
             BlockState blockState = blockView.getBlockState(pos);

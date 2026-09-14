@@ -30,8 +30,6 @@ import net.ccbluex.liquidbounce.event.events.GameRenderEvent;
 import net.ccbluex.liquidbounce.event.events.PerspectiveEvent;
 import net.ccbluex.liquidbounce.event.events.ScreenRenderEvent;
 import net.ccbluex.liquidbounce.event.events.WorldRenderEvent;
-import net.ccbluex.liquidbounce.features.module.modules.combat.aimbot.ModuleDroneControl;
-import net.ccbluex.liquidbounce.features.module.modules.fun.ModuleDankBobbing;
 import net.ccbluex.liquidbounce.features.module.modules.render.*;
 import net.ccbluex.liquidbounce.render.WorldRenderEnvironment;
 import net.ccbluex.liquidbounce.utils.collection.Pools;
@@ -133,9 +131,7 @@ public abstract class MixinGameRenderer {
     public void drawItemCharms(ItemInHandRenderer instance, float tickProgress, PoseStack matrices,
         SubmitNodeCollector orderedRenderCommandQueue, LocalPlayer player, int light,
         Operation<Void> original) {
-        ModuleItemChams.INSTANCE.applyToTexture(this.lightTexture.getTextureView());
         original.call(instance, tickProgress, matrices, orderedRenderCommandQueue, player, light);
-        ModuleItemChams.INSTANCE.resetTexture(this.lightTexture.getTextureView());
     }
 
     /**
@@ -157,23 +153,18 @@ public abstract class MixinGameRenderer {
 
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
     private void injectBobView(PoseStack matrixStack, float tickProgress, CallbackInfo callbackInfo) {
-        if (ModuleNoBob.INSTANCE.getRunning() ||
-            ModuleTracers.INSTANCE.getRunning() ||
-            (ModuleItemESP.INSTANCE.getRunning() && ModuleItemESP.INSTANCE.getShowTracers())) {
+        if (ModuleNoBob.INSTANCE.getRunning()) {
 
             callbackInfo.cancel();
             return;
         }
 
-        if (!ModuleDankBobbing.INSTANCE.getRunning()) {
-            return;
-        }
 
         if (!(minecraft.getCameraEntity() instanceof AbstractClientPlayer playerEntity)) {
             return;
         }
 
-        float additionalBobbing = ModuleDankBobbing.INSTANCE.getMotion();
+        float additionalBobbing = 0f;
 
         final var state = playerEntity.avatarState();
 
@@ -192,9 +183,6 @@ public abstract class MixinGameRenderer {
 
     @Inject(method = "displayItemActivation", at = @At("HEAD"), cancellable = true)
     private void hookShowFloatingItem(ItemStack floatingItem, CallbackInfo ci) {
-        if (!ModuleAntiBlind.canRender(DoRender.FLOATING_ITEMS)) {
-            ci.cancel();
-        }
     }
 
     @ModifyExpressionValue(method = "getFov", at = @At(value = "INVOKE", target = "Ljava/lang/Integer;intValue()I", remap = false))
@@ -216,23 +204,10 @@ public abstract class MixinGameRenderer {
 
     @ModifyExpressionValue(method = "renderLevel", at = @At(value = "INVOKE", target = "Ljava/lang/Math;max(FF)F", ordinal = 0, remap = false))
     private float hookAntiNausea(float original) {
-        if (!ModuleAntiBlind.canRender(DoRender.NAUSEA)) {
-            return 0f;
-        }
 
         return original;
     }
 
-    @ModifyReturnValue(method = "getFov", at = @At("RETURN"))
-    private float injectShit(float original) {
-        var screen = ModuleDroneControl.INSTANCE.getScreen();
-
-        if (screen != null) {
-            return Math.min(120f, original / screen.getZoomFactor());
-        }
-
-        return original;
-    }
 
     @ModifyArgs(method = "getProjectionMatrix", at = @At(value = "INVOKE", target = "Lorg/joml/Matrix4f;perspective(FFFF)Lorg/joml/Matrix4f;", remap = false))
     private void hookBasicProjectionMatrix(Args args) {

@@ -24,7 +24,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.events.MovementInputEvent;
 import net.ccbluex.liquidbounce.event.events.SprintEvent;
-import net.ccbluex.liquidbounce.features.module.modules.movement.inventorymove.ModuleInventoryMove;
 import net.ccbluex.liquidbounce.utils.aiming.RotationManager;
 import net.ccbluex.liquidbounce.utils.aiming.features.MovementCorrection;
 import net.ccbluex.liquidbounce.utils.input.InputTracker;
@@ -55,12 +54,6 @@ public abstract class MixinKeyboardInput extends MixinClientInput {
     /**
      * Hook inventory move module
      */
-    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;isDown()Z"))
-    private boolean hookInventoryMove(KeyMapping instance, Operation<Boolean> original) {
-        return original.call(instance) ||
-                ModuleInventoryMove.INSTANCE.shouldHandleInputs(instance)
-                        && InputTracker.INSTANCE.isPressedOnAny(instance);
-    }
 
     /**
      * Later in the code, the sprint key is checked for being pressed. We need to update the state of the key
@@ -68,9 +61,6 @@ public abstract class MixinKeyboardInput extends MixinClientInput {
      */
     @Inject(method = "tick", at = @At("HEAD"))
     private void hookInventoryMoveSprint(CallbackInfo ci) {
-        if (ModuleInventoryMove.INSTANCE.shouldHandleInputs(this.options.keySprint)) {
-            this.options.keySprint.setDown(InputTracker.INSTANCE.isPressedOnAny(this.options.keySprint));
-        }
     }
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "NEW", target = "(ZZZZZZZ)Lnet/minecraft/world/entity/player/Input;"))

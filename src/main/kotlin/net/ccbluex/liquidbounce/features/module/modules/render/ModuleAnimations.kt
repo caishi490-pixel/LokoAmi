@@ -28,7 +28,6 @@ import net.ccbluex.liquidbounce.event.events.PlayerStrideEvent
 import net.ccbluex.liquidbounce.event.handler
 import net.ccbluex.liquidbounce.features.module.ClientModule
 import net.ccbluex.liquidbounce.features.module.ModuleCategories
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleSwordBlock
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.HumanoidArm
 
@@ -73,7 +72,7 @@ object ModuleAnimations : ClientModule("Animations", ModuleCategories.RENDER, al
     /**
      * A choice that allows the user to choose the animation that will be used during the blocking
      * of a sword.
-     * This choice is only used when the [ModuleSwordBlock] module is enabled.
+     * This choice was originally used together with the SwordBlock module (removed in this build).
      */
     val blockAnimationChoice = choices(
         "BlockingAnimation", OneSevenAnimation, arrayOf(

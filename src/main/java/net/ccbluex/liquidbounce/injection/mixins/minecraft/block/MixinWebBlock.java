@@ -19,7 +19,6 @@
 
 package net.ccbluex.liquidbounce.injection.mixins.minecraft.block;
 
-import net.ccbluex.liquidbounce.features.module.modules.movement.noweb.ModuleNoWeb;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -35,14 +34,4 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WebBlock.class)
 public abstract class MixinWebBlock {
 
-    /**
-     * Hook entity collision event
-     */
-    @Inject(method = "entityInside", at = @At("HEAD"), cancellable = true)
-    private void hookEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier handler, boolean bl, CallbackInfo ci) {
-        if (ModuleNoWeb.INSTANCE.getRunning() && entity == Minecraft.getInstance().player &&
-                ModuleNoWeb.INSTANCE.handleEntityCollision(pos)) {
-            ci.cancel();
-        }
-    }
 }

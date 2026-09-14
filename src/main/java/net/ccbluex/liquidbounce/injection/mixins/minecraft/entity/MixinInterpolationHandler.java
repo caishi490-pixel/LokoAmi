@@ -19,7 +19,6 @@
 package net.ccbluex.liquidbounce.injection.mixins.minecraft.entity;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.ccbluex.liquidbounce.features.module.modules.world.ModuleNoInterpolation;
 import net.minecraft.world.entity.InterpolationHandler;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,9 +36,6 @@ public abstract class MixinInterpolationHandler {
         )
     )
     private int hookInterpolationSteps(int original) {
-        if (ModuleNoInterpolation.INSTANCE.getRunning()) {
-            return Math.max(original - ModuleNoInterpolation.INSTANCE.getValue(), 0);
-        }
         return original;
     }
 

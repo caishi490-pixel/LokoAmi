@@ -28,10 +28,6 @@ import net.ccbluex.liquidbounce.event.events.OverlayMessageEvent;
 import net.ccbluex.liquidbounce.event.events.OverlayRenderEvent;
 import net.ccbluex.liquidbounce.event.events.PerspectiveEvent;
 import net.ccbluex.liquidbounce.features.misc.HideAppearance;
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleSwordBlock;
-import net.ccbluex.liquidbounce.features.module.modules.player.ModuleReach;
-import net.ccbluex.liquidbounce.features.module.modules.render.DoRender;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleAntiBlind;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFreeCam;
 import net.ccbluex.liquidbounce.features.module.modules.render.crosshair.ModuleCrosshair;
 import net.ccbluex.liquidbounce.integration.theme.component.HudComponent;
@@ -99,25 +95,12 @@ public abstract class MixinGui {
 
     @Inject(method = "renderSpyglassOverlay", at = @At("HEAD"), cancellable = true)
     private void hookRenderSpyglassOverlay(GuiGraphics context, float scale, CallbackInfo ci) {
-        if (!ModuleAntiBlind.canRender(DoRender.SPYGLASS_OVERLAY)) {
-            ci.cancel();
-        }
     }
 
     @Inject(method = "renderTextureOverlay", at = @At("HEAD"), cancellable = true)
     private void injectPumpkinBlur(GuiGraphics context, Identifier texture, float opacity, CallbackInfo callback) {
-        if (!ModuleAntiBlind.INSTANCE.getRunning()) {
-            return;
-        }
 
-        if (!ModuleAntiBlind.canRender(DoRender.PUMPKIN_BLUR) && ModuleAntiBlind.TEXTURE_PUMPKIN_BLUR.equals(texture)) {
-            callback.cancel();
-            return;
-        }
 
-        if (!ModuleAntiBlind.canRender(DoRender.POWDER_SNOW_FOG) && POWDER_SNOW_OUTLINE_LOCATION.equals(texture)) {
-            callback.cancel();
-        }
     }
 
     @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
@@ -130,9 +113,6 @@ public abstract class MixinGui {
 
     @Inject(method = "renderPortalOverlay", at = @At("HEAD"), cancellable = true)
     private void hookRenderPortalOverlay(CallbackInfo ci) {
-        if (!ModuleAntiBlind.canRender(DoRender.PORTAL_OVERLAY)) {
-            ci.cancel();
-        }
     }
 
     @Inject(method = "renderScoreboardSidebar", at = @At("HEAD"), cancellable = true)
@@ -197,7 +177,7 @@ public abstract class MixinGui {
 
     @ModifyExpressionValue(method = "renderItemHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"))
     private boolean hookOffhandItem(boolean original) {
-        return original || ModuleSwordBlock.INSTANCE.shouldHideOffhand() && ModuleSwordBlock.INSTANCE.getHideShieldSlot();
+        return original;
     }
 
     @Unique
@@ -249,16 +229,10 @@ public abstract class MixinGui {
 
     @Inject(method = "renderTitle", at = @At("HEAD"), cancellable = true)
     private void hookRenderTitleAndSubtitle(CallbackInfo ci) {
-        if (!ModuleAntiBlind.canRender(DoRender.TITLE)) {
-            ci.cancel();
-        }
     }
 
     @Inject(method = "renderConfusionOverlay", at = @At("HEAD"), cancellable = true)
     private void hookNauseaOverlay(GuiGraphics context, float distortionStrength, CallbackInfo ci) {
-        if (!ModuleAntiBlind.canRender(DoRender.NAUSEA)) {
-            ci.cancel();
-        }
     }
 
     @ModifyReceiver(
@@ -269,9 +243,6 @@ public abstract class MixinGui {
         )
     )
     private AttackRange injectReachAttackRange(AttackRange instance, LivingEntity entity, Vec3 pos) {
-        if (ModuleReach.INSTANCE.getRunning()) {
-            return ModuleReach.INSTANCE.getEntity().adjustAttackRange(instance);
-        }
 
         return instance;
     }

@@ -18,7 +18,6 @@
  */
 package net.ccbluex.liquidbounce.injection.mixins.minecraft.block;
 
-import net.ccbluex.liquidbounce.features.module.modules.movement.noslow.modes.slime.NoSlowSlime;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -34,17 +33,9 @@ public abstract class MixinSlimeBlock {
 
     @Inject(method = "bounceUp", at = @At("HEAD"), cancellable = true)
     private void hookBounce(Entity entity, CallbackInfo ci) {
-        if (NoSlowSlime.INSTANCE.getRunning()) {
-            if (entity.getDeltaMovement().y == -0.0784000015258789 || entity.getDeltaMovement().y == -0.001567998535156222) {
-                ci.cancel();
-            }
-        }
     }
 
     @Inject(method = "stepOn", at = @At("HEAD"), cancellable = true)
     private void hookStep(Level world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
-        if (NoSlowSlime.INSTANCE.getRunning()) {
-            ci.cancel();
-        }
     }
 }

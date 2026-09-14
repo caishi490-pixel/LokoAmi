@@ -56,13 +56,7 @@ import net.ccbluex.liquidbounce.features.command.commands.ingame.creative.Comman
 import net.ccbluex.liquidbounce.features.command.commands.ingame.creative.CommandItemSkull
 import net.ccbluex.liquidbounce.features.command.commands.ingame.creative.CommandItemStack
 import net.ccbluex.liquidbounce.features.command.commands.ingame.fakeplayer.CommandFakePlayer
-import net.ccbluex.liquidbounce.features.command.commands.module.CommandAutoAccount
 import net.ccbluex.liquidbounce.features.command.commands.module.CommandAutoDisable
-import net.ccbluex.liquidbounce.features.command.commands.module.CommandInvsee
-import net.ccbluex.liquidbounce.features.command.commands.module.CommandXRay
-import net.ccbluex.liquidbounce.features.command.commands.module.teleport.CommandPlayerTeleport
-import net.ccbluex.liquidbounce.features.command.commands.module.teleport.CommandTeleport
-import net.ccbluex.liquidbounce.features.command.commands.module.teleport.CommandVClip
 import net.ccbluex.liquidbounce.features.command.commands.translate.CommandAutoTranslate
 import net.ccbluex.liquidbounce.features.command.commands.translate.CommandTranslate
 import net.ccbluex.liquidbounce.features.misc.HideAppearance
@@ -131,12 +125,10 @@ object CommandManager : Collection<Command> by commandSet {
             CommandBinds,
             CommandClear,
             CommandHide,
-            CommandInvsee,
             CommandPanic,
             CommandValue,
             CommandPing,
             CommandRemoteView,
-            CommandXRay,
             CommandTargets,
             CommandConfig,
             CommandLocalConfig,
@@ -144,7 +136,6 @@ object CommandManager : Collection<Command> by commandSet {
             CommandScript,
             CommandSay,
             CommandFakePlayer,
-            CommandAutoAccount,
             CommandDebug,
             CommandItemRename,
             CommandItemGive,
@@ -153,9 +144,6 @@ object CommandManager : Collection<Command> by commandSet {
             CommandItemEnchant,
             CommandUsername,
             CommandCoordinates,
-            CommandVClip,
-            CommandTeleport,
-            CommandPlayerTeleport,
             CommandTps,
             CommandServerInfo,
             CommandModels,

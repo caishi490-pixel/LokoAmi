@@ -54,7 +54,7 @@ object ThemeManager : Config("theme") {
         field = mutableListOf()
     val themeIds get() = themes.map { theme -> theme.metadata.id }
 
-    private var currentTheme by text("Theme", "liquidbounce").onChanged {
+    private var currentTheme by text("Theme", "lokoami").onChanged {
         // Update integration browser
         mc.execute {
             ScreenManager.update()
@@ -116,7 +116,7 @@ object ThemeManager : Config("theme") {
 
     suspend fun init() {
         // Load default theme
-        includedTheme = Theme.load(Theme.Origin.RESOURCE, File("liquidbounce"))
+        includedTheme = Theme.load(Theme.Origin.RESOURCE, File("lokoami"))
     }
 
     suspend fun load() {

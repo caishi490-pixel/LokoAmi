@@ -29,16 +29,7 @@ import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.TickLoopTaskExecutor;
 import net.ccbluex.liquidbounce.event.events.*;
 import net.ccbluex.liquidbounce.features.misc.HideAppearance;
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleAutoClicker;
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleNoMissCooldown;
-import net.ccbluex.liquidbounce.features.module.modules.combat.killaura.features.KillAuraAutoBlock;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.ModuleMultiActions;
 import net.ccbluex.liquidbounce.features.module.modules.misc.ModuleMiddleClickAction;
-import net.ccbluex.liquidbounce.features.module.modules.player.ModuleAutoBreak;
-import net.ccbluex.liquidbounce.features.module.modules.player.ModuleNoBlockInteract;
-import net.ccbluex.liquidbounce.features.module.modules.player.ModuleReach;
-import net.ccbluex.liquidbounce.features.module.modules.player.cheststealer.features.FeatureSilentScreen;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleXRay;
 import net.ccbluex.liquidbounce.integration.backend.BrowserBackendManager;
 import net.ccbluex.liquidbounce.integration.backend.browser.GlobalBrowserSettings;
 import net.ccbluex.liquidbounce.integration.screen.ScreenManager;
@@ -101,16 +92,6 @@ public abstract class MixinMinecraft {
     @Nullable
     public MultiPlayerGameMode gameMode;
 
-    @Inject(method = "useAmbientOcclusion()Z", at = @At("HEAD"), cancellable = true)
-    private static void injectXRayFullBright(CallbackInfoReturnable<Boolean> callback) {
-        ModuleXRay module = ModuleXRay.INSTANCE;
-        if (!module.getRunning() || !module.getFullBright()) {
-            return;
-        }
-
-        callback.setReturnValue(false);
-        callback.cancel();
-    }
 
     @Shadow
     @Nullable
@@ -288,14 +269,6 @@ public abstract class MixinMinecraft {
         }
     }
 
-    @Redirect(method = "setScreen", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MouseHandler;releaseMouse()V"))
-    private void cancelScreenMouseForChestStealer(MouseHandler instance) {
-        // Allows rotation.
-        if (!LiquidBounce.INSTANCE.isInitialized() ||
-            !FeatureSilentScreen.INSTANCE.getShouldHide() || FeatureSilentScreen.INSTANCE.getUnlockCursor()) {
-            instance.releaseMouse();
-        }
-    }
 
     /**
      * Hook game tick event at HEAD
@@ -364,16 +337,7 @@ public abstract class MixinMinecraft {
     @ModifyExpressionValue(method = "startAttack",
             at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;missTime:I", ordinal = 0))
     private int injectNoMissCooldown(int original) {
-        if (ModuleNoMissCooldown.INSTANCE.getRunning() && ModuleNoMissCooldown.INSTANCE.getRemoveAttackCooldown()) {
-            return 0;
-        }
 
-        if (ModuleAutoClicker.AttackButton.INSTANCE.getRunning()) {
-            var clickAmount = ModuleAutoClicker.AttackButton.INSTANCE.getClicker().getClickAmount();
-            if (clickAmount != null && clickAmount > 0) {
-                return 0;
-            }
-        }
 
         return original;
     }
@@ -386,26 +350,14 @@ public abstract class MixinMinecraft {
         )
     )
     private AttackRange injectReachAttackRange(AttackRange instance, LivingEntity entity, Vec3 pos) {
-        if (ModuleReach.INSTANCE.getRunning()) {
-            return ModuleReach.INSTANCE.getEntity().adjustAttackRange(instance);
-        }
 
         return instance;
     }
 
-    @WrapWithCondition(method = "startAttack", at = @At(value = "FIELD",
-            target = "Lnet/minecraft/client/Minecraft;missTime:I", ordinal = 1))
-    private boolean disableAttackCooldown(Minecraft instance, int value) {
-        return !(ModuleNoMissCooldown.INSTANCE.getRunning() && ModuleNoMissCooldown.INSTANCE.getRemoveAttackCooldown());
-    }
 
     @Inject(method = "startAttack", at = @At("HEAD"), cancellable = true)
     private void injectCombatPause(CallbackInfoReturnable<Boolean> cir) {
         if (player == null || hitResult == null || hitResult.getType() == HitResult.Type.MISS) {
-            if (ModuleNoMissCooldown.INSTANCE.getRunning() && ModuleNoMissCooldown.INSTANCE.getCancelAttackOnMiss()) {
-                // Prevent swinging
-                cir.setReturnValue(true);
-            }
             return;
         }
 
@@ -432,12 +384,12 @@ public abstract class MixinMinecraft {
 
     @ModifyExpressionValue(method = "continueAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem()Z"))
     private boolean injectMultiActionsBreakingWhileUsing(boolean original) {
-        return original && !ModuleMultiActions.mayBreakWhileUsing();
+        return original;
     }
 
     @ModifyExpressionValue(method = "startUseItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;isDestroying()Z"))
     private boolean injectMultiActionsPlacingWhileBreaking(boolean original) {
-        return original && !ModuleMultiActions.mayPlaceWhileBreaking();
+        return original;
     }
 
     /**
@@ -449,22 +401,13 @@ public abstract class MixinMinecraft {
             != null && ScreenManager.isClientScreen(this.screen)) {
             profiler.popPush("Keybindings");
 
-            if (ModuleAutoBreak.INSTANCE.getEnabled()) {
-                this.continueAttack(this.options.keyAttack.isDown());
-            }
         }
     }
 
     @ModifyExpressionValue(method = "handleKeybinds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem()Z", ordinal = 0))
     private boolean injectMultiActionsAttackingWhileUsingAndEnforcedBlockingState(boolean isUsingItem) {
         if (isUsingItem) {
-            if (!this.options.keyUse.isDown() && !(KillAuraAutoBlock.INSTANCE.getRunning() && KillAuraAutoBlock.INSTANCE.getEnforcedBlockingHand() != null)) {
-                this.gameMode.releaseUsingItem(this.player);
-            }
 
-            if (!ModuleMultiActions.mayAttackWhileUsing()) {
-                this.options.keyAttack.clickCount = 0;
-            }
 
             this.options.keyPickItem.clickCount = 0;
             this.options.keyUse.clickCount = 0;
@@ -485,16 +428,4 @@ public abstract class MixinMinecraft {
         EventManager.INSTANCE.callEvent(DisconnectEvent.INSTANCE);
     }
 
-    @Inject(method = "startUseItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;useItemOn(Lnet/minecraft/client/player/LocalPlayer;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;"), cancellable = true)
-    private void hookBlockInteract(CallbackInfo ci) {
-        final BlockHitResult blockHitResult = (BlockHitResult) this.hitResult;
-        if (blockHitResult == null) return; // it should never be null
-
-        if (ModuleNoBlockInteract.INSTANCE.getRunning() &&
-                ModuleNoBlockInteract.INSTANCE.shouldSneak(blockHitResult)) {
-
-            ModuleNoBlockInteract.INSTANCE.startSneaking();
-            ci.cancel();
-        }
-    }
 }

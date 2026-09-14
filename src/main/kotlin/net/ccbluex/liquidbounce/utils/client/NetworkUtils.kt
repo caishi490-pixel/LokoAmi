@@ -24,7 +24,6 @@ import net.ccbluex.liquidbounce.config.types.list.Tagged
 import net.ccbluex.liquidbounce.event.TickLoopTaskExecutor
 import net.ccbluex.liquidbounce.event.events.PacketEvent
 import net.ccbluex.liquidbounce.event.events.TransferOrigin
-import net.ccbluex.liquidbounce.features.module.modules.combat.crystalaura.SwitchMode
 import net.ccbluex.liquidbounce.features.module.modules.misc.ModulePacketLogger
 import net.ccbluex.liquidbounce.utils.aiming.RotationManager
 import net.ccbluex.liquidbounce.utils.block.SwingMode
@@ -169,9 +168,6 @@ fun LocalPlayer.clickBlockWithSlot(
         swingMode.swing(hand)
     }
 
-    if (slot != prevHotbarSlot && hand == InteractionHand.MAIN_HAND && switchMode == SwitchMode.SILENT) {
-        connection.sendHeldItemChange(prevHotbarSlot)
-    }
 
     this.inventory.selectedSlot = prevHotbarSlot
 }

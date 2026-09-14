@@ -21,10 +21,7 @@ package net.ccbluex.liquidbounce.integration.interop.protocol.rest.v1.game
 
 import net.ccbluex.fastutil.mapToArray
 import net.ccbluex.liquidbounce.config.gson.interopGson
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleSwordBlock.hideShieldSlot
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleSwordBlock.shouldHideOffhand
-import net.ccbluex.liquidbounce.features.module.modules.misc.nameprotect.ModuleNameProtect
-import net.ccbluex.liquidbounce.features.module.modules.misc.nameprotect.sanitizeForeignInput
+import net.ccbluex.liquidbounce.render.engine.font.processor.sanitizeForeignInput
 import net.ccbluex.liquidbounce.injection.mixins.minecraft.gui.MixinGuiAccessor
 import net.ccbluex.liquidbounce.utils.client.mc
 import net.ccbluex.liquidbounce.utils.entity.armorItems
@@ -102,7 +99,7 @@ data class PlayerData(
 
         @JvmStatic
         fun fromPlayer(player: Player) = PlayerData(
-            ModuleNameProtect.replace(player.scoreboardName),
+            player.scoreboardName,
             player.stringUUID,
             player.level().dimension().identifier(),
             player.position(),
@@ -126,7 +123,7 @@ data class PlayerData(
             player.ping,
             player.activeEffects.toList(),
             player.mainHandItem,
-            if (player == mc.player && shouldHideOffhand() && hideShieldSlot) ItemStack.EMPTY else player.offhandItem,
+            player.offhandItem,
             player.armorItems.toList(),
             ScoreboardData.fromScoreboard(
                 player.level().scoreboard

@@ -68,15 +68,7 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, S extend
     public abstract Identifier getTextureLocation(S state);
 
     @Unique
-    private @Nullable Tuple<Rotation, Rotation> getOverwriteRotation(ModuleRotations.BodyPart bodyPart) {
-        if (ModuleRotations.INSTANCE.getRunning() && ModuleRotations.INSTANCE.isPartAllowed(bodyPart)) {
-            var rotation = ModuleRotations.INSTANCE.getModelRotation();
-            var prevRotation = ModuleRotations.INSTANCE.getPrevModelRotation();
-
-            if (rotation != null && prevRotation != null) {
-                return new Tuple<>(prevRotation, rotation);
-            }
-        }
+    private @Nullable Tuple<Rotation, Rotation> getOverwriteRotation() {
 
         if (ModuleFreeCam.INSTANCE.getRunning()) {
             var serverRotation = RotationManager.INSTANCE.getServerRotation();
@@ -92,7 +84,7 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, S extend
             return original;
         }
 
-        var overwriteRotation = getOverwriteRotation(ModuleRotations.BodyPart.BODY);
+        var overwriteRotation = getOverwriteRotation();
         if (overwriteRotation != null) {
             return Mth.rotLerp(tickDelta, overwriteRotation.getA().yRot(), overwriteRotation.getB().yRot());
         }
@@ -106,7 +98,7 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, S extend
             return original;
         }
 
-        var overwriteRotation = getOverwriteRotation(ModuleRotations.BodyPart.HEAD);
+        var overwriteRotation = getOverwriteRotation();
         if (overwriteRotation != null) {
             return Mth.rotLerp(tickDelta, overwriteRotation.getA().yRot(), overwriteRotation.getB().yRot());
         }
@@ -120,7 +112,7 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, S extend
             return original;
         }
 
-        var overwriteRotation = getOverwriteRotation(ModuleRotations.BodyPart.HEAD);
+        var overwriteRotation = getOverwriteRotation();
         if (overwriteRotation != null) {
             return Mth.rotLerp(tickDelta, overwriteRotation.getA().xRot(), overwriteRotation.getB().xRot());
         }
@@ -128,45 +120,10 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, S extend
         return original;
     }
 
-    @WrapOperation(method = "submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/SubmitNodeCollector;submitModel(Lnet/minecraft/client/model/Model;Ljava/lang/Object;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/rendertype/RenderType;IIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;ILnet/minecraft/client/renderer/feature/ModelFeatureRenderer$CrumblingOverlay;)V"))
-    private void injectTrueSight(
-        SubmitNodeCollector instance, Model<M> model,
-        Object o, PoseStack matrixStack,
-        RenderType renderLayer, int light,
-        int overlay, int tintedColor,
-        TextureAtlasSprite sprite, int outlineColor,
-        ModelFeatureRenderer.CrumblingOverlay crumblingOverlayCommand, Operation<Void> original,
-        @Local(argsOnly = true) S livingEntityRenderState
-    ) {
-        if (ModuleLogoffSpot.INSTANCE.isLogoffEntity(livingEntityRenderState)) {
-            tintedColor = ESP_TRUE_SIGHT_REQUIREMENT_COLOR;
-        }
-
-        var trueSightModule = ModuleTrueSight.INSTANCE;
-        var trueSight = trueSightModule.getRunning() && trueSightModule.getEntities();
-        if (ModuleTrueSight.canRenderEntities(livingEntityRenderState)) {
-            tintedColor = trueSight ? trueSightModule.getEntityColor().argb() : ESP_TRUE_SIGHT_REQUIREMENT_COLOR;
-        }
-        original.call(
-            instance, model,
-            o, matrixStack,
-            renderLayer, light,
-            overlay, tintedColor,
-            sprite, outlineColor,
-            crumblingOverlayCommand
-        );
-    }
 
     @ModifyReturnValue(method = "getRenderType", at = @At("RETURN"))
     private RenderType injectTrueSight(RenderType original, S state, boolean showBody, boolean translucent, boolean showOutline) {
-        if (ModuleLogoffSpot.INSTANCE.isLogoffEntity(state)) {
-            return RenderTypes.itemEntityTranslucentCull(this.getTextureLocation(state));
-        }
 
-        if (ModuleTrueSight.canRenderEntities(state) && !showBody && !translucent && !showOutline) {
-            state.isInvisible = false;
-            return RenderTypes.itemEntityTranslucentCull(this.getTextureLocation(state));
-        }
         return original;
     }
 
@@ -194,25 +151,6 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, S extend
 
         var entity = ((EntityRenderStateAddition) state).liquid_bounce$getEntity();
 
-        if (ModuleChams.INSTANCE.getRunning() && CombatExtensionsKt.shouldBeAttacked(entity)) {
-            RenderSetup renderSetup = ((MixinRenderTypeAccessor) original).getState();
-            boolean affectsOutline = ((MixinRenderSetupAccessor) (Object) renderSetup).getOutlineProperty() == RenderSetup.OutlineProperty.AFFECTS_OUTLINE;
-
-            switch (((MixinRenderTypeAccessor) original).getName()) {
-                case "entity_translucent" -> {
-                    return ModuleChams.ENTITY_TRANSLUCENT.apply(identifier, affectsOutline);
-                }
-                case "entity_cutout" -> {
-                    return ModuleChams.ENTITY_CUTOUT.apply(identifier);
-                }
-                case "entity_cutout_no_cull" -> {
-                    return ModuleChams.ENTITY_CUTOUT_NO_CULL.apply(identifier, affectsOutline);
-                }
-                default -> {
-                    return original;
-                }
-            }
-        }
 
         return original;
     }

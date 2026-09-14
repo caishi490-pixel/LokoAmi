@@ -31,10 +31,6 @@ import net.ccbluex.liquidbounce.event.handler
 import net.ccbluex.liquidbounce.features.command.commands.module.CommandAutoDisable
 import net.ccbluex.liquidbounce.features.module.ClientModule
 import net.ccbluex.liquidbounce.features.module.ModuleCategories
-import net.ccbluex.liquidbounce.features.module.modules.combat.killaura.ModuleKillAura
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleNoClip
-import net.ccbluex.liquidbounce.features.module.modules.movement.fly.ModuleFly
-import net.ccbluex.liquidbounce.features.module.modules.movement.speed.ModuleSpeed
 import net.ccbluex.liquidbounce.utils.client.notification
 import net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket
 
@@ -76,10 +72,8 @@ object ModuleAutoDisable : ClientModule("AutoDisable", ModuleCategories.WORLD) {
     }
 
     init {
-        add(ModuleFly)
-        add(ModuleSpeed)
-        add(ModuleNoClip)
-        add(ModuleKillAura)
+        // NOTE: 默认自动关闭列表已清空 —— Fly / Speed / NoClip / KillAura 等危险模块
+        // 已从本客户端彻底移除，不再需要自动关闭。仍可通过命令/配置自行添加模块。
     }
 
     @Suppress("unused")

@@ -69,7 +69,10 @@ public abstract class MixinPacketWrapper {
             || packetType == ServerboundPackets1_21_4.CONTAINER_CLICK && this.get(Types.VAR_INT, 0) == 0) {
             // Note: this doesn't cover all handlers of PacketEvent
             InventoryManager.onClickOccurs();
-            InventoryManager.INSTANCE.setInventoryOpenServerSide$liquidbounce(true);
+            // NOTE: Kotlin `internal` 成员会带编译期模块名后缀，模块名跟随 Gradle 项目名。
+            // 本项目 rootProject.name = "LokoAmi"，故后缀为 $LokoAmi。
+            // 若将来再次改动 settings.gradle.kts 的 rootProject.name，此处必须同步。
+            InventoryManager.INSTANCE.setInventoryOpenServerSide$LokoAmi(true);
         }
     }
 

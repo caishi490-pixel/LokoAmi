@@ -23,8 +23,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleLogoffSpot;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleTrueSight;
 import net.ccbluex.liquidbounce.render.engine.type.Color4b;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.OrderedSubmitNodeCollector;
@@ -61,14 +59,6 @@ public abstract class MixinRenderLayer {
         Operation<Void> original
     ) {
         if (state instanceof LivingEntityRenderState rs) {
-            var trueSightModule = ModuleTrueSight.INSTANCE;
-            var trueSight = trueSightModule.getRunning() && trueSightModule.getEntities();
-            if (ModuleTrueSight.canRenderEntities(rs)) {
-                tintedColor = trueSight ? trueSightModule.getEntityFeatureLayerColor().argb() : ESP_TRUE_SIGHT_REQUIREMENT_COLOR;
-            }
-            if (ModuleLogoffSpot.INSTANCE.isLogoffEntity(rs)) {
-                tintedColor = ESP_TRUE_SIGHT_REQUIREMENT_COLOR;
-            }
         }
         original.call(
             instance, model,
@@ -83,9 +73,6 @@ public abstract class MixinRenderLayer {
     @WrapOperation(method = "renderColoredCutoutModel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/rendertype/RenderTypes;entityCutoutNoCull(Lnet/minecraft/resources/Identifier;)Lnet/minecraft/client/renderer/rendertype/RenderType;"))
     private static RenderType injectTrueSight(
         Identifier texture, Operation<RenderType> original, @Local(argsOnly = true) LivingEntityRenderState state) {
-        if (ModuleTrueSight.canRenderEntities(state) || ModuleLogoffSpot.INSTANCE.isLogoffEntity(state)) {
-            return RenderTypes.itemEntityTranslucentCull(texture);
-        }
         return original.call(texture);
     }
 

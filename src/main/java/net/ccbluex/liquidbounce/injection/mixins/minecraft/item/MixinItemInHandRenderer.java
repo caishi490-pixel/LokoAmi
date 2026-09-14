@@ -22,9 +22,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.ccbluex.liquidbounce.features.module.modules.combat.ModuleSwordBlock;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleAnimations;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleSilentHotbar;
 import net.ccbluex.liquidbounce.utils.client.SilentHotbar;
 import net.ccbluex.liquidbounce.utils.item.ItemCategorizationsKt;
 import net.minecraft.client.Minecraft;
@@ -113,13 +111,6 @@ public abstract class MixinItemInHandRenderer {
         }
     }
 
-    @Inject(method = "renderArmWithItem", at = @At("HEAD"), cancellable = true)
-    private void hideShield(AbstractClientPlayer player, float tickProgress, float pitch, InteractionHand hand, float swingProgress, ItemStack item, float equipProgress, PoseStack matrices, SubmitNodeCollector orderedRenderCommandQueue, int light, CallbackInfo ci) {
-        if (hand == InteractionHand.OFF_HAND && player == Minecraft.getInstance().player &&
-            ModuleSwordBlock.INSTANCE.shouldHideOffhand(item)) {
-            ci.cancel();
-        }
-    }
 
     @ModifyArg(method = "renderArmWithItem", at = @At(
             value = "INVOKE",
@@ -136,22 +127,10 @@ public abstract class MixinItemInHandRenderer {
 
     @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;getMainHandItem()Lnet/minecraft/world/item/ItemStack;"))
     private ItemStack injectSilentHotbar(ItemStack original) {
-        if (ModuleSilentHotbar.INSTANCE.getRunning()) {
-            // noinspection DataFlowIssue
-            return minecraft.player.getInventory().getNonEquipmentItems().get(SilentHotbar.INSTANCE.getClientsideSlot());
-        }
 
         return original;
     }
 
-    @ModifyExpressionValue(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;getItemSwapScale(F)F"))
-    private float injectSilentHotbarNoCooldown(float original) {
-        if (ModuleSilentHotbar.INSTANCE.getRunning() && ModuleSilentHotbar.INSTANCE.getNoCooldownProgress() && SilentHotbar.INSTANCE.isSlotModified()) {
-            return 1f;
-        }
-
-        return original;
-    }
 
     @Inject(method = "itemUsed", at = @At("HEAD"), cancellable = true)
     private void injectIgnorePlace(InteractionHand hand, CallbackInfo ci) {
@@ -184,9 +163,6 @@ public abstract class MixinItemInHandRenderer {
         ordinal = 0
     ))
     private ItemUseAnimation hookUseAction(ItemUseAnimation original, @Local(argsOnly = true) ItemStack itemStack, @Local(argsOnly = true) AbstractClientPlayer entity) {
-        if (ModuleSwordBlock.shouldAnimateSwordBlock(entity, itemStack)) {
-            return ItemUseAnimation.BLOCK;
-        }
         return original;
     }
 
@@ -196,9 +172,6 @@ public abstract class MixinItemInHandRenderer {
         ordinal = 1
     ))
     private boolean hookIsUseItem(boolean original, @Local(argsOnly = true) AbstractClientPlayer entity) {
-        if (ModuleSwordBlock.shouldAnimateSwordBlock(entity)) {
-            return true;
-        }
 
         return original;
     }
@@ -209,9 +182,6 @@ public abstract class MixinItemInHandRenderer {
         ordinal = 1
     ))
     private InteractionHand hookActiveHand(InteractionHand original, @Local(argsOnly = true) AbstractClientPlayer entity) {
-        if (ModuleSwordBlock.shouldAnimateSwordBlock(entity)) {
-            return InteractionHand.MAIN_HAND;
-        }
 
         return original;
     }
@@ -222,9 +192,6 @@ public abstract class MixinItemInHandRenderer {
         ordinal = 2
     ))
     private int hookItemUseItem(int original, @Local(argsOnly = true) AbstractClientPlayer entity) {
-        if (ModuleSwordBlock.shouldAnimateSwordBlock(entity)) {
-            return 7200;
-        }
 
         return original;
     }

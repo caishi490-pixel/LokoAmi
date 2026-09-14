@@ -91,7 +91,7 @@ allprojects {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/liquidbounce.accesswidener")
+    accessWidenerPath = file("src/main/resources/lokoami.accesswidener")
 }
 
 dependencies {
@@ -275,7 +275,7 @@ tasks.register<NodeTask>("bundleTheme") {
     inputs.dir("src-theme/src")
     inputs.dir("src-theme/public")
     inputs.dir("src-theme/dist")
-    outputs.files("src-theme/resources/assets/liquidbounce/themes/liquidbounce.zip")
+    outputs.files("src-theme/resources/resources/lokoami/themes/lokoami.zip")
 }
 
 sourceSets {
@@ -333,7 +333,7 @@ tasks.register<CompareJsonKeysTask>("verifyI18nJsonKeys") {
     group = "verification"
     description = "Compare i18n JSON files with $baselineFileName as the baseline and report missing keys."
 
-    val languageFolder = file("src/main/resources/resources/liquidbounce/lang")
+    val languageFolder = file("src/main/resources/resources/lokoami/lang")
     baselineFile.set(languageFolder.resolve(baselineFileName))
     files.from(languageFolder.listFilesOrdered { it.extension.equals("json", ignoreCase = true) })
     consoleOutputCount.set(5)

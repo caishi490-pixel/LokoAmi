@@ -34,7 +34,6 @@ import net.ccbluex.liquidbounce.event.events.WorldChangeEvent
 import net.ccbluex.liquidbounce.event.handler
 import net.ccbluex.liquidbounce.features.module.ClientModule
 import net.ccbluex.liquidbounce.features.module.ModuleCategories
-import net.ccbluex.liquidbounce.features.module.modules.player.invcleaner.ItemAndComponents
 import net.ccbluex.liquidbounce.render.gui.ItemStackListRenderer.drawItemStackList
 import net.ccbluex.liquidbounce.render.engine.type.Color4b
 import net.ccbluex.liquidbounce.utils.collection.Filter
@@ -83,7 +82,7 @@ object ModuleItemTags : ClientModule("ItemTags", ModuleCategories.RENDER) {
         yAxis = "Size" axis 0.1F..32F,
     )
 
-    private val mergeMode by enumChoice("MergeMode", MergeMode.BY_COMPONENTS)
+    private val mergeMode by enumChoice("MergeMode", MergeMode.BY_ITEM)
 
     private object Shulker : ToggleableValueGroup(this, "Shulker", false) {
         val mergeStacks by boolean("MergeStacks", true)
@@ -130,24 +129,6 @@ object ModuleItemTags : ClientModule("ItemTags", ModuleCategories.RENDER) {
             }
         }),
 
-        /**
-         * [ItemStack]s with same [Item] and same [DataComponentPatch] will be merged.
-         */
-        BY_COMPONENTS("ByComponents", { stacks ->
-            val map = Object2IntOpenHashMap<ItemAndComponents>()
-
-            for (stack in stacks) {
-                map.addTo(ItemAndComponents(stack), stack.count)
-            }
-
-            val iter = map.fastIterator()
-            Array(map.size) {
-                val entry = iter.next()
-                entry.key.toItemStack(entry.intValue)
-            }.apply {
-                sortWith(itemStackComparator)
-            }
-        }),
     }
 
     private val itemEntities by computedOn<GameTickEvent, ObjectArrayList<ClusteredEntitiesRenderState>>(

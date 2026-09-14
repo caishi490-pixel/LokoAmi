@@ -20,7 +20,6 @@
 package net.ccbluex.liquidbounce.utils.aiming.utils
 
 import net.ccbluex.fastutil.mapToArray
-import net.ccbluex.liquidbounce.features.module.modules.combat.aimbot.ModuleProjectileAimbot
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleDebug
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleDebug.debugGeometry
 import net.ccbluex.liquidbounce.render.engine.type.Color4b
@@ -181,7 +180,7 @@ fun findVisiblePointFromVirtualEye(
 ): Vec3? {
     val points = projectPointsOnBox(virtualEyes, box) ?: return null
 
-    ModuleProjectileAimbot.debugGeometry("points") {
+    ModuleDebug.debugGeometry("points") {
         ModuleDebug.DebugCollection(points.map { ModuleDebug.DebuggedPoint(it, Color4b.BLUE, 0.01) })
     }
 
@@ -202,12 +201,12 @@ fun findVisiblePointFromVirtualEye(
         rays.add(ModuleDebug.DebuggedLineSegment(rayStart, spotOnBox, if (visible) Color4b.GREEN else Color4b.RED))
 
         if (visible) {
-            ModuleProjectileAimbot.debugGeometry("rays") { ModuleDebug.DebugCollection(rays) }
+            ModuleDebug.debugGeometry("rays") { ModuleDebug.DebugCollection(rays) }
             return spotOnBox
         }
     }
 
-    ModuleProjectileAimbot.debugGeometry("rays") { ModuleDebug.DebugCollection(rays) }
+    ModuleDebug.debugGeometry("rays") { ModuleDebug.DebugCollection(rays) }
 
     return null
 }

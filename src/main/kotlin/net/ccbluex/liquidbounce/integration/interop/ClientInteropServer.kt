@@ -68,8 +68,8 @@ object ClientInteropServer {
                     get("/", ::getRootResponse)
                     registerInteropFunctions()
 
-                    LiquidBounce.resource("themes/liquidbounce.zip").use { stream ->
-                        zip("/resource/liquidbounce", stream)
+                    LiquidBounce.resource("themes/lokoami.zip").use { stream ->
+                        zip("/resource/lokoami", stream)
                     }
                     file("/local", ThemeManager.themesFolder)
                     file("/marketplace", MarketplaceManager.marketplaceRoot)

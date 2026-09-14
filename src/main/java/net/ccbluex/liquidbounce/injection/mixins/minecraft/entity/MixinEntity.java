@@ -26,11 +26,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.event.events.*;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.ModuleNoPitchLimit;
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleAntiBounce;
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleNoPose;
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleNoPush;
-import net.ccbluex.liquidbounce.features.module.modules.movement.NoPushBy;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFreeCam;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tags.TagKey;
@@ -80,7 +75,7 @@ public abstract class MixinEntity {
 
     @ModifyExpressionValue(method = "isSuppressingBounce", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isShiftKeyDown()Z"))
     private boolean hookAntiBounce(boolean original) {
-        return ModuleAntiBounce.INSTANCE.getRunning() || original;
+        return original;
     }
 
     /**
@@ -99,24 +94,10 @@ public abstract class MixinEntity {
             return original;
         }
 
-        return ModuleNoPush.canPush(NoPushBy.LIQUIDS)
-                ? original : Vec3.ZERO;
+        return original;
     }
 
-    /**
-     * Hook no pitch limit exploit
-     */
-    @Redirect(method = {"turn", "absSnapRotationTo"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(FFF)F"))
-    public float hookNoPitchLimit1(float value, float min, float max) {
-        boolean noLimit = ModuleNoPitchLimit.INSTANCE.getRunning();
-        return noLimit ? value : Mth.clamp(value, min, max);
-    }
 
-    @WrapOperation(method = "setXRot", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/Entity;xRot:F", opcode = Opcodes.PUTFIELD))
-    public void hookNoPitchLimit2(Entity instance, float clamped, Operation<Void> original, @Local(argsOnly = true) float xRot) {
-        boolean noLimit = ModuleNoPitchLimit.INSTANCE.getRunning();
-        original.call(instance, noLimit ? xRot : clamped);
-    }
 
     @ModifyExpressionValue(method = "moveRelative", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getInputVector(Lnet/minecraft/world/phys/Vec3;FF)Lnet/minecraft/world/phys/Vec3;"))
     public Vec3 hookVelocity(Vec3 original, @Local(argsOnly = true) Vec3 movementInput, @Local(argsOnly = true) float speed, @Local(argsOnly = true) float yaw) {
@@ -221,10 +202,4 @@ public abstract class MixinEntity {
         return original;
     }
 
-    @Inject(method = "setPose", at = @At("HEAD"), cancellable = true)
-    private void setPose(Pose pose, CallbackInfo ci) {
-        /* Cancel pose if needed */
-        if ((Object) this == Minecraft.getInstance().player && ModuleNoPose.INSTANCE.shouldCancelPose(pose))
-            ci.cancel();
-    }
 }

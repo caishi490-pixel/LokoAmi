@@ -109,7 +109,7 @@ object LiquidBounce : EventListener {
      *
      * WARNING: Please read the GNU General Public License
      */
-    const val CLIENT_NAME = "LiquidBounce"
+    const val CLIENT_NAME = "LokoAmi"
     const val CLIENT_AUTHOR = "CCBlueX"
 
     private object Client : Config("Client") {
@@ -168,18 +168,18 @@ object LiquidBounce : EventListener {
     /**
      * Gets client resource.
      *
-     * @param path prefix `/resources/liquidbounce/`
+     * @param path prefix `/resources/lokoami/`
      * @throws IllegalArgumentException if the resource is not found
      */
     @JvmStatic
     fun resource(path: String): InputStream =
-        LiquidBounce::class.java.getResourceAsStream("/resources/liquidbounce/$path")
+        LiquidBounce::class.java.getResourceAsStream("/resources/lokoami/$path")
             ?: throw IllegalArgumentException("Resource $path not found")
 
     /**
      * Gets client resource as string.
      *
-     * @param path prefix `/resources/liquidbounce/`
+     * @param path prefix `/resources/lokoami/`
      * @throws IllegalArgumentException if the resource is not found
      */
     @JvmStatic

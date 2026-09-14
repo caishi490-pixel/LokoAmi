@@ -20,7 +20,6 @@ package net.ccbluex.liquidbounce.injection.mixins.minecraft.render;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.ccbluex.liquidbounce.common.OutlineFlag;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleStorageESP;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
@@ -44,21 +43,6 @@ public abstract class MixinBlockEntityRenderDispatcher {
         S state, @Local(argsOnly = true) S blockEntityRenderState
     ) {
         var client = Minecraft.getInstance();
-        if (ModuleStorageESP.GlowMode.INSTANCE.getRunning() && client.level != null) {
-            var type = ModuleStorageESP.categorize(client.level.getBlockEntity(blockEntityRenderState.blockPos));
-
-            if (type != null && type.shouldRender(blockEntityRenderState.blockPos)) {
-                var color = type.getColor();
-
-                if (!color.isTransparent()) {
-                    var outlineVertexConsumerProvider = client.renderBuffers()
-                        .outlineBufferSource();
-                    outlineVertexConsumerProvider.setColor(color.argb());
-                    OutlineFlag.drawOutline = true;
-                    return state;
-                }
-            }
-        }
 
         return state;
     }

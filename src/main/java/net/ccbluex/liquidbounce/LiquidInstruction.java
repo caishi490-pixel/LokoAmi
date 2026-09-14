@@ -39,9 +39,9 @@ public final class LiquidInstruction {
 
   private static @NotNull List<Image> loadIcons() {
     return Stream.of(
-            "/resources/liquidbounce/icon_64x64.png",
-            "/resources/liquidbounce/icon_32x32.png",
-            "/resources/liquidbounce/icon_16x16.png"
+            "/resources/lokoami/icon_64x64.png",
+            "/resources/lokoami/icon_32x32.png",
+            "/resources/lokoami/icon_16x16.png"
         ).map(LiquidInstruction.class::getResource)
         .filter(Objects::nonNull)
         .map(it -> new ImageIcon(it).getImage())

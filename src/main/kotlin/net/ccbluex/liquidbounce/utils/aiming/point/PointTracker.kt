@@ -74,7 +74,7 @@ class PointTracker(val parent: EventListener) : ValueGroup("AimPoint"), EventLis
 
         // Project points onto box
         val box = entity.getBoundingBoxAt(targetPos)
-            // Support [ModuleHitbox]
+            // Support hitbox expansion
             .inflate(entity.pickRadius.toDouble())
         val points = box.getPoints(eyes)
 

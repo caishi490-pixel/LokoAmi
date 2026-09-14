@@ -19,7 +19,6 @@
 
 package net.ccbluex.liquidbounce.utils.render.trajectory
 
-import net.ccbluex.liquidbounce.features.module.modules.movement.ModuleFreeze
 import net.ccbluex.liquidbounce.render.WorldRenderEnvironment
 import net.ccbluex.liquidbounce.render.drawBox
 import net.ccbluex.liquidbounce.render.drawBoxSide
@@ -120,7 +119,7 @@ class TrajectoryInfoRenderer @Suppress("LongParameterList") constructor(
             ).withLength(trajectoryInfo.initialVelocity)
 
             //In Freeze, this momentum is the residual value before freezing.
-            if (trajectoryInfo.copiesPlayerVelocity && !ModuleFreeze.running) {
+            if (trajectoryInfo.copiesPlayerVelocity) {
                 velocity = velocity.add(
                     owner.deltaMovement.x,
                     if (owner.onGround()) 0.0 else owner.deltaMovement.y,

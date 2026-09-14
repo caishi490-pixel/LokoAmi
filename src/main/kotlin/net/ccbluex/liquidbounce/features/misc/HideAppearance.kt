@@ -66,7 +66,7 @@ object HideAppearance : EventListener {
      * And we'll provide the value after first removing the mod
      */
     private val modContainersToHide: MutableMap<String, Mod?> = arrayOf(
-        "liquidbounce", "mcef"
+        "lokoami", "mcef"
     ).associateWith { null }.toMutableMap()
 
     private val shiftChronometer = Chronometer()
@@ -168,7 +168,7 @@ object HideAppearance : EventListener {
         }
 
         FabricLoaderImpl.INSTANCE.allMods.find {
-            it.metadata.id == "liquidbounce"
+            it.metadata.id == "lokoami"
         }?.let { mod ->
             // Delete JAR file
             runCatching {

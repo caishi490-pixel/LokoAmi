@@ -25,14 +25,8 @@ import net.ccbluex.liquidbounce.event.events.EntityEquipmentChangeEvent;
 import net.ccbluex.liquidbounce.event.events.EntityHealthUpdateEvent;
 import net.ccbluex.liquidbounce.event.events.PlayerAfterJumpEvent;
 import net.ccbluex.liquidbounce.event.events.PlayerJumpEvent;
-import net.ccbluex.liquidbounce.features.module.modules.combat.elytratarget.ModuleElytraTarget;
-import net.ccbluex.liquidbounce.features.module.modules.movement.*;
-import net.ccbluex.liquidbounce.features.module.modules.render.DoRender;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleAnimations;
-import net.ccbluex.liquidbounce.features.module.modules.render.ModuleAntiBlind;
 import net.ccbluex.liquidbounce.features.module.modules.render.hitfx.ModuleHitFX;
-import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.ModuleScaffold;
-import net.ccbluex.liquidbounce.features.module.modules.world.scaffold.tower.ScaffoldTowerNone;
 import net.ccbluex.liquidbounce.utils.aiming.RotationManager;
 import net.ccbluex.liquidbounce.utils.aiming.features.MovementCorrection;
 import net.ccbluex.liquidbounce.utils.client.SilentHotbar;
@@ -127,9 +121,6 @@ public abstract class MixinLivingEntity extends MixinEntity {
         // If we get anyting other than levitation, the injection went wrong
         assert original != MobEffects.LEVITATION;
 
-        if (ModuleAntiLevitation.INSTANCE.getRunning()) {
-            return null;
-        }
 
         return original;
     }
@@ -148,9 +139,6 @@ public abstract class MixinLivingEntity extends MixinEntity {
             allow = 1
     )
     public boolean hookTravelStatusEffect(boolean original) {
-        if (ModuleAntiLevitation.INSTANCE.getRunning()) {
-            return false;
-        }
 
         return original;
     }
@@ -226,32 +214,11 @@ public abstract class MixinLivingEntity extends MixinEntity {
 
     @Inject(method = "push", at = @At("HEAD"), cancellable = true)
     private void hookNoPush(CallbackInfo callbackInfo) {
-        if (!ModuleNoPush.canPush(NoPushBy.ENTITIES)) {
-            callbackInfo.cancel();
-        }
     }
 
-    @Inject(method = "aiStep", at = @At("HEAD"))
-    private void hookTickMovement(CallbackInfo callbackInfo) {
-        // We don't want NoJumpDelay to interfere with AirJump which would lead to a Jetpack-like behavior
-        var noJumpDelay = ModuleNoJumpDelay.INSTANCE.getRunning() && !ModuleAirJump.INSTANCE.getAllowJump();
-
-        // The jumping cooldown would lead to very slow tower building
-        var towerActive = ModuleScaffold.INSTANCE.getRunning() &&
-                ModuleScaffold.INSTANCE.getTowerMode().getActiveMode() != ScaffoldTowerNone.INSTANCE &&
-                ModuleScaffold.INSTANCE.getTowerMode().getActiveMode().getRunning();
-
-        if (noJumpDelay || towerActive) {
-            this.noJumpDelay = 0;
-        }
-    }
 
     @Inject(method = "aiStep", at = @At(value = "FIELD", target = "Lnet/minecraft/world/entity/LivingEntity;jumping:Z"))
     private void hookAirJump(CallbackInfo callbackInfo) {
-        if (ModuleAirJump.INSTANCE.getAllowJump() && jumping && noJumpDelay == 0) {
-            this.jumpFromGround();
-            noJumpDelay = 10;
-        }
     }
 
     @Unique
@@ -264,12 +231,6 @@ public abstract class MixinLivingEntity extends MixinEntity {
         }
 
         var elytra = isFallFlying();
-        if (ModuleElytraRecast.INSTANCE.getRunning() && previousElytra && !elytra) {
-            Minecraft.getInstance().getSoundManager().stop(SoundEvents.ELYTRA_FLYING.location(),
-                    SoundSource.PLAYERS);
-            ModuleElytraRecast.INSTANCE.recastElytra();
-            noJumpDelay = 0;
-        }
 
         previousElytra = elytra;
     }
@@ -295,9 +256,6 @@ public abstract class MixinLivingEntity extends MixinEntity {
 
     @Inject(method = "spawnItemParticles", at = @At("HEAD"), cancellable = true)
     private void hookEatParticles(ItemStack stack, int count, CallbackInfo ci) {
-        if (stack.getComponents().has(DataComponents.FOOD) && !ModuleAntiBlind.canRender(DoRender.EAT_PARTICLES)) {
-            ci.cancel();
-        }
     }
 
     /**
@@ -331,15 +289,6 @@ public abstract class MixinLivingEntity extends MixinEntity {
         var player = (LocalPlayer) (Object) this;
         var gliding = cir.getReturnValue();
 
-        if (previousIsGliding && !gliding) {
-            var flag = ModuleElytraTarget.canAlwaysGlide();
-            if (flag) {
-                player.startFallFlying();
-                player.connection.send(new ServerboundPlayerCommandPacket(player, ServerboundPlayerCommandPacket.Action.START_FALL_FLYING));
-            }
-
-            cir.setReturnValue(flag);
-        }
 
         previousIsGliding = gliding;
     }

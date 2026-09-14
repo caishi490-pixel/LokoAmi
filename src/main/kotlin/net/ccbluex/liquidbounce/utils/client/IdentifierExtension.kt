@@ -19,15 +19,24 @@
 
 package net.ccbluex.liquidbounce.utils.client
 
-import net.ccbluex.liquidbounce.LiquidBounce.CLIENT_NAME
 import net.minecraft.resources.Identifier
 import java.util.Locale
 
 /**
- * Creates an [net.minecraft.resources.Identifier] starts with [CLIENT_NAME].
+ * The resource namespace this mod declares its assets under.
+ *
+ * This MUST stay in sync with the `id` field in `fabric.mod.json` — it is what Minecraft uses to
+ * look up everything under `assets/<namespace>/`. It is deliberately NOT derived from
+ * [CLIENT_NAME]: rebranding the client must not move its resource namespace, or every texture,
+ * sound and font lookup silently misses (and the client dies while initialising).
+ */
+private const val RESOURCE_NAMESPACE = "lokoami"
+
+/**
+ * Creates an [net.minecraft.resources.Identifier] inside this client's resource namespace.
  */
 internal fun clientIdentifier(path: String): Identifier =
-    Identifier.fromNamespaceAndPath(CLIENT_NAME.lowercase(Locale.ROOT), path)
+    Identifier.fromNamespaceAndPath(RESOURCE_NAMESPACE, path)
 
 /**
  * Converts an [Identifier] to a human-readable name without localization.

@@ -26,6 +26,8 @@ object ModuleCategories {
 
     @JvmField
     val COMBAT = register(ModuleCategory("Combat"))
+    @JvmField
+    val CUSTOM = register(ModuleCategory("Custom"))
 
     @JvmField
     val PLAYER = register(ModuleCategory("Player"))

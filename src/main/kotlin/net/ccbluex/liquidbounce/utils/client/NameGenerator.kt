@@ -36,7 +36,7 @@ private val LEET_MAP = Char2CharArrayMap(
 )
 
 private fun loadLines(name: String): List<String> {
-    val resourceName = "/resources/liquidbounce/data/usernames/$name"
+    val resourceName = "/resources/lokoami/data/usernames/$name"
     val inputStream =
         LiquidBounce::class.java.getResourceAsStream(resourceName)
             ?: error("Failed to load resource $resourceName")
