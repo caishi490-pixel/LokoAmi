@@ -57,7 +57,7 @@
     background-color: rgba($menu-base-color, .36);
     padding: 15px 25px;
     column-gap: 15px;
-    border-radius: 5px;
+    border-radius: 0;
     transition: ease background-color .2s;
     align-items: center;
     cursor: grab;
@@ -107,7 +107,7 @@
       color: $menu-text-color;
       font-size: 12px;
       padding: 3px 10px;
-      border-radius: 20px;
+      border-radius: 0;
 
       &.visible {
         display: block;

@@ -46,7 +46,7 @@
     display: flex;
     gap: 5px;
     padding: 6px;
-    border-radius: 999px;
+    border-radius: 0;
     background-color: rgba($clickgui-base-color, 0.85);
     box-shadow: 0 0 10px rgba($clickgui-base-color, 0.5);
     z-index: 9999999999;
@@ -58,7 +58,7 @@
     padding: 6px 14px;
     font-size: 14px;
     font-weight: 600;
-    border-radius: 999px;
+    border-radius: 0;
     cursor: pointer;
     transition: ease background-color 0.2s, ease color 0.2s;
     border: solid 1px transparent;

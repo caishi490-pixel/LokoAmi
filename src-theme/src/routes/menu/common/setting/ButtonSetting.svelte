@@ -40,7 +40,7 @@
     color: $menu-text-color;
     font-family: "Inter", sans-serif;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 0;
     font-size: 20px;
     transition: ease background-color .2s, ease opacity .2s;
 

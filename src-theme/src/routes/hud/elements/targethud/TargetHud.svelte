@@ -79,7 +79,7 @@
 
     .targethud {
         background-color: rgba($targethud-base-color, 0.68);
-        border-radius: 5px;
+        border-radius: 0;
         overflow: hidden;
     }
 
@@ -131,7 +131,7 @@
         background-image: url("/img/steve.png");
         background-repeat: no-repeat;
         background-size: cover;
-        border-radius: 5px;
+        border-radius: 0;
         overflow: hidden;
 
         img {

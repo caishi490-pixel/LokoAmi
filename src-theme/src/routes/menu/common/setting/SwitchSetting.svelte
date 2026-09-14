@@ -42,7 +42,7 @@
     background-color: color.adjust($menu-text-color, $lightness: -55%);
     transition: ease 0.4s;
     height: 14px;
-    border-radius: 10px;
+    border-radius: 0;
 
     &::before {
       position: absolute;

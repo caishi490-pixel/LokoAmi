@@ -27,8 +27,8 @@
 
             if (clientUpdate.update) {
                 notification.set({
-                    title: `LokoAmi ${clientUpdate.update.clientVersion} has been released!`,
-                    message: `Download it from lokoami.net!`,
+                    title: `LokoAmi ${clientUpdate.update.clientVersion} 已发布！`,
+                    message: `请前往官网下载最新版本。`,
                     error: false,
                     delay: 99999999
                 });
@@ -60,36 +60,36 @@
         <div class="content">
             <div class="main-buttons">
                 {#if regularButtonsShown}
-                    <MainButton title="Singleplayer" icon="singleplayer" index={0}
+                    <MainButton title="单人游戏" icon="singleplayer" index={0}
                                 on:click={() => openScreen("singleplayer")}/>
 
-                    <MainButton title="Multiplayer" icon="multiplayer" let:parentHovered
+                    <MainButton title="多人游戏" icon="multiplayer" let:parentHovered
                                 on:click={() => openScreen("multiplayer")} index={1}>
                         <ChildButton title="Realms" icon="realms" {parentHovered}
                                      on:click={() => openScreen("multiplayer_realms")}/>
                     </MainButton>
                     <MainButton title="LokoAmi" icon="liquidbounce" on:click={toggleButtons} index={2}/>
-                    <MainButton title="Options" icon="options" on:click={() => openScreen("options")} index={3}/>
+                    <MainButton title="选项" icon="options" on:click={() => openScreen("options")} index={3}/>
                 {:else if clientButtonsShown}
-                    <MainButton title="Proxy Manager" icon="proxymanager" on:click={() => openScreen("proxymanager")}
+                    <MainButton title="代理管理" icon="proxymanager" on:click={() => openScreen("proxymanager")}
                                 index={0}/>
-                    <MainButton title="Click GUI" icon="clickgui" on:click={() => openScreen("clickgui")} index={1}/>
-                    <!-- <MainButton title="Scripts" icon="scripts" index={2}/> -->
-                    <MainButton title="Back" icon="back-large" on:click={toggleButtons} index={2}/>
+                    <MainButton title="界面设置" icon="clickgui" on:click={() => openScreen("clickgui")} index={1}/>
+                    <!-- <MainButton title="脚本" icon="scripts" index={2}/> -->
+                    <MainButton title="返回" icon="back-large" on:click={toggleButtons} index={2}/>
                 {/if}
             </div>
 
             <div class="additional-buttons" transition:fly|global={{duration: 700, y: 100}}>
                 <ButtonContainer>
-                    <IconTextButton icon="icon-exit.svg" title="Exit" on:click={exitClient}/>
-                    <IconTextButton icon="icon-change-background.svg" title="Toggle Shader"
+                    <IconTextButton icon="icon-exit.svg" title="退出游戏" on:click={exitClient}/>
+                    <IconTextButton icon="icon-change-background.svg" title="切换光影"
                                     on:click={toggleBackgroundShaderEnabled}/>
                 </ButtonContainer>
             </div>
 
             <div class="social-buttons" transition:fly|global={{duration: 700, y: 100}}>
                 <ButtonContainer>
-                    <IconButton title="Forum" icon="nodebb" on:click={() => browse("MAINTAINER_FORUM")}/>
+                    <IconButton title="论坛" icon="nodebb" on:click={() => browse("MAINTAINER_FORUM")}/>
                     <IconButton title="GitHub" icon="github" on:click={() => browse("MAINTAINER_GITHUB")}/>
                     <IconButton title="Discord" icon="discord" on:click={() => browse("MAINTAINER_DISCORD")}/>
                     <IconButton title="Twitter" icon="twitter" on:click={() => browse("MAINTAINER_TWITTER")}/>

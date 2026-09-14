@@ -93,7 +93,7 @@
   .choice {
     color: $clickgui-text-dimmed-color;
     background-color: rgba($clickgui-base-color, 0.3);
-    border-radius: 3px;
+    border-radius: 0;
     padding: 3px 6px;
     cursor: pointer;
     font-weight: 500;

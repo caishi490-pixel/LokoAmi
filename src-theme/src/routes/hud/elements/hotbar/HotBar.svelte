@@ -185,7 +185,7 @@
   .hotbar-elements {
     background-color: rgba($hotbar-base-color, 0.68);
     position: relative;
-    border-radius: 5px;
+    border-radius: 0;
     overflow: hidden;
 
     .slider {
@@ -193,7 +193,7 @@
       height: 45px;
       width: 45px;
       position: absolute;
-      border-radius: 5px;
+      border-radius: 0;
       /* transition: linear left 0.05s; TODO: Animation is possible but annoying */
     }
 
@@ -210,7 +210,7 @@
   .offhand-slot {
     height: 45px;
     width: 45px;
-    border-radius: 5px;
+    border-radius: 0;
     background-color: rgba($hotbar-base-color, 0.68);
     position: absolute;
     bottom: 0;
@@ -224,7 +224,7 @@
     font-weight: 500;
     background-color: rgba($hotbar-base-color, .68);
     padding: 5px 8px;
-    border-radius: 5px;
+    border-radius: 0;
     width: max-content;
   }
 

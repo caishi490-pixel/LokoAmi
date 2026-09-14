@@ -183,7 +183,7 @@
 
     &.expanded {
       .header {
-        border-radius: 5px 5px 0 0;
+        border-radius: 0;
       }
     }
   }
@@ -191,7 +191,7 @@
   .header {
     background-color: rgba($hotbar-base-color, 0.68);
     padding: 15px 18px;
-    border-radius: 5px;
+    border-radius: 0;
     align-items: center;
     display: grid;
     grid-template-areas:
@@ -271,7 +271,7 @@
     position: absolute;
     z-index: 1000;
     width: 100%;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0;
     background-color: rgba($menu-base-color, 0.9);
 
     .placeholder {

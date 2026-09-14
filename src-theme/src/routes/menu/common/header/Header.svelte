@@ -15,13 +15,13 @@
     listen("accountManagerAddition", (e: AccountManagerAdditionEvent) => {
         if (!e.error) {
             notification.set({
-                title: "AltManager",
-                message: `Successfully added account ${e.username}`,
+                title: "账号管理",
+                message: `已成功添加账号 ${e.username}`,
                 error: false
             });
         } else {
             notification.set({
-                title: "AltManager",
+                title: "账号管理",
                 message: e.error,
                 error: true
             });
@@ -30,7 +30,7 @@
 
     listen("accountManagerMessage", (e: AccountManagerMessageEvent) => {
         notification.set({
-            title: "AltManager",
+            title: "账号管理",
             message: e.message,
             error: false
         });
@@ -39,13 +39,13 @@
     listen("accountManagerLogin", (e: AccountManagerLoginEvent) => {
         if (!e.error) {
             notification.set({
-                title: "AltManager",
-                message: `Successfully logged in to account ${e.username}`,
+                title: "账号管理",
+                message: `已成功登录账号 ${e.username}`,
                 error: false
             });
         } else {
             notification.set({
-                title: "AltManager",
+                title: "账号管理",
                 message: e.error,
                 error: true
             });

@@ -100,7 +100,7 @@
     border: none;
     border-bottom: solid 2px $accent-color;
     padding: 6px;
-    border-radius: 3px;
+    border-radius: 0;
     transition: ease border-color .2s;
 
     white-space: nowrap;

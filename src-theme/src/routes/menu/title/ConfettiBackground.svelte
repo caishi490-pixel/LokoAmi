@@ -126,7 +126,7 @@
     }
 
     .confetti-piece.is-streamer .confetti-bit {
-        border-radius: 999px;
+        border-radius: 0;
     }
 
     @keyframes confetti-fall {

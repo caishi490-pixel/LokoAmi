@@ -1,5 +1,10 @@
 @use "colors.scss" as *;
 
+/* ==========================================================================
+   LokoAmi · Esports & Gaming 全局样式
+   ========================================================================== */
+
+/* --- 拉丁字形：Inter（正文）------------------------------------------------ */
 @font-face {
     font-family: "Inter";
     src: url("/fonts/Inter-Bold.ttf") format("truetype");
@@ -28,6 +33,40 @@
     font-style: normal;
 }
 
+/* --- 拉丁字形：Rajdhani（标题 / 数字，电竞风骨架）-------------------------- */
+@font-face {
+    font-family: "Rajdhani";
+    src: url("/fonts/Rajdhani-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Rajdhani";
+    src: url("/fonts/Rajdhani-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* ------------------------------------------------------------------
+       中文回退栈
+       Rajdhani 与 Inter 都只有拉丁字形，中文会缺字。
+       这里统一把中文字体排在后面：浏览器按字形逐个回退 ——
+       英文/数字用 Rajdhani 或 Inter，中文自动落到系统字体。
+       ⚠ 不要在任何组件里写裸 font-family，否则中文会掉回浏览器默认字体。
+       ------------------------------------------------------------------ */
+    --font-display: "Rajdhani", "Noto Sans SC", "Source Han Sans SC",
+                    "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    --font-body: "Inter", "Noto Sans SC", "Source Han Sans SC",
+                 "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+
+    /* 电竞规范 Shapes：none = 0px。全站不使用圆角。 */
+    --radius: 0px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -39,11 +78,16 @@
 }
 
 body {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-body);
     user-select: none;
     overflow: hidden;
 }
 
+/* 数字一律等宽，血量 / 延迟 / 计时跳动时宽度不抖 */
+.tnum,
+[data-tnum] {
+    font-variant-numeric: tabular-nums;
+}
 
 ::-webkit-scrollbar-track {
     background-color: transparent;
@@ -54,6 +98,29 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: $accent-color;
-    border-radius: 10px;
+    background-color: $neon-color;
+    border-radius: 0;
+}
+
+/* ==========================================================================
+   通用电竞组件基类
+   组件里用 @extend 或直接 @use colors.scss 复刻这些值，保持 0 圆角与斜切一致。
+   ========================================================================== */
+
+/* 平行四边形按钮裁切（规范 Neon Button） */
+@mixin clip-button {
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+
+/* 右上角切角卡片（规范 Player/Team Card） */
+@mixin clip-card($cut: 12px) {
+    clip-path: polygon(0 0, calc(100% - #{$cut}) 0, 100% #{$cut}, 100% 100%, 0 100%);
+}
+
+/* 霓虹描边 + 辉光 */
+@mixin neon-frame($strength: 1) {
+    border: 1px solid $neon-dim;
+    @if $strength > 1 {
+        box-shadow: 0 0 20px $neon-glow;
+    }
 }

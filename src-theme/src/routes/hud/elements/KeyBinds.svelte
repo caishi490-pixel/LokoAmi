@@ -49,7 +49,7 @@
 
   .keybinds {
     width: max-content;
-    border-radius: 5px;
+    border-radius: 0;
     overflow: hidden;
     font-size: 14px;
     min-width: 150px;

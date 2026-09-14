@@ -41,7 +41,7 @@
             background-color: rgba($targethud-base-color, 0.3);
             height: 3px;
             width: 5px;
-            border-radius: 1px;
+            border-radius: 0;
             transition: ease background-color 0.7s;
 
             &.active {

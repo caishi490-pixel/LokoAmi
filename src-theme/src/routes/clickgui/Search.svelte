@@ -207,13 +207,13 @@
     transform: translateX(-50%);
     background-color: rgba($clickgui-base-color, 0.9);
     width: 600px;
-    border-radius: 30px;
+    border-radius: 0;
     overflow: hidden;
     transition: ease border-radius 0.2s;
     box-shadow: 0 0 10px rgba($clickgui-base-color, 0.5);
 
     &.has-results {
-      border-radius: 10px;
+      border-radius: 0;
     }
 
     &:focus-within,

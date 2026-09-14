@@ -54,7 +54,7 @@
     grid-row-start: 1;
     grid-column-start: 1;
     background-color: rgba($menu-base-color, 0.68);
-    border-radius: 5px;
+    border-radius: 0;
     display: grid;
     grid-template-areas:
         "a b"

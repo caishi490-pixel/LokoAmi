@@ -52,7 +52,7 @@
     flex-direction: column;
     gap: 4px;
     background-color: $effects-background-color;
-    border-radius: 5px;
+    border-radius: 0;
     padding: 4px 6px;
   }
 

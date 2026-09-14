@@ -136,45 +136,63 @@
   @use "../../colors" as *;
   @use "./icon-settings-expand" as *;
 
+  /* Esports：0 圆角；启用态用左侧霓虹竖条 + 淡霓虹底表示，不用圆角高亮块。
+     模块名由后端翻译返回，中文走系统字体回退（Rajdhani 无中文字形），
+     故这里用 --font-display 让拉丁名拿到 Rajdhani、中文自动回退。 */
   .module {
     position: relative;
 
     .name {
       cursor: pointer;
-      transition: ease background-color 0.2s,
-      ease color 0.2s;
+      transition: background-color .14s ease, color .14s ease, border-color .14s ease;
 
+      font-family: var(--font-display);
       color: $clickgui-text-dimmed-color;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 500;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
       position: relative;
-      padding: 10px;
+      padding: 9px 10px 9px 12px;
+      border-left: 2px solid transparent;
+      font-variant-numeric: tabular-nums;
 
+      /* 搜索命中：改为霓虹描边方块，0 圆角 */
       &.highlight::before {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
-        width: calc(100% - 4px);
-        height: calc(100% - 4px);
-        border: solid 2px $accent-color;
+        width: 100%;
+        height: 100%;
+        border: solid 2px $neon-color;
+        box-shadow: 0 0 14px $neon-glow-sm;
+        pointer-events: none;
       }
 
       &:hover {
-        background-color: rgba($clickgui-base-color, 0.85);
+        background-color: $neon-faint;
         color: $clickgui-text-color;
+        border-left-color: $line-color-strong;
       }
 
+      /* 启用态：霓虹文字 + 左竖条 + 辉光 */
       &.enabled {
-        color: $accent-color;
+        color: $neon-color;
+        background-color: $neon-faint;
+        border-left-color: $neon-color;
+        text-shadow: 0 0 10px $neon-glow-sm;
+
+        &:hover {
+          background-color: rgba(240, 80, 140, 0.18);
+        }
       }
     }
 
     .settings {
-      background-color: rgba($clickgui-base-color, 0.5);
-      border-left: solid 4px $accent-color;
-      padding: 0 11px 0 7px;
+      background-color: rgba($panel-color, 0.92);
+      border-left: solid 2px $neon-color;
+      padding: 4px 10px 6px 10px;
     }
 
     &.has-settings {

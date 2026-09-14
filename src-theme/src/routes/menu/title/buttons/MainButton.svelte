@@ -35,51 +35,67 @@
 <style lang="scss">
   @use "../../../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 右上角切角 + 左侧状态条；辉光只出现在悬停态 */
   .main-button {
-    background-color: rgba($menu-base-color, 0.68);
     width: 590px;
-    padding: 25px 35px;
+    padding: 18px 28px;
     display: grid;
     grid-template-columns: max-content 1fr max-content;
     align-items: center;
+    column-gap: 22px;
     cursor: pointer;
-    border-radius: 5px;
-    column-gap: 25px;
+    border-radius: 0;
 
-    background: linear-gradient(to left, rgba($menu-base-color, .68) 50%, $accent-color 50%);
-    background-size: 200% 100%;
-    background-position: right bottom;
-    will-change: background-position;
-    transition: background-position .2s ease-out;
+    background-color: rgba($panel-color, 0.72);
+    border: 1px solid $line-color;
+    border-left: 3px solid $line-color-strong;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+
+    transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
+    will-change: background-color;
 
     &:hover {
-      background-position: left bottom;
+      background-color: $neon-faint;
+      border-color: $neon-dim;
+      border-left-color: $neon-color;
+      box-shadow: 0 0 24px $neon-glow-sm;
 
       .icon {
-        background-color: $menu-text-color;
+        border-color: $neon-color;
+        box-shadow: 0 0 14px $neon-glow-sm;
+      }
+
+      .title {
+        color: $neon-color;
       }
     }
   }
 
+  /* 图标位由圆形改为切角方块，保持硬边 */
   .icon {
-    background-color: $accent-color;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    transition: ease background-color 0.2s;
-    position: relative;
+    width: 62px;
+    height: 62px;
+    border: 1px solid $line-color;
+    background-color: $void-color;
+    border-radius: 0;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    display: grid;
+    place-items: center;
+    transition: border-color .16s ease, box-shadow .16s ease;
 
     img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      width: 34px;
+      height: 34px;
     }
   }
 
+  /* 中文会回退到系统字体（Rajdhani 无中文字形），字号与字距按中文调过 */
   .title {
-    font-size: 26px;
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 2px;
     color: $menu-text-color;
-    font-weight: 600;
+    transition: color .16s ease;
   }
 </style>

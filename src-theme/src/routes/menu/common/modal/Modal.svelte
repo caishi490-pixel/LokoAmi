@@ -52,7 +52,7 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
+    border-radius: 0;
     box-shadow: 0 0 10px rgba($menu-base-color, 0.5);
   }
 
@@ -74,7 +74,7 @@
       bottom: -25px;
       left: 50%;
       transform: translateX(-50%);
-      border-radius: 10px;
+      border-radius: 0;
     }
   }
 

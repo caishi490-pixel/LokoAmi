@@ -13,7 +13,7 @@
       background-color: rgba($menu-base-color, 0.68);
       padding: 15px 30px;
       display: flex;
-      border-radius: 5px;
+      border-radius: 0;
       align-items: center;
       column-gap: 30px;
       margin-bottom: 25px;

@@ -20,7 +20,7 @@
     color: $menu-text-color;
     font-family: "Inter", sans-serif;
     font-size: 20px;
-    border-radius: 5px;
+    border-radius: 0;
     border-bottom: solid 4px $accent-color;
     background-image: url("/img/menu/icon-search.svg");
     background-repeat: no-repeat;
