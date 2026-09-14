@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LokoAmi · 成品预览（全部 53 个模块）</title>
+<style>
+  :root {
+    --base:#0A1628; --panel:#122236; --bar:#091322; --side:#0E1D32;
+    --accent:#F0508C; --accent2:#38BDF8; --text:#EAF2FF; --dim:#8FA6C4;
+    --page:#0d0f14; --card:#171a21;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--page); font-family:"Segoe UI","Microsoft YaHei",sans-serif; color:var(--text);
+         padding:22px 26px 36px; transition:background .25s; }
+
+  .top { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:18px; }
+  .logo { font-size:28px; font-weight:800; letter-spacing:1px; color:var(--accent); transition:color .25s; }
+  .sub { font-size:12.5px; color:#8b93a5; margin-top:5px; }
+  .controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .pbtn { padding:7px 14px; border-radius:7px; border:1px solid rgba(255,255,255,.16); cursor:pointer;
+          background:rgba(255,255,255,.05); color:#d7dce6; font-size:12.5px; font-family:inherit; transition:.18s; }
+  .pbtn:hover { background:rgba(255,255,255,.11); }
+  .pbtn.active { background:var(--accent); color:#0b0d12; border-color:transparent; font-weight:700; }
+  .sep { width:1px; height:24px; background:rgba(255,255,255,.14); }
+
+  .layout { display:flex; gap:18px; align-items:flex-start; }
+
+  /* ===== ClickGUI：全部模块 ===== */
+  .cg { flex:0 0 720px; border-radius:10px; overflow:hidden; background:var(--base);
+        box-shadow:0 16px 50px rgba(0,0,0,.5); transition:.25s; }
+  .cg-bar { display:flex; align-items:center; justify-content:space-between; padding:11px 15px; background:var(--bar); }
+  .cg-bar .t { font-weight:800; letter-spacing:.8px; color:var(--accent); font-size:15px; }
+  .cg-bar .c { font-size:11.5px; color:var(--dim); }
+  .cg-wrap { display:flex; height:660px; }
+  .cg-side { width:150px; padding:9px 0; background:var(--side); overflow-y:auto; }
+  .cg-side .it { padding:7px 14px; font-size:12.5px; color:var(--dim); cursor:pointer; display:flex; justify-content:space-between; }
+  .cg-side .it:hover { color:var(--text); }
+  .cg-side .it.on { color:var(--accent); font-weight:700; border-left:3px solid var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent); }
+  .cg-side .it b { font-weight:600; opacity:.55; font-size:11px; }
+  .cg-main { flex:1; overflow-y:auto; padding:8px 14px 14px; }
+  .sec { font-size:11px; letter-spacing:1.6px; color:var(--accent); padding:11px 0 5px; font-weight:700; opacity:.9; }
+  .sec:first-child { padding-top:4px; }
+  .mod { display:flex; align-items:center; justify-content:space-between; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.055); }
+  .mod .n { font-weight:600; font-size:13px; }
+  .mod .d { font-size:10.5px; color:var(--dim); margin-top:1px; }
+  .sw { width:34px; height:18px; border-radius:9px; position:relative; flex-shrink:0;
+        background:rgba(255,255,255,.16); transition:.2s; cursor:pointer; }
+  .sw.on { background:var(--accent); }
+  .sw i { position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:#fff; transition:.2s; }
+  .sw.on i { left:18px; }
+
+  /* ===== 右侧 HUD 预览 ===== */
+  .right { flex:1; display:flex; flex-direction:column; gap:14px; }
+  .viewport { position:relative; height:480px; border-radius:10px; overflow:hidden;
+              background:linear-gradient(180deg,#5f8ccd 0%,#84a9da 44%,#4a6a36 44%,#38512b 100%);
+              box-shadow:0 16px 50px rgba(0,0,0,.5); }
+  .viewport::after { content:''; position:absolute; inset:0; z-index:1;
+              background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.38)); }
+  .el { position:absolute; z-index:3; font-family:Consolas,"Segoe UI",monospace; transition:.25s; }
+  .wm { top:12px; left:14px; padding:6px 11px; border-radius:6px; background:var(--panel); border-left:4px solid var(--accent); }
+  .wm .a { font-weight:800; color:var(--accent); font-size:13px; letter-spacing:.8px; }
+  .wm .b { font-size:10px; color:var(--dim); margin-top:2px; }
+  .al { top:12px; right:0; max-height:420px; overflow:hidden; }
+  .al .it { display:flex; justify-content:space-between; gap:14px; padding:4px 9px 4px 0; margin-bottom:2px;
+            font-size:12px; border-radius:5px 0 0 5px; border-left:4px solid var(--accent);
+            background:color-mix(in srgb, var(--base) 72%, transparent); }
+  .al .it span:last-child { opacity:.55; }
+  .kb { bottom:14px; right:14px; padding:7px 10px; border-radius:6px; font-size:11.5px; min-width:150px;
+        background:color-mix(in srgb, var(--base) 74%, transparent); }
+  .kb .r { display:flex; justify-content:space-between; padding:2px 0; }
+  .kb .r span:last-child { color:var(--accent2); }
+  .ef { bottom:14px; left:14px; padding:5px 8px; border-radius:6px; font-size:11.5px;
+        background:color-mix(in srgb, var(--base) 62%, transparent); }
+  .ef .r { display:flex; align-items:center; gap:6px; padding:2px 0; }
+  .ef .ic { width:14px; height:14px; border-radius:3px; background:var(--accent); }
+  .tg { left:14px; top:70px; border-radius:6px; padding:5px 0; min-width:104px; font-size:11.5px;
+        background:color-mix(in srgb, var(--base) 56%, transparent); }
+  .tg .c { padding:5px 11px; color:var(--dim); }
+  .tg .c.on { color:var(--accent); font-weight:700; border-left:3px solid var(--accent); }
+  .tg .sub { margin:3px 0 3px 8px; border-radius:5px; padding:4px 9px; min-width:96px;
+             background:color-mix(in srgb, var(--base) 78%, transparent); }
+  .tg .sub .m { padding:2px 0; }
+  .tg .sub .m.on { color:var(--accent); font-weight:700; }
+
+  .mcards { display:flex; gap:14px; flex-wrap:wrap; }
+  .mcard { flex:1; min-width:190px; background:var(--card); border-radius:9px; padding:13px 15px;
+           border:1px solid rgba(255,255,255,.07); }
+  .mcard .k { font-size:10.5px; color:#8b93a5; letter-spacing:.7px; text-transform:uppercase; }
+  .mcard .v { font-size:13px; margin-top:6px; color:#e6eaf2; line-height:1.5; }
+  .chips { display:flex; gap:6px; margin-top:9px; }
+  .chip { flex:1; height:24px; border-radius:5px; border:1px solid rgba(255,255,255,.14); }
+  .hex { font-family:Consolas,monospace; font-size:10px; color:#9aa3b4; margin-top:6px; display:flex; justify-content:space-between; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <div class="logo">LokoAmi</div>
+    <div class="sub">基于 LiquidBounce 0.37.0 · MC 1.21.11 · 危险模块已物理删除 · <b id="cnt">40</b> 个模块全部展示</div>
+  </div>
+  <div class="controls" id="controls"></div>
+</div>
+
+<div class="layout">
+  <div class="cg">
+    <div class="cg-bar">
+      <div class="t">LokoAmi</div>
+      <div class="c" id="cgCount">—</div>
+    </div>
+    <div class="cg-wrap">
+      <div class="cg-side" id="side"></div>
+      <div class="cg-main" id="main"></div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="viewport">
+      <div class="el wm"><div class="a">LOKOAMI</div><div class="b">v0.37.0 · Fabric</div></div>
+      <div class="el al" id="al"></div>
+      <div class="el tg">
+        <div class="c on">Render</div>
+        <div class="sub">
+          <div class="m on">FreeCam</div><div class="m on">Zoom</div>
+          <div class="m on">HUD</div><div class="m">Hats</div>
+        </div>
+        <div class="c">Misc</div><div class="c">Exploit</div>
+      </div>
+      <div class="el ef">
+        <div class="r"><span class="ic"></span><span>速度</span><span>II</span><span>2:14</span></div>
+        <div class="r"><span class="ic"></span><span>跳跃</span><span>I</span><span>0:41</span></div>
+      </div>
+      <div class="el kb">
+        <div class="r"><span>FreeCam</span><span>V</span></div>
+        <div class="r"><span>Zoom</span><span>Z</span></div>
+        <div class="r"><span>HUD</span><span>H</span></div>
+        <div class="r"><span>ClickGUI</span><span>RSHIFT</span></div>
+      </div>
+    </div>
+    <div class="mcards">
+      <div class="mcard">
+        <div class="k">当前配色</div>
+        <div class="v" id="cName">—</div>
+        <div class="chips" id="cChips"></div>
+        <div class="hex"><span id="h1"></span><span id="h2"></span><span id="h3"></span><span id="h4"></span></div>
+      </div>
+      <div class="mcard">
+        <div class="k">模块构成</div>
+        <div class="v">Render 29 · Misc 6 · Exploit 3<br>World 1 · Player 1　（共 40）</div>
+      </div>
+      <div class="mcard">
+        <div class="k">已移除</div>
+        <div class="v">172 个模块关闭<br>176 个模块源码删除<br>572 个文件隔离</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ 全部 53 个保留模块（真实名称 + 分类 + 中文说明）============
+const MODULES = [
+  // RENDER 31
+  ['RENDER','FreeCam','自由视角 · 录像用',1],
+  ['RENDER','Zoom','缩放',1],
+  ['RENDER','HUD','屏幕信息面板',1],
+  ['RENDER','Crosshair','自定义准星',1],
+  ['RENDER','Animations','动画效果',1],
+  ['RENDER','Aspect','画面比例',0],
+  ['RENDER','AutoF5','自动切换视角',0],
+  ['RENDER','BetterChat','聊天界面增强',0],
+  ['RENDER','BetterInventory','背包界面增强',1],
+  ['RENDER','BetterTab','TAB 列表增强',1],
+  ['RENDER','BlockOutline','方块轮廓描边',1],
+  ['RENDER','Breadcrumbs','路径面包屑',0],
+  ['RENDER','ClickGUI','点击界面（本窗口）',1],
+  ['RENDER','CombineMobs','合并怪物渲染',0],
+  ['RENDER','CustomAmbience','自定义天空氛围',0],
+  ['RENDER','DamageParticles','伤害粒子',0],
+  ['RENDER','Debug','调试面板',0],
+  ['RENDER','FreeLook','自由环视',1],
+  ['RENDER','Hats','帽子装饰',0],
+  ['RENDER','HitFX','命中特效',1],
+  ['RENDER','ItemTags','物品标签',1],
+  ['RENDER','NoBob','关闭视角摇晃',1],
+  ['RENDER','NoFOV','固定视野角度',0],
+  ['RENDER','NoHurtCam','关闭受伤镜头',1],
+  ['RENDER','NoSwing','无挥手动画',0],
+  ['RENDER','Particles','粒子控制',0],
+  ['RENDER','QuickPerspectiveSwap','快速切视角',0],
+  ['RENDER','SkinChanger','皮肤更换',0],
+  ['RENDER','SmoothCamera','平滑相机（录像）',1],
+  // MISC 9
+  ['MISC','DebugRecorder','调试录制',0],
+  ['MISC','GUICloser','关闭 GUI',0],
+  ['MISC','ItemScroller','背包滚轮增强',0],
+  ['MISC','MiddleClickAction','中键动作',0],
+  ['MISC','Notifier','通知提醒',1],
+  ['MISC','PacketLogger','数据包日志',0],
+  // EXPLOIT 4
+  ['EXPLOIT','Plugins','脚本插件管理',0],
+  ['EXPLOIT','PortalMenu','传送门菜单',0],
+  ['EXPLOIT','YggdrasilSignatureFix','登录签名修复',1],
+  // WORLD 2
+  ['WORLD','AutoDisable','事件自动关闭模块',0],
+  // PLAYER 1
+  ['PLAYER','ReportHelper','举报助手',0]
+];
+
+const CAT_NAME = { RENDER:'Render 渲染', MISC:'Misc 杂项', EXPLOIT:'Exploit 工具', WORLD:'World 世界', PLAYER:'Player 玩家' };
+document.getElementById('cnt').textContent = MODULES.length;
+
+const PALETTES = [
+  { id:'bp1', name:'蓝粉 · 深海玫粉', base:'#0A1628', panel:'#122236', bar:'#091322', side:'#0E1D32', accent:'#F0508C', accent2:'#38BDF8', text:'#EAF2FF', dim:'#8FA6C4' },
+  { id:'bp2', name:'蓝粉 · 赛博霓虹', base:'#0D0A21', panel:'#171034', bar:'#0A0820', side:'#120D2C', accent:'#FF2D7F', accent2:'#00E5FF', text:'#E8E0FF', dim:'#9B93C4' },
+  { id:'bp3', name:'蓝粉 · 冰蓝樱粉', base:'#F6F9FF', panel:'#E9F1FE', bar:'#DFE9FA', side:'#EFF4FD', accent:'#EC4899', accent2:'#3B82F6', text:'#16233D', dim:'#7C8CA8' },
+  { id:'blue', name:'蓝白 · 宝蓝', base:'#12294D', panel:'#1A3560', bar:'#0F2244', side:'#162E56', accent:'#6FB1FF', accent2:'#4C9AFF', text:'#FFFFFF', dim:'#A8C4E8' },
+  { id:'warm', name:'暖色 · 焦糖琥珀', base:'#1F1512', panel:'#2B1D16', bar:'#191110', side:'#261A14', accent:'#FF9F45', accent2:'#E8623C', text:'#FFF4E6', dim:'#C4A88F' }
+];
+
+let curCat = 'ALL';
+let state = {};
+MODULES.forEach(([c,n,d,on]) => state[n] = !!on);
+
+function renderSide() {
+  const counts = {};
+  MODULES.forEach(([c]) => counts[c] = (counts[c]||0)+1);
+  const items = [`<div class="it ${curCat==='ALL'?'on':''}" data-cat="ALL">全部 <b>${MODULES.length}</b></div>`]
+    .concat(Object.keys(CAT_NAME).map(c =>
+      `<div class="it ${curCat===c?'on':''}" data-cat="${c}">${CAT_NAME[c].split(' ')[0]} <b>${counts[c]||0}</b></div>`));
+  document.getElementById('side').innerHTML = items.join('');
+  document.querySelectorAll('#side .it').forEach(el => {
+    el.onclick = () => { curCat = el.dataset.cat; renderSide(); renderMain(); };
+  });
+}
+
+function renderMain() {
+  const list = curCat === 'ALL' ? MODULES : MODULES.filter(m => m[0] === curCat);
+  const groups = {};
+  list.forEach(m => (groups[m[0]] = groups[m[0]] || []).push(m));
+  let html = '';
+  for (const [cat, arr] of Object.entries(groups)) {
+    html += `<div class="sec">${CAT_NAME[cat]} · ${arr.length}</div>`;
+    for (const [c,n,d] of arr) {
+      const on = state[n] ? 'on' : '';
+      html += `<div class="mod"><div><div class="n">${n}</div><div class="d">${d}</div></div>
+               <div class="sw ${on}" data-n="${n}"><i></i></div></div>`;
+    }
+  }
+  document.getElementById('main').innerHTML = html;
+  document.querySelectorAll('#main .sw').forEach(el => {
+    el.onclick = () => { state[el.dataset.n] = !state[el.dataset.n];
+      el.classList.toggle('on', state[el.dataset.n]); syncAL(); };
+  });
+  const onN = Object.values(state).filter(Boolean).length;
+  document.getElementById('cgCount').textContent = `已启用 ${onN} / ${MODULES.length} · 当前显示 ${list.length}`;
+}
+
+function syncAL() {
+  const on = MODULES.filter(m => state[m[1]]).slice(0, 22).map(m => m[1]);
+  document.getElementById('al').innerHTML = on.map(n =>
+    `<div class="it"><span>${n}</span><span>ON</span></div>`).join('');
+}
+
+function apply(p) {
+  const r = document.documentElement.style;
+  r.setProperty('--base',p.base); r.setProperty('--panel',p.panel); r.setProperty('--bar',p.bar);
+  r.setProperty('--side',p.side); r.setProperty('--accent',p.accent); r.setProperty('--accent2',p.accent2);
+  r.setProperty('--text',p.text); r.setProperty('--dim',p.dim);
+  document.getElementById('cName').textContent = p.name;
+  document.getElementById('cChips').innerHTML = [p.base,p.panel,p.accent,p.accent2,p.text]
+    .map(c => `<div class="chip" style="background:${c}"></div>`).join('');
+  ['h1','h2','h3','h4'].forEach((id,i) =>
+    document.getElementById(id).textContent = [p.base,p.panel,p.accent,p.accent2][i]);
+  document.querySelectorAll('.pbtn').forEach(b => b.classList.toggle('active', b.dataset.id === p.id));
+}
+
+const controls = document.getElementById('controls');
+PALETTES.forEach(p => {
+  const b = document.createElement('button');
+  b.className = 'pbtn'; b.textContent = p.name; b.dataset.id = p.id;
+  b.onclick = () => apply(p); controls.appendChild(b);
+});
+
+renderSide(); renderMain(); syncAL(); apply(PALETTES[0]);
+</script>
+</body>
+</html>
