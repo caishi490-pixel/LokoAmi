@@ -73,4 +73,13 @@
     letter-spacing: 2px;
     padding: 6px 10px;
   }
+
+  /* Esports-FONT-INJECT */
+  .header {
+    font-family: var(--font-display);
+  }
+  /* Esports-BOX-INJECT */
+  .entries {
+    border: 1px solid $neon-dim;
+  }
 </style>

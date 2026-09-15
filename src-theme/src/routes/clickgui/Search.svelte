@@ -295,4 +295,9 @@
     color: $clickgui-text-color;
     width: 100%;
   }
+
+  /* Esports-FONT-INJECT */
+  .module-name, .placeholder {
+    font-family: var(--font-display);
+  }
 </style>

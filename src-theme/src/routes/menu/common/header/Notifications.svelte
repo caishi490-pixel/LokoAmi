@@ -103,4 +103,13 @@
   .notifications {
     border: 1px solid $neon-dim;
   }
+
+  /* Esports-FONT-INJECT */
+  .title, .message {
+    font-family: var(--font-display);
+  }
+  /* Esports-BOX-INJECT */
+  .notifications {
+    border: 1px solid $neon-dim;
+  }
 </style>

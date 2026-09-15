@@ -144,4 +144,13 @@
   .modal, .content {
     border: 1px solid $neon-dim;
   }
+
+  /* Esports-FONT-INJECT */
+  .title {
+    font-family: var(--font-display);
+  }
+  /* Esports-BOX-INJECT */
+  .modal, .content {
+    border: 1px solid $neon-dim;
+  }
 </style>

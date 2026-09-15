@@ -242,4 +242,9 @@
     margin-bottom: 15px;
     overflow: hidden;
   }
+
+  /* Esports-FONT-INJECT */
+  .item-name {
+    font-family: var(--font-display);
+  }
 </style>

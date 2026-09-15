@@ -25,4 +25,9 @@
   .option-bar {
     border: 1px solid $neon-dim;
   }
+
+  /* Esports-BOX-INJECT */
+  .option-bar {
+    border: 1px solid $neon-dim;
+  }
 </style>

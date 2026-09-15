@@ -98,4 +98,9 @@
     color: $menu-text-color;
     transition: color .16s ease;
   }
+
+  /* Esports-FONT-INJECT */
+  .title {
+    font-family: var(--font-display);
+  }
 </style>

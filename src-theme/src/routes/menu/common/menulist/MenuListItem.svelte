@@ -151,4 +151,9 @@
       transition: ease opacity .2s;
     }
   }
+
+  /* Esports-FONT-INJECT */
+  .title, .text, .subtitle {
+    font-family: var(--font-display);
+  }
 </style>

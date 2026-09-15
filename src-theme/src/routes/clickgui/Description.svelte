@@ -81,4 +81,9 @@
     padding: 10px;
     color: $clickgui-text-color;
   }
+
+  /* Esports-FONT-INJECT */
+  .text {
+    font-family: var(--font-display);
+  }
 </style>

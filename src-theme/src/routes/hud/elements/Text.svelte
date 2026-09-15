@@ -87,4 +87,9 @@
   .text {
     font-family: var(--font-display);
   }
+
+  /* Esports-FONT-INJECT */
+  .text {
+    font-family: var(--font-display);
+  }
 </style>

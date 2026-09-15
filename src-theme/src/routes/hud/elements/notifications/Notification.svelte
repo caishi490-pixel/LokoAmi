@@ -103,4 +103,9 @@
     font-size: 12px;
     color: #94A3B8;
   }
+
+  /* Esports-FONT-INJECT */
+  .title, .message {
+    font-family: var(--font-display);
+  }
 </style>

@@ -63,4 +63,9 @@
             text-shadow: 0 0 10px $neon-glow-sm;
         }
     }
+
+  /* Esports-FONT-INJECT */
+  .name {
+    font-family: var(--font-display);
+  }
 </style>

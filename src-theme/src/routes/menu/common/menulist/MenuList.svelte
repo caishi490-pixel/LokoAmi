@@ -59,4 +59,9 @@
   .menu-list {
     border: 1px solid $neon-dim;
   }
+
+  /* Esports-BOX-INJECT */
+  .menu-list {
+    border: 1px solid $neon-dim;
+  }
 </style>

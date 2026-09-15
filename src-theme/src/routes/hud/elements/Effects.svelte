@@ -94,4 +94,13 @@
       font-variant-numeric: tabular-nums;
     }
   }
+
+  /* Esports-FONT-INJECT */
+  .name {
+    font-family: var(--font-display);
+  }
+  /* Esports-NUM-INJECT */
+  .duration, .amplifier {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

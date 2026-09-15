@@ -341,4 +341,9 @@
   .placeholder, .header {
     font-family: var(--font-display);
   }
+
+  /* Esports-FONT-INJECT */
+  .placeholder, .header {
+    font-family: var(--font-display);
+  }
 </style>

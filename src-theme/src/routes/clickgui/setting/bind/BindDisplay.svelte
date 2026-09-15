@@ -92,4 +92,9 @@
   .wrapper {
     border: 1px solid $neon-dim;
   }
+
+  /* Esports-BOX-INJECT */
+  .wrapper {
+    border: 1px solid $neon-dim;
+  }
 </style>

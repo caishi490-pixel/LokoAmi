@@ -72,4 +72,9 @@
       box-shadow: 0 0 20px $neon-glow-sm;
     }
   }
+
+  /* Esports-FONT-INJECT */
+  .tab-button {
+    font-family: var(--font-display);
+  }
 </style>

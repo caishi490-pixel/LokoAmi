@@ -133,4 +133,13 @@
   .dropdown {
     border: 1px solid $neon-dim;
   }
+
+  /* Esports-FONT-INJECT */
+  .text {
+    font-family: var(--font-display);
+  }
+  /* Esports-BOX-INJECT */
+  .dropdown {
+    border: 1px solid $neon-dim;
+  }
 </style>

@@ -58,4 +58,9 @@
   .title {
     font-family: var(--font-display);
   }
+
+  /* Esports-FONT-INJECT */
+  .title {
+    font-family: var(--font-display);
+  }
 </style>

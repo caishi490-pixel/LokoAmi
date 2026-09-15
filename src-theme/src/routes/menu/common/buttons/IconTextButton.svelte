@@ -62,4 +62,9 @@
       color: $menu-text-color;
       padding: 0 30px;
     }
+
+  /* Esports-FONT-INJECT */
+  .title {
+    font-family: var(--font-display);
+  }
 </style>

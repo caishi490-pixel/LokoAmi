@@ -64,4 +64,9 @@
   .value {
     font-variant-numeric: tabular-nums;
   }
+
+  /* Esports-NUM-INJECT */
+  .value {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

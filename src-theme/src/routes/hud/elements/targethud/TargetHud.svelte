@@ -153,4 +153,17 @@
             top: 118px;
         }
     }
+
+  /* Esports-FONT-INJECT */
+  .name {
+    font-family: var(--font-display);
+  }
+  /* Esports-NUM-INJECT */
+  .value {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Esports-BOX-INJECT */
+  .stat {
+    border: 1px solid $neon-dim;
+  }
 </style>

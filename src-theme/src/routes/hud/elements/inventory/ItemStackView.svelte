@@ -87,4 +87,9 @@
   .count {
     font-variant-numeric: tabular-nums;
   }
+
+  /* Esports-NUM-INJECT */
+  .count {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

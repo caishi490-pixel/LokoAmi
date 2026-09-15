@@ -57,4 +57,9 @@
     }
   }
 
+
+  /* Esports-BOX-INJECT */
+  .tooltip {
+    border: 1px solid $neon-dim;
+  }
 </style>

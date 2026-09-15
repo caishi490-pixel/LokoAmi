@@ -122,5 +122,10 @@
   .header {
     font-family: var(--font-display);
   }
+
+  /* Esports-FONT-INJECT */
+  .header {
+    font-family: var(--font-display);
+  }
 </style>
 

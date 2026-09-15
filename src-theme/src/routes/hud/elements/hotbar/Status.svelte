@@ -77,4 +77,13 @@
   .label, .progress {
     font-variant-numeric: tabular-nums;
   }
+
+  /* Esports-FONT-INJECT */
+  .label {
+    font-family: var(--font-display);
+  }
+  /* Esports-NUM-INJECT */
+  .label, .progress {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

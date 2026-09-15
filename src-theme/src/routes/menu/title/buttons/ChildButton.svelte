@@ -75,4 +75,9 @@
         transform: translate(-50%, -50%);
       }
     }
+
+  /* Esports-FONT-INJECT */
+  .title {
+    font-family: var(--font-display);
+  }
 </style>

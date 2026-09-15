@@ -329,4 +329,13 @@
   .panel {
     border: 1px solid $neon-dim;
   }
+
+  /* Esports-FONT-INJECT */
+  .title, .category {
+    font-family: var(--font-display);
+  }
+  /* Esports-BOX-INJECT */
+  .panel {
+    border: 1px solid $neon-dim;
+  }
 </style>

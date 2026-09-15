@@ -113,4 +113,13 @@
   .name {
     font-family: var(--font-display);
   }
+
+  /* Esports-FONT-INJECT */
+  .name {
+    font-family: var(--font-display);
+  }
+  /* Esports-BOX-INJECT */
+  .body {
+    border: 1px solid $neon-dim;
+  }
 </style>
