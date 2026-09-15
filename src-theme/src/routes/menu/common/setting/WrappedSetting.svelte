@@ -117,5 +117,10 @@
     zoom: 1.5;
     width: 100%;
   }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .header {
+    font-family: var(--font-display);
+  }
 </style>
 

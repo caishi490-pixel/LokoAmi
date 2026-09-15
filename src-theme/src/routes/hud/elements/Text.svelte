@@ -82,4 +82,9 @@
         pointer-events: none;
         z-index: 1000;
     }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .text {
+    font-family: var(--font-display);
+  }
 </style>

@@ -142,4 +142,9 @@
     gap: 7px;
     font-size: 12px;
   }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .title {
+    font-family: var(--font-display);
+  }
 </style>

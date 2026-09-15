@@ -82,4 +82,9 @@
     text-shadow: 1px 1px black; // This is inconsistent with other UI elements but it looks better so I will let it pass ~Senk Ju
     font-family: monospace;
   }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .count {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

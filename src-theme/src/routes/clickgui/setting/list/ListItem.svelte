@@ -70,4 +70,9 @@
     white-space: nowrap;
     overflow: hidden;
   }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .name {
+    font-family: var(--font-display);
+  }
 </style>

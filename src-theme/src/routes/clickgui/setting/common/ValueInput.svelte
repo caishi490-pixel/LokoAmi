@@ -59,4 +59,9 @@
       text-shadow: 0 0 10px $neon-glow-sm;
     }
   }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .value {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

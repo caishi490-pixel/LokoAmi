@@ -237,6 +237,9 @@
       grid-template-columns: max-content 1fr max-content;
 
       .module-name {
+        font-family: var(--font-display);
+        font-weight: 600;
+        letter-spacing: 1px;
         color: $clickgui-text-dimmed-color;
         transition: ease color 0.2s;
       }
@@ -244,6 +247,7 @@
       &.enabled {
         .module-name {
           color: $neon-color;
+          text-shadow: 0 0 10px $neon-glow-sm;
         }
       }
 
@@ -260,7 +264,7 @@
         color: $clickgui-text-color;
 
         &::after {
-          content: "Right-click to locate";
+          content: "右键定位";
           color: rgba($clickgui-text-color, 0.4);
           font-size: 12px;
         }
@@ -268,8 +272,10 @@
     }
 
     .placeholder {
+      font-family: var(--font-display);
       color: $clickgui-text-dimmed-color;
       font-size: 16px;
+      letter-spacing: 1px;
       padding: 10px 0;
     }
 
@@ -282,8 +288,10 @@
     padding: 15px 25px;
     background-color: transparent;
     border: none;
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-display);
     font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
     color: $clickgui-text-color;
     width: 100%;
   }

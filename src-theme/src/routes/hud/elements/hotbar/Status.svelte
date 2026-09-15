@@ -69,4 +69,12 @@
       margin-left: auto;
     }
   }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .label {
+    font-family: var(--font-display);
+  }
+  .label, .progress {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

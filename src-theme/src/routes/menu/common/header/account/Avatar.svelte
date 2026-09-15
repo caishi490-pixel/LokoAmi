@@ -17,6 +17,8 @@
 </div>
 
 <style lang="scss">
+  @use "../../../../../colors.scss" as *;
+
   .avatar-wrapper {
     grid-area: a;
     height: 50px;
@@ -24,10 +26,13 @@
     position: relative;
   }
 
+  /* Esports：头像由圆形改为切角方块 */
   .avatar {
     height: 100%;
     width: 100%;
-    border-radius: 50%;
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    image-rendering: pixelated;
   }
 
   .loader {

@@ -100,4 +100,12 @@
         grid-area: d;
         padding-right: 10px;
     }
+
+  /* Esports：统一字体栈与等宽数字（补完注入） */
+  .name {
+    font-family: var(--font-display);
+  }
+  .value {
+    font-variant-numeric: tabular-nums;
+  }
 </style>

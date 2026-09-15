@@ -55,8 +55,10 @@
     }
 
     .title {
+      font-family: var(--font-display);
       font-size: 20px;
-      font-weight: 500;
+      font-weight: 700;
+      letter-spacing: 1px;
       color: $menu-text-color;
       padding: 0 30px;
     }

@@ -45,20 +45,22 @@
     margin-bottom: 40px;
   }
 
+  /* Esports：0 圆角；选中态用霓虹描边 + 淡霓虹底 + 辉光 */
   .tab-button {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 1px;
     background-color: rgba($panel-color, .36);
     color: $menu-text-color;
     padding: 10px;
     border: solid 2px transparent;
-    border-radius: 0;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
     cursor: pointer;
-    transition: ease border-color .2s;
+    transition: ease border-color .2s, ease background-color .2s, ease box-shadow .2s;
 
     .icon {
       height: 30px;
@@ -66,6 +68,8 @@
 
     &.active {
       border-color: $neon-color;
+      background-color: $neon-faint;
+      box-shadow: 0 0 20px $neon-glow-sm;
     }
   }
 </style>
