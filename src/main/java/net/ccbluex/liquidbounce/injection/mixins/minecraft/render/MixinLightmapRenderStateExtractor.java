@@ -23,12 +23,26 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.ccbluex.liquidbounce.features.module.modules.render.ModuleFullBright;
 import net.minecraft.client.renderer.LightTexture;
 import org.jspecify.annotations.NullMarked;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @NullMarked
 @Mixin(LightTexture.class)
 public abstract class MixinLightmapRenderStateExtractor {
+
+    /**
+     * Gamma value that was last used to force a lightmap refresh for FullBright.
+     */
+    @Unique
+    private double lokoami$lastForcedGamma;
+
+    /**
+     * Whether FullBright's gamma mode was active on the previous lightmap update.
+     */
+    @Unique
+    private boolean lokoami$fullBrightActive;
 
     /**
      * Target:
@@ -43,6 +57,53 @@ public abstract class MixinLightmapRenderStateExtractor {
     private Object injectFullBright(Object original) {
         if (ModuleFullBright.FullBrightGamma.INSTANCE.getRunning()) {
             return ModuleFullBright.FullBrightGamma.INSTANCE.getGamma();
+        }
+
+        return original;
+    }
+
+    /**
+     * Keeps the lightmap updating while FullBright's gamma mode is active.
+     *
+     * <p>{@code updateLightTexture} starts with {@code if (!this.updateLightTexture) return;}, and that
+     * flag is only ever set by {@link LightTexture#tick()}. GameRenderer calls {@code updateLightTexture}
+     * unconditionally every frame, so overriding this single read is what lets the gamma override above
+     * reach the shader.
+     *
+     * <p>Without this, the gamma override is silently dead on any setup that caches the lightmap. The
+     * override only replaces the value returned by {@code options.gamma().get()} inside this method, so
+     * the real option never changes — and lightmap caching mods (BadOptimizations'
+     * {@code enable_lightmap_caching}, for instance) compare exactly that real value, conclude nothing
+     * changed, cancel {@code tick()} and starve this method of updates.
+     *
+     * <p>The refresh is driven by our own gamma value, which keeps the module's intended fade-in and
+     * costs nothing once the value settles. One refresh is also forced on disable so the lightmap
+     * reverts to the real gamma.
+     */
+    @ModifyExpressionValue(
+        method = "updateLightTexture",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/client/renderer/LightTexture;updateLightTexture:Z",
+            opcode = Opcodes.GETFIELD
+        )
+    )
+    private boolean forceLightmapRefreshForFullBright(boolean original) {
+        if (ModuleFullBright.FullBrightGamma.INSTANCE.getRunning()) {
+            double gamma = ModuleFullBright.FullBrightGamma.INSTANCE.getGamma();
+
+            if (!this.lokoami$fullBrightActive || gamma != this.lokoami$lastForcedGamma) {
+                this.lokoami$fullBrightActive = true;
+                this.lokoami$lastForcedGamma = gamma;
+                return true;
+            }
+
+            return original;
+        }
+
+        if (this.lokoami$fullBrightActive) {
+            this.lokoami$fullBrightActive = false;
+            return true;
         }
 
         return original;
