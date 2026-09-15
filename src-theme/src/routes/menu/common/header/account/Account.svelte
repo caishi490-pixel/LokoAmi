@@ -272,7 +272,7 @@
     z-index: 1000;
     width: 100%;
     border-radius: 0;
-    background-color: rgba($menu-base-color, 0.9);
+    background-color: rgba($panel-color, 0.9);
 
     .placeholder {
       font-weight: 500;
@@ -282,14 +282,14 @@
     }
 
     .account-search {
-      background-color: rgba($menu-base-color, .36);
+      background-color: rgba($panel-color, .36);
       border: none;
       color: $menu-text-color;
       font-family: "Inter", sans-serif;
       padding: 15px 15px 15px 50px;
       width: 100%;
       font-size: 18px;
-      border-bottom: solid 4px $accent-color;
+      border-bottom: solid 4px $neon-color;
       background-image: url("/img/menu/icon-search.svg");
       background-repeat: no-repeat;
       background-position: 18px center;
@@ -331,7 +331,7 @@
 
       &.active {
         .username {
-          color: $accent-color;
+          color: $neon-color;
         }
       }
     }

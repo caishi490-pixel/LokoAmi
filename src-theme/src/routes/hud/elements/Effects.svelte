@@ -47,13 +47,16 @@
 <style lang="scss">
   @use "../../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 右上切角 + 霓虹描边；药水时长用等宽数字 */
   .effects {
     display: flex;
     flex-direction: column;
     gap: 4px;
     background-color: $effects-background-color;
-    border-radius: 0;
-    padding: 4px 6px;
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    box-shadow: 0 0 18px $neon-glow-sm;
+    padding: 5px 8px;
   }
 
   .effect {
@@ -72,11 +75,15 @@
     }
 
     .name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: 1px;
       color: $effects-name-color;
     }
 
     .amplifier {
       color: $effects-amplifier-color;
+      font-weight: 700;
     }
 
     .duration {
@@ -84,6 +91,7 @@
       font-family: monospace;
       color: $effects-duration-color;
       font-size: 12px;
+      font-variant-numeric: tabular-nums;
     }
   }
 </style>

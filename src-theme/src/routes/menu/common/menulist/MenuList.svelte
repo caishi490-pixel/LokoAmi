@@ -47,7 +47,7 @@
   @use "../../../../colors.scss" as *;
 
   .menu-list {
-    background-color: rgba($menu-base-color, 0.68);
+    background-color: rgba($panel-color, 0.68);
     flex: 1;
     border-radius: 0;
     margin-bottom: 25px;

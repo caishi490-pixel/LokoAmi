@@ -10,7 +10,7 @@
     @use "../../../../colors.scss" as *;
 
     .option-bar {
-      background-color: rgba($menu-base-color, 0.68);
+      background-color: rgba($panel-color, 0.68);
       padding: 15px 30px;
       display: flex;
       border-radius: 0;

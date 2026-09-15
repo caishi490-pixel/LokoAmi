@@ -6,7 +6,7 @@
   .divider {
     height: 100%;
     width: 4px;
-    background-color: rgba($menu-base-color, .36);
+    background-color: rgba($panel-color, .36);
     border-radius: 0;
   }
 </style>

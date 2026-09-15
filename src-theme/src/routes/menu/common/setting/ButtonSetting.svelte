@@ -36,7 +36,7 @@
   .button-setting {
     position: relative;
     border: none;
-    background-color: $accent-color;
+    background-color: $neon-color;
     color: $menu-text-color;
     font-family: "Inter", sans-serif;
     padding: 20px;
@@ -49,15 +49,15 @@
     }
 
     &.secondary {
-      background-color: rgba($menu-base-color, .36);
+      background-color: rgba($panel-color, .36);
     }
 
     &:not([disabled]):hover {
-      background-color: color.adjust(color.adjust($accent-color, $saturation: -30%), $lightness: -10%);
+      background-color: color.adjust(color.adjust($neon-color, $saturation: -30%), $lightness: -10%);
       cursor: pointer;
 
       &.secondary {
-        background-color: color.adjust(color.adjust($menu-base-color, $saturation: -30%), $lightness: -10%);
+        background-color: color.adjust(color.adjust($void-color, $saturation: -30%), $lightness: -10%);
       }
     }
 

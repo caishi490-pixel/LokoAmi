@@ -96,7 +96,7 @@
       cursor: pointer;
 
       .header {
-        background-color: rgba($menu-base-color, .36);
+        background-color: rgba($panel-color, .36);
         padding: 20px;
         display: flex;
         column-gap: 20px;
@@ -112,7 +112,7 @@
     position: absolute;
     z-index: 1000;
     border-radius: 0;
-    background-color: rgba($menu-base-color, 0.9);
+    background-color: rgba($panel-color, 0.9);
     padding: 10px 13px;
     zoom: 1.5;
     width: 100%;

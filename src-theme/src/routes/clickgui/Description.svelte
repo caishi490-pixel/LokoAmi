@@ -44,11 +44,12 @@
     transform: translateY(-50%);
   }
 
+  /* Esports：0 圆角 + 霓虹描边与辉光（替代原来的柔和投影） */
   .description {
     position: relative;
-    border-radius: 0;
-    background-color: rgba($clickgui-base-color, .9);
-    filter: drop-shadow(0 0 10px rgba($clickgui-base-color, 0.5));
+    background-color: rgba($panel-color, .95);
+    border: 1px solid $neon-color;
+    box-shadow: 0 0 22px $neon-glow-sm;
 
     &::before {
       content: "";
@@ -58,8 +59,8 @@
       height: 0;
       border-top: 8px solid transparent;
       border-bottom: 8px solid transparent;
-      border-right: 8px solid rgba($clickgui-base-color, .9);
-      left: -8px;
+      border-right: 8px solid $neon-color;
+      left: -9px;
       top: 50%;
       transform: translateY(-50%);
     }
@@ -68,13 +69,15 @@
       &::before {
         transform: translateY(-50%) rotate(180deg);
         left: unset;
-        right: -8px;
+        right: -9px;
       }
     }
   }
 
   .text {
+    font-family: var(--font-display);
     font-size: 12px;
+    letter-spacing: 1px;
     padding: 10px;
     color: $clickgui-text-color;
   }

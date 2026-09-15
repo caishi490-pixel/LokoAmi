@@ -109,7 +109,7 @@
 
   .change-bind {
     background-color: transparent;
-    border: solid 2px $accent-color;
+    border: solid 2px $neon-color;
     border-radius: 0;
     cursor: pointer;
     padding: 4px;

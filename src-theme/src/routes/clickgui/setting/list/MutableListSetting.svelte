@@ -83,7 +83,7 @@
     font-family: monospace;
     font-size: 12px;
     color: $clickgui-text-color;
-    background-color: $accent-color;
+    background-color: $neon-color;
     border: none;
     padding: 6px 10px;
     border-radius: 0;
@@ -92,18 +92,18 @@
     transition: ease background-color .2s;
 
     &:hover {
-        background-color: color.adjust(color.adjust($accent-color, $saturation: -30%), $lightness: -10%);
+        background-color: color.adjust(color.adjust($neon-color, $saturation: -30%), $lightness: -10%);
     }
   }
 
   .value {
     width: 100%;
-    background-color: rgba($clickgui-base-color, .36);
+    background-color: rgba($panel-color, .36);
     font-family: monospace;
     font-size: 12px;
     color: $clickgui-text-color;
     border: none;
-    border-bottom: solid 2px $accent-color;
+    border-bottom: solid 2px $neon-color;
     padding: 6px;
     border-radius: 0;
     transition: ease border-color .2s;

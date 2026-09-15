@@ -38,12 +38,18 @@
 <style lang="scss">
   @use "../../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 切角 + 霓虹描边；数量用等宽数字 */
   .counter {
-    background-color: rgba($panel-color, 0.90);
-    border-radius: 0;
+    background-color: rgba($panel-color, 0.92);
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    box-shadow: 0 0 16px $neon-glow-sm;
     white-space: nowrap;
-    padding: 5px 8px;
-    font-weight: 500;
+    padding: 5px 9px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
     text-align: center;
     width: fit-content;
     display: flex;

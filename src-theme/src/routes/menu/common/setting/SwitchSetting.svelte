@@ -70,12 +70,12 @@
     }
 
     input:checked + .slider {
-      background-color: color.adjust($accent-color, $saturation: -60%, $lightness: -15%);
+      background-color: color.adjust($neon-color, $saturation: -60%, $lightness: -15%);
     }
 
     input:checked + .slider:before {
       transform: translateX(27px);
-      background-color: $accent-color;
+      background-color: $neon-color;
     }
   }
 </style>

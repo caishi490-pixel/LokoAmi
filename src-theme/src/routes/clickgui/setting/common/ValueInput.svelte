@@ -45,12 +45,18 @@
 
   .value {
     font-family: monospace;
+    font-variant-numeric: tabular-nums;
     color: $clickgui-text-color;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 12px;
     background-color: transparent;
     border: none;
     min-width: 5px;
     display: inline-block;
+
+    &:focus {
+      color: $neon-color;
+      text-shadow: 0 0 10px $neon-glow-sm;
+    }
   }
 </style>

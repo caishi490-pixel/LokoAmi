@@ -86,7 +86,7 @@
         }
     }
     .nested-settings {
-        border-left: solid 2px $accent-color;
+        border-left: solid 2px $neon-color;
         padding-left: 7px;
     }
 </style>

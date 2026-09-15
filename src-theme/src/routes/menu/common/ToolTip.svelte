@@ -28,12 +28,16 @@
 <style lang="scss">
   @use "../../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 霓虹描边 + 辉光；字体走标题栈 */
   .tooltip {
     color: white;
-    padding: 10px 15px;
-    border-radius: 0;
-    font-size: 16px;
-    font-weight: 600;
+    padding: 9px 15px;
+    border: 1px solid $neon-color;
+    box-shadow: 0 0 20px $neon-glow-sm;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
     position: absolute;
     white-space: nowrap;
     left: 50%;

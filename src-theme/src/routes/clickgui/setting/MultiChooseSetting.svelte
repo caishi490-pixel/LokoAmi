@@ -92,7 +92,7 @@
 
   .choice {
     color: $clickgui-text-dimmed-color;
-    background-color: rgba($clickgui-base-color, 0.3);
+    background-color: rgba($panel-color, 0.3);
     border-radius: 0;
     padding: 3px 6px;
     cursor: pointer;
@@ -110,8 +110,8 @@
     }
 
     &.active {
-      background-color: rgba($accent-color, 0.1);
-      color: $accent-color;
+      background-color: rgba($neon-color, 0.1);
+      color: $neon-color;
     }
   }
 
@@ -134,7 +134,7 @@
   }
 
   .choices {
-    border-left: solid 2px $accent-color;
+    border-left: solid 2px $neon-color;
     color: $clickgui-text-color;
     padding: 7px 7px;
     display: flex;

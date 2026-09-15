@@ -61,7 +61,7 @@
   }
 
   .header {
-    background-color: $accent-color;
+    background-color: $neon-color;
     padding: 20px;
     display: flex;
     column-gap: 20px;
@@ -84,6 +84,6 @@
     border-radius: 0;
     max-height: 250px;
     overflow: auto;
-    background-color: rgba($menu-base-color, 0.9);
+    background-color: rgba($panel-color, 0.9);
   }
 </style>

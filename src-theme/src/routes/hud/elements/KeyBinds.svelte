@@ -100,13 +100,17 @@
     &.enabled {
       .module-name {
         color: $keybinds-enabled-color;
-        font-weight: 500;
+        font-weight: 700;
+        text-shadow: 0 0 10px $neon-glow-sm;
       }
     }
 
     .module-name {
+      font-family: var(--font-display);
       color: $keybinds-text-color;
       font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
       flex: 1;
       min-width: 0;
       overflow: hidden;
@@ -119,8 +123,9 @@
       align-items: center;
       font-family: monospace;
       font-size: 11px;
-      color: $accent-color;
-      font-weight: 600;
+      color: $neon-color;
+      font-weight: 700;
+      letter-spacing: 1px;
       flex-shrink: 0;
       min-width: max-content;
 

@@ -45,8 +45,8 @@
     background-color: color.adjust($clickgui-text-color, $lightness: -55%);
     transition: ease 0.4s;
     height: 8px;
-    border-radius: 0;
 
+    /* Esports：滑块改方角，与整站 0 圆角一致 */
     &::before {
       position: absolute;
       content: "";
@@ -56,7 +56,6 @@
       left: 0;
       background-color: $clickgui-text-color;
       transition: ease 0.4s;
-      border-radius: 50%;
     }
   }
 
@@ -70,12 +69,13 @@
     }
 
     input:checked + .slider {
-      background-color: color.adjust($accent-color, $saturation: -60%, $lightness: -15%);
+      background-color: $neon-dim;
     }
 
     input:checked + .slider:before {
       transform: translateX(10px);
-      background-color: $accent-color;
+      background-color: $neon-color;
+      box-shadow: 0 0 10px $neon-color;
     }
   }
 </style>

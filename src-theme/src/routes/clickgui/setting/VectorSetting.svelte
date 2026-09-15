@@ -73,12 +73,12 @@
 
     input.value {
       width: 100%;
-      background-color: rgba($clickgui-base-color, .36);
+      background-color: rgba($panel-color, .36);
       font-family: monospace;
       font-size: 12px;
       color: $clickgui-text-color;
       border: none;
-      border-bottom: solid 2px $accent-color;
+      border-bottom: solid 2px $neon-color;
       padding: 5px;
       border-radius: 0;
       transition: ease border-color .2s;

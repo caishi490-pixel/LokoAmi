@@ -76,7 +76,7 @@
   $GRID_SIZE: 10px;
 
   .tabbed-clickgui {
-    background-color: rgba($clickgui-base-color, 0.6);
+    background-color: rgba($panel-color, 0.6);
     overflow: hidden;
     position: absolute;
     will-change: opacity;

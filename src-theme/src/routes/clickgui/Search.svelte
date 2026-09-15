@@ -205,12 +205,12 @@
     left: 50%;
     top: 70px;
     transform: translateX(-50%);
-    background-color: rgba($clickgui-base-color, 0.9);
+    background-color: rgba($panel-color, 0.9);
     width: 600px;
     border-radius: 0;
     overflow: hidden;
     transition: ease border-radius 0.2s;
-    box-shadow: 0 0 10px rgba($clickgui-base-color, 0.5);
+    box-shadow: 0 0 10px rgba($panel-color, 0.5);
 
     &.has-results {
       border-radius: 0;
@@ -223,7 +223,7 @@
   }
 
   .results {
-    border-top: solid 2px $accent-color;
+    border-top: solid 2px $neon-color;
     padding: 5px 25px;
     max-height: 250px;
     overflow: auto;
@@ -243,7 +243,7 @@
 
       &.enabled {
         .module-name {
-          color: $accent-color;
+          color: $neon-color;
         }
       }
 

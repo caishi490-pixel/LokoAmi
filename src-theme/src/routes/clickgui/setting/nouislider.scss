@@ -2,7 +2,7 @@
 @use "../../../colors.scss" as *;
 
 .noUi-handle {
-    background-color: $accent-color;
+    background-color: $neon-color;
     box-shadow: unset;
     border: none;
     border-radius: 50%;
@@ -25,5 +25,5 @@
 }
 
 .noUi-connect {
-    background-color: $accent-color;
+    background-color: $neon-color;
 }

@@ -32,7 +32,7 @@
   .icon {
     height: 64px;
     width: 64px;
-    background-color: $accent-color;
+    background-color: $neon-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,11 +43,11 @@
     color: $menu-text-color;
     font-family: "Inter", sans-serif;
     font-size: 20px;
-    background-color: rgba($menu-base-color, .36);
+    background-color: rgba($panel-color, .36);
     border: none;
     padding: 0 20px 0 18px;
     border-radius: 0;
-    border-left: solid 2px $menu-base-color;
+    border-left: solid 2px $void-color;
     width: 100%;
 
     &:invalid {

@@ -71,7 +71,7 @@
   }
 
   .head {
-    background-color: $accent-color;
+    background-color: $neon-color;
     padding: 6px 10px;
     cursor: pointer;
     display: flex;
@@ -97,8 +97,8 @@
 
   .options {
     padding: 6px 10px;
-    background-color: $clickgui-base-color;
-    border: solid 1px $accent-color;
+    background-color: $void-color;
+    border: solid 1px $neon-color;
     border-top: none;
     border-radius: 0;
     z-index: 9999;
@@ -119,7 +119,7 @@
       }
 
       &.active {
-        color: $accent-color;
+        color: $neon-color;
       }
     }
   }

@@ -44,7 +44,7 @@
 
   .progress {
     position: relative;
-    border-radius: 0;
+    border: 1px solid $neon-dim;
     background-color: rgba($panel-color, 0.90);
 
     &.align-right {
@@ -61,7 +61,6 @@
   }
 
   .progress-bar {
-    border-radius: 0;
     height: 20px;
     will-change: width;
     transition: ease width 0.2s;

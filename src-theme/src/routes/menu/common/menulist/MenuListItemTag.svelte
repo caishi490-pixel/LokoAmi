@@ -10,7 +10,7 @@
   @use "../../../../colors.scss" as *;
 
   .tag {
-    background-color: rgba($menu-base-color, 0.36);
+    background-color: rgba($panel-color, 0.36);
     color: $menu-text-color;
     font-size: 12px;
     padding: 3px 10px;

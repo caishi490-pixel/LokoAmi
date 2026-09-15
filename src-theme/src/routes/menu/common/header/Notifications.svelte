@@ -53,7 +53,7 @@
   .notification {
     grid-row-start: 1;
     grid-column-start: 1;
-    background-color: rgba($menu-base-color, 0.68);
+    background-color: rgba($panel-color, 0.68);
     border-radius: 0;
     display: grid;
     grid-template-areas:
@@ -82,7 +82,7 @@
       grid-area: a;
       height: 65px;
       width: 65px;
-      background-color: $accent-color;
+      background-color: $neon-color;
       display: flex;
       align-items: center;
       justify-content: center;

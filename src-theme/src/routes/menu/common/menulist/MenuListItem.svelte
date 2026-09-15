@@ -54,7 +54,7 @@
         "a b c"
         "a d c";
     grid-template-columns: max-content 1fr max-content;
-    background-color: rgba($menu-base-color, .36);
+    background-color: rgba($panel-color, .36);
     padding: 15px 25px;
     column-gap: 15px;
     border-radius: 0;
@@ -62,8 +62,10 @@
     align-items: center;
     cursor: grab;
 
+    /* Esports：悬停由整块霓虹底改为淡霓虹底 + 左霓虹竖条，避免列表过于喧闹 */
     &:hover {
-      background-color: $accent-color;
+      background-color: $neon-faint;
+      box-shadow: inset 3px 0 0 0 $neon-color;
 
       .subtitle {
         color: $menu-text-color;
@@ -86,10 +88,11 @@
       transform: translate(-50%, -50%);
     }
 
+    /* Esports：圆形预览图改方角 + 霓虹描边 */
     .preview {
       height: 68px;
       width: 68px;
-      border-radius: 50%;
+      border: 1px solid $neon-dim;
       image-rendering: pixelated;
     }
 
@@ -107,7 +110,6 @@
       color: $menu-text-color;
       font-size: 12px;
       padding: 3px 10px;
-      border-radius: 0;
 
       &.visible {
         display: block;
@@ -122,18 +124,21 @@
     align-items: center;
 
     .text {
+      font-family: var(--font-display);
       font-size: 20px;
       color: $menu-text-color;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
   }
 
   .subtitle {
     grid-area: d;
-    font-size: 18px;
+    font-size: 15px;
     color: $menu-text-dimmed-color;
     transition: ease color .2s;
     align-self: flex-start;
+    font-variant-numeric: tabular-nums;
   }
 
   .buttons {
