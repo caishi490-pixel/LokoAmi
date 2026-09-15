@@ -3,14 +3,14 @@
     import AnimatedLogo from "./AnimatedLogo.svelte";
     import Notifications from "./Notifications.svelte";
     import {listen} from "../../../../integration/ws";
-    import {location} from "svelte-spa-router";
+    import {getModules} from "../../../../integration/rest";
+    import {onMount} from "svelte";
     import type {
         AccountManagerAdditionEvent,
         AccountManagerLoginEvent,
         AccountManagerMessageEvent
     } from "../../../../integration/events";
     import {notification} from "./notification_store";
-    import {isAnniversary} from "../../../../util/utils";
 
     listen("accountManagerAddition", (e: AccountManagerAdditionEvent) => {
         if (!e.error) {
@@ -51,32 +51,80 @@
             });
         }
     });
+
+    /* 设计稿 v3 顶栏右侧的「就绪」状态徽章：模块数实时取，不写死 */
+    let moduleCount: number | null = null;
+
+    onMount(async () => {
+        try {
+            moduleCount = (await getModules()).length;
+        } catch {
+            moduleCount = null;
+        }
+    });
 </script>
 
 <div class="header">
-    {#if $location === "/title" && isAnniversary()}
-        <AnimatedLogo/>
-    {:else}
-        <img class="logo" src="img/lb-logo.svg" alt="LokoAmi logo">
-    {/if}
+    <AnimatedLogo/>
 
-    <Notifications />
+    <Notifications/>
 
-    <Account/>
+    <div class="right">
+        {#if moduleCount !== null}
+            <div class="stat">
+                <span class="dot"></span>
+                就绪 · {moduleCount} 个模块
+            </div>
+        {/if}
+
+        <Account/>
+    </div>
 </div>
 
 <style lang="scss">
   .header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 60px;
     align-items: center;
+    gap: 24px;
+    margin-bottom: 40px;
   }
 
-  .logo {
-    display: block;
-    width: 261.263px;
-    height: 98px;
-    flex: 0 0 auto;
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  /* 设计稿 v3 的 .stat */
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: #8FA6C4;
+    white-space: nowrap;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ADE80;
+    box-shadow: 0 0 10px #4ADE80;
+    animation: stat-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes stat-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: .32;
+    }
   }
 </style>

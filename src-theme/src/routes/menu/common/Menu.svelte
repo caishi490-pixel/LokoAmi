@@ -27,8 +27,9 @@
 </div>
 
 <style lang="scss">
+  /* 启动页设计稿 v3：40px 56px */
   .menu {
-    padding: 50px;
+    padding: 40px 56px;
     display: flex;
     flex-direction: column;
     height: 100vh;

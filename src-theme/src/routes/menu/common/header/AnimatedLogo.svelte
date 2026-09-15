@@ -1,114 +1,109 @@
 <script lang="ts">
+    /*
+     * 启动页品牌区 —— 设计稿 v3
+     *
+     * 左倾 45° 樱瓣 + 品牌名（Ami 用玫粉）+ 版本徽章。
+     * 版本号来自 getClientInfo()，不再写死；取不到时只隐藏徽章。
+     * 贡献清单（开发 / 版本号）按设计稿移到主区卡片里，不在顶栏。
+     */
+    import {onMount} from "svelte";
+    import {getClientInfo} from "../../../../integration/rest";
+
     const idBase = `lokoami-logo-${Math.random().toString(36).slice(2, 9)}`;
     const petalGradientId = `${idBase}-petal`;
-    const facetGradientId = `${idBase}-facet`;
+
+    let version = "";
+
+    onMount(async () => {
+        try {
+            const info = await getClientInfo();
+            version = info.clientVersion;
+        } catch {
+            version = "";
+        }
+    });
 </script>
 
-<div class="animated-logo">
-    <!-- Esports 规范：几何 / 有棱角，不使用柔和曲线。
-         花瓣轮廓保留可辨识度，但改用多边形棱面 + 硬边描线。 -->
-    <svg
-            class="logo-svg"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 140"
-            role="img"
-            aria-label="LokoAmi logo"
-    >
-        <defs>
-            <linearGradient id={petalGradientId} x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#FF7FB0"/>
-                <stop offset="100%" stop-color="#F0508C"/>
-            </linearGradient>
-            <linearGradient id={facetGradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#0A1628" stop-opacity="0.72"/>
-                <stop offset="100%" stop-color="#0A1628" stop-opacity="0.34"/>
-            </linearGradient>
-        </defs>
-
-        <g class="petal-part" transform="rotate(45 50 70)">
-            <!-- 外轮廓：六边形棱面 -->
-            <polygon points="50,2 76,46 94,96 50,148 6,96 24,46" fill={`url(#${petalGradientId})`}/>
-            <!-- 内棱面 -->
-            <polygon points="50,26 66,58 74,96 50,124 26,96 34,58" fill={`url(#${facetGradientId})`}/>
-            <!-- 硬边分割线 -->
-            <polyline points="50,2 50,148" stroke="#0A1628" stroke-width="2" opacity=".45" fill="none"/>
-            <polyline points="24,46 76,46" stroke="#0A1628" stroke-width="2" opacity=".45" fill="none"/>
-        </g>
-    </svg>
-
-    <div class="divider"></div>
-
-    <div class="message">
-        <div class="brand">Loko<span>Ami</span></div>
-        <div class="credits">贡献清单 · 开发 <span class="who">lie_fish</span></div>
-        <div class="credits">版本号 <span class="who">V0.1</span></div>
+<div class="brand">
+    <div class="logo-box">
+        <svg
+                class="logo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 140"
+                role="img"
+                aria-label="LokoAmi logo"
+        >
+            <defs>
+                <linearGradient id={petalGradientId} x1="0" y1="0" x2="0.4" y2="1">
+                    <stop offset="0%" stop-color="#FFB3CE"/>
+                    <stop offset="45%" stop-color="#F0508C"/>
+                    <stop offset="100%" stop-color="#C92E68"/>
+                </linearGradient>
+            </defs>
+            <path
+                    d="M50,6 C80,6 98,34 98,62 C98,96 74,124 56,134 L50,126 L44,134
+                       C26,124 2,96 2,62 C2,34 20,6 50,6 Z"
+                    fill={`url(#${petalGradientId})`}
+            />
+        </svg>
     </div>
+
+    <span class="nm">Loko<i>Ami</i></span>
+
+    {#if version}
+        <span class="ver">V{version}</span>
+    {/if}
 </div>
 
 <style>
-    .animated-logo {
+    .brand {
         display: flex;
-        column-gap: 22px;
         align-items: center;
+        gap: 15px;
     }
 
-    .logo-svg {
-        display: block;
-        width: 78px;
-        height: 110px;
+    /* 52×52 的定位盒，让旋转后的花瓣视觉居中 */
+    .logo-box {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
         flex: 0 0 auto;
+    }
+
+    /* ★ 左倾 45°，无内部线条 */
+    .logo {
+        display: block;
+        width: 32px;
+        height: 45px;
+        transform: rotate(45deg);
+        filter: drop-shadow(0 4px 16px rgba(240, 80, 140, .55));
         overflow: visible;
     }
 
-    /* Esports：霓虹辉光，不用柔和投影 */
-    .petal-part {
-        filter: drop-shadow(0 0 16px rgba(240, 80, 140, 0.55));
-    }
-
-    /* 分隔条改为霓虹竖条，0 圆角 */
-    .divider {
-        background-color: #F0508C;
-        width: 3px;
-        flex: 0 0 auto;
-        align-self: stretch;
-        box-shadow: 0 0 14px rgba(240, 80, 140, 0.5);
-    }
-
-    .message {
-        color: #FFFFFF;
-        font-family: var(--font-body);
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 24px;
-        justify-content: center;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* 品牌名用 Rajdhani（拉丁字形），字距按电竞规范拉开 */
-    .brand {
+    .nm {
         font-family: var(--font-display);
-        font-size: 32px;
-        font-weight: 700;
-        letter-spacing: 3px;
-        line-height: 38px;
-        color: #FFFFFF;
-
-        span {
-            color: #F0508C;
-            text-shadow: 0 0 18px rgba(240, 80, 140, 0.5);
-        }
+        font-size: 25px;
+        font-weight: 800;
+        letter-spacing: .4px;
+        color: #EAF2FF;
+        white-space: nowrap;
     }
 
-    /* 中文署名回退系统字体，字距适度 */
-    .credits {
-        color: #94A3B8;
-        font-size: 13px;
-        letter-spacing: 1px;
-    }
-
-    .who {
+    .nm i {
+        font-style: normal;
         color: #F0508C;
+    }
+
+    .ver {
+        font-family: var(--font-display);
+        font-size: 10px;
         font-weight: 700;
+        letter-spacing: 1.4px;
+        color: #38BDF8;
+        border: 1px solid rgba(56, 189, 248, .34);
+        border-radius: 5px;
+        padding: 3px 7px;
+        white-space: nowrap;
     }
 </style>
