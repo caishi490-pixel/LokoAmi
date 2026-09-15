@@ -182,18 +182,21 @@
     column-gap: 20px;
   }
 
+  /* Esports：0 圆角 + 切角 + 霓虹描边；选中格用霓虹框 + 辉光 */
   .hotbar-elements {
     background-color: rgba($panel-color, 0.90);
     position: relative;
-    border-radius: 0;
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    box-shadow: 0 0 18px $neon-glow-sm;
     overflow: hidden;
 
     .slider {
       border: solid 2px $neon-color;
+      box-shadow: 0 0 14px $neon-glow;
       height: 45px;
       width: 45px;
       position: absolute;
-      border-radius: 0;
       /* transition: linear left 0.05s; TODO: Animation is possible but annoying */
     }
 
@@ -210,7 +213,7 @@
   .offhand-slot {
     height: 45px;
     width: 45px;
-    border-radius: 0;
+    border: 1px solid $neon-dim;
     background-color: rgba($panel-color, 0.90);
     position: absolute;
     bottom: 0;
@@ -218,18 +221,23 @@
   }
 
   .item-name {
+    font-family: var(--font-display);
     color: $hotbar-text-color;
     font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
     margin: 0 auto 15px;
-    font-weight: 500;
-    background-color: rgba($panel-color, 0.90);
-    padding: 5px 8px;
-    border-radius: 0;
+    background-color: rgba($panel-color, 0.92);
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    padding: 5px 10px;
     width: max-content;
   }
 
   .overlay-message {
     text-align: center;
+    font-family: var(--font-display);
     color: $hotbar-text-color;
     margin-bottom: 15px;
     overflow: hidden;

@@ -46,10 +46,11 @@
 <style lang="scss">
   @use "../../../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 霓虹描边 */
   .menu-list {
     background-color: rgba($panel-color, 0.68);
+    border: 1px solid $neon-dim;
     flex: 1;
-    border-radius: 0;
     margin-bottom: 25px;
     position: relative;
   }
