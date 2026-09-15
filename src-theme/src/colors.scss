@@ -36,9 +36,9 @@ $line-color-faint:  rgba(148, 163, 184, 0.18);
 // 以下为旧变量名映射 —— 全部保留，避免 98 个组件引用断裂
 // ============================================================================
 
-$neon-color: $neon-color;
+$accent-color: $neon-color;
 
-$void-color: $void-color;
+$menu-base-color: $void-color;
 $clickgui-text-color: #FFFFFF;
 $clickgui-text-dimmed-color: #94A3B8;
 $clickgui-grid-color: $neon-dim;
@@ -65,7 +65,7 @@ $hotbar-health-color: $danger-color;
 $hotbar-hunger-color: $warn-color;
 
 $menu-account-premium-color: $ok-color;
-$void-color: $void-color;
+$clickgui-base-color: $void-color;
 $menu-text-color: #FFFFFF;
 $menu-text-dimmed-color: #94A3B8;
 $menu-error-color: $danger-color;
