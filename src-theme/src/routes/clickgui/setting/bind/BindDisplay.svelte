@@ -87,4 +87,9 @@
   .boundKey {
     font-weight: bold;
   }
+
+  /* Esports：容器描边（补完注入） */
+  .wrapper {
+    border: 1px solid $neon-dim;
+  }
 </style>

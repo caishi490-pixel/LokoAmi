@@ -135,4 +135,11 @@
       }
     }
   }
+
+  /* Esports：容器描边（补完注入） */
+  .entries {
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    box-shadow: 0 0 18px $neon-glow-sm;
+  }
 </style>

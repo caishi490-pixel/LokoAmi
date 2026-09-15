@@ -54,4 +54,9 @@
     margin-bottom: 25px;
     position: relative;
   }
+
+  /* Esports：容器描边（补完注入） */
+  .menu-list {
+    border: 1px solid $neon-dim;
+  }
 </style>

@@ -324,4 +324,9 @@
       }
     }
   }
+
+  /* Esports：容器描边（补完注入） */
+  .panel {
+    border: 1px solid $neon-dim;
+  }
 </style>

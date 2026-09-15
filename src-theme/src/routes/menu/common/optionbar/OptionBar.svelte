@@ -20,4 +20,9 @@
       column-gap: 30px;
       margin-bottom: 25px;
     }
+
+  /* Esports：容器描边（补完注入） */
+  .option-bar {
+    border: 1px solid $neon-dim;
+  }
 </style>

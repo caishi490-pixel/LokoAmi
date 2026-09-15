@@ -70,4 +70,9 @@
     overflow: auto;
     max-height: calc(var(--window-max-height, 9999px) - 60px);
   }
+
+  /* Esports：容器描边（补完注入） */
+  .window, .content {
+    border: 1px solid $neon-dim;
+  }
 </style>

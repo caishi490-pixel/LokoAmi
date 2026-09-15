@@ -139,4 +139,9 @@
   .title {
     font-family: var(--font-display);
   }
+
+  /* Esports：容器描边（补完注入） */
+  .modal, .content {
+    border: 1px solid $neon-dim;
+  }
 </style>
