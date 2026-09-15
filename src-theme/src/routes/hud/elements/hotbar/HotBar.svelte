@@ -120,14 +120,14 @@
                     <Status
                             max={playerData.maxHealth}
                             value={playerData.health}
-                            color="$danger-color"
+                            color="var(--danger)"
                             alignRight={false}
                             icon="heart"
                     />
                     <Status
                             max={20}
                             value={playerData.food}
-                            color="$warn-color"
+                            color="var(--warn)"
                             alignRight={true}
                             icon="food"
                     />
@@ -136,7 +136,7 @@
             {#if playerData.experienceLevel > 0}
                 <Status
                         max={100} value={playerData.experienceProgress * 100}
-                        color="$ok-color"
+                        color="var(--ok)"
                         alignRight={false}
                         label={playerData.experienceLevel.toString()}
                 />
