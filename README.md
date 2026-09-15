@@ -27,9 +27,9 @@ LokoAmi 由 **LiquidBounce 0.37.0** 二次开发而来。
 
 标识是一枚**左倾 45° 的樱花瓣**，配色为**深海蓝黑 + 玫粉**。
 
-## 当前版本：v0.15
+## 当前版本：v0.16
 
-**视觉重构完成 · 界面中文化 · 照明修复**
+**启动页重塑 · 视觉重构完成 · 界面中文化 · 照明修复**
 
 | 项目 | 内容 |
 |---|---|
@@ -38,6 +38,7 @@ LokoAmi 由 **LiquidBounce 0.37.0** 二次开发而来。
 | 界面 | **121 个** Svelte 组件全量重做；中英语言文件 **781 / 777** 条 |
 | 配色 | 深海玫瑰 —— `#0A1628` 深海蓝黑 / `#F0508C` 玫粉 |
 | 命名空间 | 模组 ID、资源包、语言文件统一迁移至 `lokoami` |
+| 启动页 | 按设计稿 v3 重做：深海底 + 双色辉光 + 点阵 + 飘落樱瓣 + 45° 品牌标识 + 贡献清单卡片 + 编号式菜单 |
 | 修复 | FullBright 伽马模式在光照贴图缓存环境下完全失效（见下方工程笔记） |
 
 ## 模块一览
@@ -110,7 +111,7 @@ HUD、ClickGUI、启动页、设置面板均已完成结构级改造，不再是
 
 1. 安装 **Fabric Loader**（≥ `0.16.14`）
 2. 游戏版本需为 **Minecraft 1.21.11**
-3. 从 [Releases](https://github.com/caishi490-pixel/LokoAmi/releases) 下载 `LokoAmi-0.15.jar`
+3. 从 [Releases](https://github.com/caishi490-pixel/LokoAmi/releases) 下载 `LokoAmi-0.16.jar`
 4. 放入 `.minecraft/mods/`
 5. 确认两个前置模组同样位于 `mods/`：
    - [Fabric API](https://modrinth.com/mod/fabric-api) —— 构建所依赖版本 `0.140.0+1.21.11`
@@ -131,7 +132,7 @@ cd LokoAmi
 ./gradlew assemble
 ```
 
-产物位于 `build/libs/LokoAmi-0.15.jar`。版本号在 `gradle.properties` 的 `mod_version` 中调整，产物文件名跟随 `archives_base_name`。
+产物位于 `build/libs/LokoAmi-0.16.jar`。版本号在 `gradle.properties` 的 `mod_version` 中调整，产物文件名跟随 `archives_base_name`。
 
 开发时可用 `./gradlew runClient` 直接启动，`./gradlew genSources` 生成可读的 Minecraft 源码（可选，便于调试）。
 
@@ -139,7 +140,7 @@ cd LokoAmi
 
 - **6 个 Custom 模块是空壳**，仅有骨架，暂无实际功能
 - 部分 HUD 元素在极端分辨率下间距需手动微调
-- v0.15 尚未经过大规模实机验证
+- v0.16 尚未经过大规模实机验证
 
 ## 工程笔记（改这个项目时踩过的坑）
 
