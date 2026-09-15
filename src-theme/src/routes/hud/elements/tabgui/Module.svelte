@@ -34,19 +34,24 @@
 <style lang="scss">
     @use "../../../../colors.scss" as *;
 
+    /* Esports：选中用霓虹左竖条 + 淡霓虹底；启用态文字转霓虹 */
     .module {
-        font-weight: 500;
+        font-family: var(--font-display);
+        font-weight: 600;
         color: $tabgui-text-dimmed-color;
-        font-size: 12px;
+        font-size: 12.5px;
+        letter-spacing: 1px;
         padding: 6px 15px 6px 10px;
-        transition: ease color 0.2s;
+        border-left: 2px solid transparent;
+        transition: color .14s ease, background-color .14s ease, border-color .14s ease;
 
         .name {
-            transition: ease transform 0.2s;
+            transition: transform .2s ease;
         }
 
         &.selected {
-            background-color: rgba($tabgui-base-color, 0.36);
+            background-color: $neon-faint;
+            border-left-color: $neon-color;
 
             .name {
                 transform: translateX(5px);
@@ -54,7 +59,8 @@
         }
 
         &.enabled {
-            color: $tabgui-text-color;
+            color: $neon-color;
+            text-shadow: 0 0 10px $neon-glow-sm;
         }
     }
 </style>

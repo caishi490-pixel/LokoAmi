@@ -77,9 +77,12 @@
 <style lang="scss">
     @use "../../../../colors.scss" as *;
 
+    /* Esports：0 圆角 + 右上切角 + 霓虹描边与辉光 */
     .targethud {
-        background-color: rgba($targethud-base-color, 0.68);
-        border-radius: 0;
+        background-color: rgba($panel-color, 0.92);
+        border: 1px solid $neon-dim;
+        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+        box-shadow: 0 0 26px $neon-glow-sm;
         overflow: hidden;
     }
 
@@ -95,8 +98,14 @@
     .name {
         grid-area: b;
         color: $targethud-text-color;
-        font-weight: 500;
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 1px;
         align-self: flex-end;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .health-stats {
@@ -106,8 +115,11 @@
 
         .stat {
             .value {
-                color: $targethud-text-dimmed-color;
-                font-size: 14px;
+                color: $neon-color;
+                font-family: var(--font-display);
+                font-size: 15px;
+                font-weight: 700;
+                font-variant-numeric: tabular-nums;
                 min-width: 18px;
                 display: inline-block;
             }
@@ -131,7 +143,7 @@
         background-image: url("/img/steve.png");
         background-repeat: no-repeat;
         background-size: cover;
-        border-radius: 0;
+        border: 1px solid $neon-dim;
         overflow: hidden;
 
         img {

@@ -121,9 +121,9 @@
 <Menu>
     <OptionBar>
         <Search on:search={handleSearch}/>
-        <SwitchSetting title="Premium Only" bind:value={premiumOnly}/>
-        <SwitchSetting title="Favorites Only" bind:value={favoritesOnly}/>
-        <MultiSelect title="Account Type" options={["Mojang", "TheAltening"]} bind:values={accountTypes}/>
+        <SwitchSetting title="仅正版" bind:value={premiumOnly}/>
+        <SwitchSetting title="仅收藏" bind:value={favoritesOnly}/>
+        <MultiSelect title="账号类型" options={["Mojang", "TheAltening"]} bind:values={accountTypes}/>
     </OptionBar>
 
     <MenuList sortable={accounts.length === renderedAccounts.length} elementCount={accounts.length}
@@ -144,13 +144,13 @@
                     </svelte:fragment>
 
                     <svelte:fragment slot="active-visible">
-                        <MenuListItemButton title="Delete" icon="trash" on:click={() => removeAccount(account.id)}/>
-                        <MenuListItemButton title="Favorite" icon={account.favorite ? "favorite-filled" : "favorite" }
+                        <MenuListItemButton title="删除" icon="trash" on:click={() => removeAccount(account.id)}/>
+                        <MenuListItemButton title="收藏" icon={account.favorite ? "favorite-filled" : "favorite" }
                                             on:click={() => toggleFavorite(account.id, !account.favorite)}/>
                     </svelte:fragment>
 
                     <svelte:fragment slot="always-visible">
-                        <MenuListItemButton title="Login" icon="play" on:click={() => loginToAccount(account.id)}/>
+                        <MenuListItemButton title="登录" icon="play" on:click={() => loginToAccount(account.id)}/>
                     </svelte:fragment>
                 </MenuListItem>
             {/each}
@@ -159,15 +159,15 @@
 
     <BottomButtonWrapper>
         <ButtonContainer>
-            <IconTextButton icon="icon-plus-circle.svg" title="Add" on:click={() => addAccountModalVisible = true}/>
-            <IconTextButton icon="icon-plane.svg" title="Direct" on:click={() => directLoginModalVisible = true}/>
-            <IconTextButton icon="icon-random.svg" disabled={renderedAccounts.length === 0} title="Random"
+            <IconTextButton icon="icon-plus-circle.svg" title="添加" on:click={() => addAccountModalVisible = true}/>
+            <IconTextButton icon="icon-plane.svg" title="直连" on:click={() => directLoginModalVisible = true}/>
+            <IconTextButton icon="icon-random.svg" disabled={renderedAccounts.length === 0} title="随机"
                             on:click={loginToRandomAccount}/>
-            <IconTextButton icon="icon-refresh.svg" title="Restore" on:click={restoreSession}/>
+            <IconTextButton icon="icon-refresh.svg" title="恢复" on:click={restoreSession}/>
         </ButtonContainer>
 
         <ButtonContainer>
-            <IconTextButton icon="icon-back.svg" title="Back" on:click={() => deleteScreen()}/>
+            <IconTextButton icon="icon-back.svg" title="返回" on:click={() => deleteScreen()}/>
         </ButtonContainer>
     </BottomButtonWrapper>
 </Menu>

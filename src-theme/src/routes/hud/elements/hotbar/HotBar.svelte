@@ -120,14 +120,14 @@
                     <Status
                             max={playerData.maxHealth}
                             value={playerData.health}
-                            color="#FC4130"
+                            color="$danger-color"
                             alignRight={false}
                             icon="heart"
                     />
                     <Status
                             max={20}
                             value={playerData.food}
-                            color="#B88458"
+                            color="$warn-color"
                             alignRight={true}
                             icon="food"
                     />
@@ -136,7 +136,7 @@
             {#if playerData.experienceLevel > 0}
                 <Status
                         max={100} value={playerData.experienceProgress * 100}
-                        color="#88C657"
+                        color="$ok-color"
                         alignRight={false}
                         label={playerData.experienceLevel.toString()}
                 />
@@ -183,7 +183,7 @@
   }
 
   .hotbar-elements {
-    background-color: rgba($hotbar-base-color, 0.68);
+    background-color: rgba($panel-color, 0.90);
     position: relative;
     border-radius: 0;
     overflow: hidden;
@@ -211,7 +211,7 @@
     height: 45px;
     width: 45px;
     border-radius: 0;
-    background-color: rgba($hotbar-base-color, 0.68);
+    background-color: rgba($panel-color, 0.90);
     position: absolute;
     bottom: 0;
     left: -65px;
@@ -222,7 +222,7 @@
     font-size: 14px;
     margin: 0 auto 15px;
     font-weight: 500;
-    background-color: rgba($hotbar-base-color, .68);
+    background-color: rgba($panel-color, 0.90);
     padding: 5px 8px;
     border-radius: 0;
     width: max-content;

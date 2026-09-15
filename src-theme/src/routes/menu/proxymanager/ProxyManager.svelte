@@ -187,9 +187,9 @@
 <Menu>
     <OptionBar>
         <Search on:search={handleSearch}/>
-        <SwitchSetting title="Favorites Only" bind:value={favoritesOnly}/>
-        <MultiSelect title="Country" options={allCountries} bind:values={countries}/>
-        <MultiSelect title="Type" options={["SOCKS5", "HTTP"]} bind:values={proxyTypes}/>
+        <SwitchSetting title="仅收藏" bind:value={favoritesOnly}/>
+        <MultiSelect title="国家" options={allCountries} bind:values={countries}/>
+        <MultiSelect title="类型" options={["SOCKS5", "HTTP"]} bind:values={proxyTypes}/>
     </OptionBar>
 
     <MenuList sortable={false} on:sort={handleProxySort}>
@@ -209,15 +209,15 @@
                 </svelte:fragment>
 
                 <svelte:fragment slot="active-visible">
-                    <MenuListItemButton title="Delete" icon="trash" on:click={() => removeProxy(proxy.id)}/>
-                    <MenuListItemButton title="Check" icon="check" on:click={() => checkProxy(proxy.id)}/>
-                    <MenuListItemButton title="Favorite" icon={proxy.favorite ? "favorite-filled" : "favorite" }
+                    <MenuListItemButton title="删除" icon="trash" on:click={() => removeProxy(proxy.id)}/>
+                    <MenuListItemButton title="检测" icon="check" on:click={() => checkProxy(proxy.id)}/>
+                    <MenuListItemButton title="收藏" icon={proxy.favorite ? "favorite-filled" : "favorite" }
                                         on:click={() => toggleFavorite(proxy.id, !proxy.favorite)}/>
-                    <MenuListItemButton title="Edit" icon="pen-2" on:click={() => editProxy(proxy)}/>
+                    <MenuListItemButton title="编辑" icon="pen-2" on:click={() => editProxy(proxy)}/>
                 </svelte:fragment>
 
                 <svelte:fragment slot="always-visible">
-                    <MenuListItemButton title="Connect" icon="play" on:click={() => connectToProxy(proxy.id)}/>
+                    <MenuListItemButton title="连接" icon="play" on:click={() => connectToProxy(proxy.id)}/>
                 </svelte:fragment>
             </MenuListItem>
         {/each}
@@ -225,16 +225,16 @@
 
     <BottomButtonWrapper>
         <ButtonContainer>
-            <IconTextButton icon="icon-plus-circle.svg" title="Add" on:click={() => addProxyModalVisible = true}/>
-            <IconTextButton icon="icon-clipboard.svg" title="Add Clipboard" on:click={() => fromClipboard() } />
-            <IconTextButton icon="icon-random.svg" disabled={renderedProxies.length === 0} title="Random"
+            <IconTextButton icon="icon-plus-circle.svg" title="添加" on:click={() => addProxyModalVisible = true}/>
+            <IconTextButton icon="icon-clipboard.svg" title="从剪贴板添加" on:click={() => fromClipboard() } />
+            <IconTextButton icon="icon-random.svg" disabled={renderedProxies.length === 0} title="随机"
                             on:click={connectToRandomProxy}/>
-            <IconTextButton icon="icon-disconnect.svg" disabled={!isConnectedToProxy} title="Disconnect"
+            <IconTextButton icon="icon-disconnect.svg" disabled={!isConnectedToProxy} title="断开"
                             on:click={disconnectFromProxy}/>
         </ButtonContainer>
 
         <ButtonContainer>
-            <IconTextButton icon="icon-back.svg" title="Back" on:click={() => deleteScreen()}/>
+            <IconTextButton icon="icon-back.svg" title="返回" on:click={() => deleteScreen()}/>
         </ButtonContainer>
     </BottomButtonWrapper>
 </Menu>

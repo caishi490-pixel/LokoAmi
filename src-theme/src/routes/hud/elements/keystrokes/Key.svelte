@@ -26,7 +26,7 @@
 
   .key {
     height: 50px;
-    background-color: rgba($keystrokes-base-color, .68);
+    background-color: rgba($panel-color, 0.90);
     color: $keystrokes-text-color;
     display: flex;
     align-items: center;

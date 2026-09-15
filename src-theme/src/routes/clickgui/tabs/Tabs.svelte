@@ -38,40 +38,43 @@
 <style lang="scss">
   @use "../../../colors.scss" as *;
 
+  /* Esports：0 圆角标签条；选中态用实心霓虹反白 */
   .available-tabs {
     position: fixed;
     top: 15px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 5px;
-    padding: 6px;
-    border-radius: 0;
-    background-color: rgba($clickgui-base-color, 0.85);
-    box-shadow: 0 0 10px rgba($clickgui-base-color, 0.5);
+    gap: 4px;
+    padding: 4px;
+    background-color: rgba($panel-color, 0.92);
+    border: 1px solid $neon-dim;
+    box-shadow: 0 0 24px $neon-glow-sm;
     z-index: 9999999999;
   }
 
   .tab-button {
     background: transparent;
     color: $clickgui-text-dimmed-color;
-    padding: 6px 14px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 0;
+    padding: 7px 18px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: ease background-color 0.2s, ease color 0.2s;
+    transition: background-color .16s ease, color .16s ease, border-color .16s ease;
     border: solid 1px transparent;
 
     &:hover {
       color: $clickgui-text-color;
-      background-color: rgba($clickgui-base-color, 0.7);
+      background-color: $neon-faint;
     }
 
     &.active {
-      color: $clickgui-text-color;
-      background-color: rgba($accent-color, 0.15);
-      border: 1px solid rgba($accent-color, 0.8);
+      color: $void-color;
+      background-color: $neon-color;
+      border: 1px solid $neon-color;
+      box-shadow: 0 0 16px $neon-glow-sm;
     }
   }
 </style>

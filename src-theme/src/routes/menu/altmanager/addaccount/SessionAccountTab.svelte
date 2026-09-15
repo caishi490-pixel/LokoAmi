@@ -20,6 +20,6 @@
 </script>
 
 <Tab>
-    <IconTextInput icon="user" title="Session ID" bind:value={token}/>
-    <ButtonSetting title="Add Account" {disabled} on:click={addAccount} listenForEnter={true} inset={true} />
+    <IconTextInput icon="user" title="会话 ID" bind:value={token}/>
+    <ButtonSetting title="添加账号" {disabled} on:click={addAccount} listenForEnter={true} inset={true} />
 </Tab>

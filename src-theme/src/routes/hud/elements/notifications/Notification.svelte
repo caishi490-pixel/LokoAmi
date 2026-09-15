@@ -11,6 +11,9 @@
 </div>
 
 <style lang="scss">
+  
+  @use "../../../../colors.scss" as *;
+/* Esports：0 圆角 + 右上切角 + 霓虹描边与辉光 */
   .notification {
     display: grid;
     grid-template-areas:
@@ -18,8 +21,10 @@
             "a c";
     grid-template-columns: max-content 1fr;
     column-gap: 10px;
-    background: rgba(0, 0, 0, 0.68);
-    border-radius: 0;
+    background: rgba($panel-color, 0.94);
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    box-shadow: 0 0 22px $neon-glow-sm;
     width: 300px;
     overflow: hidden;
     padding: 10px;
@@ -38,17 +43,17 @@
     background-image: url("/img/hud/notification/icon-toggle.svg");
 
     &.success {
-      background-color: #4dac68;
+      background-color: $ok-color;
       background-image: url("/img/hud/notification/icon-success.svg");
     }
 
     &.error {
-      background-color: #fc4130;
+      background-color: $danger-color;
       background-image: url("/img/hud/notification/icon-error.svg");
     }
 
     &.info {
-      background-color: #F0508C;
+      background-color: $neon-color;
       background-image: url("/img/hud/notification/icon-info.svg");
     }
 
@@ -68,7 +73,7 @@
     }
 
     &.enabled {
-      background-color: #4dac68;
+      background-color: $ok-color;
 
       &::after {
         left: 62%;
@@ -76,7 +81,7 @@
     }
 
     &.disabled {
-      background-color: #fc4130;
+      background-color: $danger-color;
 
       &::after {
         left: 38%;
@@ -86,14 +91,16 @@
 
   .title {
     grid-area: b;
+    font-family: var(--font-display);
     font-size: 14px;
     color: white;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 1px;
   }
 
   .message {
     grid-area: c;
     font-size: 12px;
-    color: #cbd1e3;
+    color: #94A3B8;
   }
 </style>

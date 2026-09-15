@@ -16,6 +16,6 @@
 </script>
 
 <Tab>
-    <ButtonSetting title="Link Account" on:click={addAccount} {loading}/>
-    <ButtonSetting title="Copy URL" secondary={true} on:click={copyLoginUrl} inset={true}/>
+    <ButtonSetting title="关联账号" on:click={addAccount} {loading}/>
+    <ButtonSetting title="复制链接" secondary={true} on:click={copyLoginUrl} inset={true}/>
 </Tab>

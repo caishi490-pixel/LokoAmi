@@ -65,7 +65,7 @@
     left: 10%;
     width: 80%;
     height: 2px;
-    background-color: rgba($item-damage-base-color, 0.68);
+    background-color: rgba($panel-color, 0.68);
   }
 
   .durability {

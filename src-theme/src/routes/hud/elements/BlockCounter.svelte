@@ -39,7 +39,7 @@
   @use "../../../colors.scss" as *;
 
   .counter {
-    background-color: rgba($blockcounter-base-color, 0.68);
+    background-color: rgba($panel-color, 0.90);
     border-radius: 0;
     white-space: nowrap;
     padding: 5px 8px;

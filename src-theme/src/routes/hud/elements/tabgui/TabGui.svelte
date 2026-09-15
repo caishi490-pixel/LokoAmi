@@ -112,23 +112,25 @@
 <style lang="scss">
     @use "../../../../colors.scss" as *;
 
+    /* Esports：整块面板 0 圆角 + 右上切角 + 霓虹描边 */
     .tabgui {
         display: flex;
+        background-color: rgba($panel-color, 0.88);
+        border: 1px solid $neon-dim;
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
     }
 
     .categories {
-        background-clip: content-box;
         display: flex;
         flex-direction: column;
-        border-radius: 0;
         overflow: hidden;
     }
 
+    /* 展开的模块列表：以霓虹竖条与分类栏分隔 */
     .modules {
-      background-clip: content-box;
-      background-color: rgba($tabgui-base-color, 0.5);
-      margin-left: 6px;
-      border-radius: 0;
+      background-color: rgba($void-color, 0.9);
+      margin-left: 1px;
+      border-left: 2px solid $neon-color;
       min-width: 100px;
       display: flex;
       flex-direction: column;

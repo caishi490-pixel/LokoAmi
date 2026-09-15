@@ -230,12 +230,14 @@
 <style lang="scss">
   @use "../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 右上切角 + 霓虹描边与辉光（与 Module 卡片同族） */
   .panel {
-    border-radius: 0;
     width: 250px;
     position: absolute;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba($clickgui-base-color, 0.5);
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    box-shadow: 0 0 24px $neon-glow-sm;
     will-change: transform;
     transition: none;
     user-select: none;
@@ -246,15 +248,17 @@
     grid-template-columns: max-content 1fr max-content;
     align-items: center;
     column-gap: 12px;
-    background-color: rgba($clickgui-base-color, 0.9);
-    border-bottom: solid 2px $accent-color;
+    background-color: rgba($panel-color, 0.95);
+    border-bottom: solid 2px $neon-color;
     padding: 10px 15px;
     cursor: grab;
 
     .category {
+      font-family: var(--font-display);
       font-size: 14px;
       color: $clickgui-text-color;
-      font-weight: 500;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
   }
 
@@ -264,7 +268,7 @@
     max-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: rgba($clickgui-base-color, 0.8);
+    background-color: rgba($panel-color, 0.88);
 
     &.expanded {
       max-height: 545px;

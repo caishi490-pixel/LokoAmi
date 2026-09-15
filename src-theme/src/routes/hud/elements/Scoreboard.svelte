@@ -41,16 +41,22 @@
 <style lang="scss">
   @use "../../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 右上切角 + 霓虹描边；数字等宽对齐 */
   .scoreboard {
     width: max-content;
-    border-radius: 0;
     overflow: hidden;
     font-size: 14px;
+    font-family: var(--font-display);
+    border: 1px solid $neon-dim;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    box-shadow: 0 0 20px $neon-glow-sm;
   }
 
   .entries {
-    background-color: rgba($scoreboard-base-color, 0.5);
+    background-color: rgba($panel-color, 0.86);
     padding: 10px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
   }
 
   .row {
@@ -61,7 +67,10 @@
 
   .header {
     text-align: center;
-    background-color: rgba($scoreboard-base-color, 0.68);
-    padding: 7px 10px;
+    background-color: $neon-color;
+    color: $void-color;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 10px;
   }
 </style>

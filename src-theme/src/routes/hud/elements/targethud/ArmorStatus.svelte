@@ -38,7 +38,7 @@
         row-gap: 1px;
 
         .point {
-            background-color: rgba($targethud-base-color, 0.3);
+            background-color: rgba($panel-color, 0.90);
             height: 3px;
             width: 5px;
             border-radius: 0;

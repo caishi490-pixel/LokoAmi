@@ -133,13 +133,13 @@
         </div>
         <div class="buttons">
             <button class="icon-button" type="button" on:click={loginWithRandomUsername}>
-                <ToolTip text="Random username"/>
+                <ToolTip text="随机用户名"/>
 
                 <img class="icon" src="img/menu/account/icon-random.svg" alt="random username">
             </button>
             <button class="icon-button" disabled={inAccountManager} type="button"
                     on:click={() => openScreen("altmanager")}>
-                <ToolTip text="Change account"/>
+                <ToolTip text="切换账号"/>
 
                 <img class="icon" src="img/menu/icon-pen.svg" alt="change account">
             </button>
@@ -149,7 +149,7 @@
     {#if expanded}
         <div class="quick-switcher" transition:fade|global={{ duration: 200, easing: quintOut }}>
             <!-- svelte-ignore a11y_autofocus -->
-            <input type="text" autofocus class="account-search" placeholder="Search..." bind:value={searchQuery}>
+            <input type="text" autofocus class="account-search" placeholder="搜索…" bind:value={searchQuery}>
 
             {#if accounts.length > 0}
                 {#if renderedAccounts.length > 0}

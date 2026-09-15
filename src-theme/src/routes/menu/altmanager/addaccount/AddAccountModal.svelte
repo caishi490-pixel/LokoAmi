@@ -40,6 +40,6 @@
     }
 </script>
 
-<Modal title="Add Account" bind:visible={visible}>
+<Modal title="添加账号" bind:visible={visible}>
     <Tabs {tabs} {activeTab} on:changeTab={handleChangeTab}/>
 </Modal>

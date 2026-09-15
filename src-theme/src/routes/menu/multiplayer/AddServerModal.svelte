@@ -38,9 +38,9 @@
     }
 </script>
 
-<Modal bind:visible={visible} title="Add Server" on:close={cleanUp}>
-    <IconTextInput title="Name" icon="info" bind:value={name}/>
-    <IconTextInput title="Address" icon="server" bind:value={address}/>
-    <SingleSelect title="Server Resource Packs" options={["Prompt", "Enabled", "Disabled"]} bind:value={resourcePackPolicy}/>
-    <ButtonSetting title="Add Server" on:click={addServer} {disabled} listenForEnter={true} inset={true}/>
+<Modal bind:visible={visible} title="添加服务器" on:close={cleanUp}>
+    <IconTextInput title="名称" icon="info" bind:value={name}/>
+    <IconTextInput title="地址" icon="server" bind:value={address}/>
+    <SingleSelect title="服务器资源包" options={["Prompt", "Enabled", "Disabled"]} bind:value={resourcePackPolicy}/>
+    <ButtonSetting title="添加服务器" on:click={addServer} {disabled} listenForEnter={true} inset={true}/>
 </Modal>

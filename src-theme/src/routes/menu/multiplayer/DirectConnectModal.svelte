@@ -26,7 +26,7 @@
     }
 </script>
 
-<Modal bind:visible={visible} title="Direct Connection">
-    <IconTextInput title="Address" icon="server" bind:value={address}/>
-    <ButtonSetting title="Join Server" on:click={connect} {disabled} listenForEnter={true} inset={true}/>
+<Modal bind:visible={visible} title="直接连接">
+    <IconTextInput title="地址" icon="server" bind:value={address}/>
+    <ButtonSetting title="加入服务器" on:click={connect} {disabled} listenForEnter={true} inset={true}/>
 </Modal>

@@ -29,17 +29,20 @@
 <style lang="scss">
     @use "../../../../colors.scss" as *;
 
+    /* 选中用霓虹底色从右侧滑入；0 圆角，字距与字体走电竞规范 */
     .name {
-        font-weight: 500;
+        font-family: var(--font-display);
+        font-weight: 600;
         color: $tabgui-text-color;
-        font-size: 14px;
+        font-size: 13px;
+        letter-spacing: 1px;
         width: 100%;
         padding: 7px 12px 7px 12px;
 
         background: linear-gradient(
             to left,
-            rgba(0, 0, 0, 0.5) 50%,
-            $accent-color 50%
+            rgba($void-color, 0.88) 50%,
+            $neon-color 50%
         );
         background-size: 200% 100%;
         background-position: right bottom;
@@ -53,11 +56,14 @@
 
         &.selected .name {
             background-position: left bottom;
+            color: $void-color;
+            font-weight: 700;
         }
     }
 
     .icon {
-        background-color: rgba($tabgui-base-color, 0.68);
+        background-color: rgba($void-color, 0.8);
+        border-right: 1px solid $neon-dim;
         width: 62px;
         position: relative;
 

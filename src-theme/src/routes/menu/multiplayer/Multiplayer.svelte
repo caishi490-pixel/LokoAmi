@@ -177,18 +177,18 @@
     <OptionBar>
         <Search on:search={handleSearch}/>
 
-        <SwitchSetting title="Online only" bind:value={onlineOnly}/>
+        <SwitchSetting title="仅在线" bind:value={onlineOnly}/>
         <Divider/>
-        <SwitchSetting title="Auto Config" bind:value={autoConfig} on:change={updateAutoConfigState}/>
+        <SwitchSetting title="自动配置" bind:value={autoConfig} on:change={updateAutoConfigState}/>
         {#if spooferConfigurable}
             <WrappedSetting bind:value={spooferConfigurable} on:change={updateSpooferSettings} path="multiplayer.spoofer"/>
         {/if}
         {#if clientInfo && clientInfo.viaFabricPlus}
-            <SingleSelect title="Version" value={selectedProtocol.name} options={protocols.map(p => p.name)}
+            <SingleSelect title="版本" value={selectedProtocol.name} options={protocols.map(p => p.name)}
                           on:change={changeProtocolVersion}/>
             <ButtonSetting title="ViaFabricPlus" on:click={() => openScreen("viafabricplus_protocol_selection")}/>
         {:else}
-            <ButtonSetting title="Install ViaFabricPlus" on:click={() => browse("VIAFABRICPLUS")}/>
+            <ButtonSetting title="安装 ViaFabricPlus" on:click={() => browse("VIAFABRICPLUS")}/>
         {/if}
     </OptionBar>
 
@@ -215,12 +215,12 @@
                     </svelte:fragment>
 
                     <svelte:fragment slot="active-visible">
-                        <MenuListItemButton title="Remove" icon="trash" on:click={() => removeServer(server.id)}/>
-                        <MenuListItemButton title="Edit" icon="pen-2" on:click={() => editServer(server)}/>
+                        <MenuListItemButton title="移除" icon="trash" on:click={() => removeServer(server.id)}/>
+                        <MenuListItemButton title="编辑" icon="pen-2" on:click={() => editServer(server)}/>
                     </svelte:fragment>
 
                     <svelte:fragment slot="always-visible">
-                        <MenuListItemButton title="Join" icon="play" on:click={() => connectToServer(server.address)}/>
+                        <MenuListItemButton title="加入" icon="play" on:click={() => connectToServer(server.address)}/>
                     </svelte:fragment>
                 </MenuListItem>
             {/each}
@@ -229,13 +229,13 @@
 
     <BottomButtonWrapper>
         <ButtonContainer>
-            <IconTextButton icon="icon-plus-circle.svg" title="Add" on:click={() => addServerModalVisible = true}/>
-            <IconTextButton icon="icon-plane.svg" title="Direct" on:click={() => directConnectModalVisible = true}/>
-            <IconTextButton icon="icon-refresh.svg" title="Refresh" on:click={refreshServers}/>
+            <IconTextButton icon="icon-plus-circle.svg" title="添加" on:click={() => addServerModalVisible = true}/>
+            <IconTextButton icon="icon-plane.svg" title="直连" on:click={() => directConnectModalVisible = true}/>
+            <IconTextButton icon="icon-refresh.svg" title="刷新" on:click={refreshServers}/>
         </ButtonContainer>
 
         <ButtonContainer>
-            <IconTextButton icon="icon-back.svg" title="Back" on:click={() => openScreen("title")}/>
+            <IconTextButton icon="icon-back.svg" title="返回" on:click={() => openScreen("title")}/>
         </ButtonContainer>
     </BottomButtonWrapper>
 </Menu>

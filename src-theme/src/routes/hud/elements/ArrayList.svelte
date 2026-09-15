@@ -72,18 +72,27 @@
 <style lang="scss">
   @use "../../../colors.scss" as *;
 
+  /* Esports：0 圆角 + 右上切角 + 左侧霓虹状态条。
+     模块名多为中文，用 --font-display 让拉丁名拿到 Rajdhani、中文自动回退。
+     数字走等宽，模块计数／延迟跳动时不抖。 */
   .module {
-    background-color: rgba($arraylist-base-color, 0.68);
+    background-color: rgba($panel-color, 0.82);
     color: $arraylist-text-color;
+    font-family: var(--font-display);
     font-size: 14px;
-    border-radius: 0;
-    padding: 5px 8px;
-    border-left: solid 4px $accent-color;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+    padding: 4px 11px 4px 9px;
+    border-left: solid 3px $neon-color;
     width: max-content;
-    font-weight: 500;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    box-shadow: -8px 0 14px -8px $neon-glow;
   }
 
   .tag {
     color: $arraylist-tag-color;
+    font-size: 12px;
+    font-weight: 500;
   }
 </style>

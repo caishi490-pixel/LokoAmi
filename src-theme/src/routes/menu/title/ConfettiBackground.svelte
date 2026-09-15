@@ -9,9 +9,9 @@
 
     const colors = [
         "#F0508C",
-        "#38BDF8",
-        "#67d24a",
-        "#ffd166",
+        "#FF2D55",
+        "#39FF14",
+        "#F5A623",
         "#ffffff",
         "#8ad9ff",
         "#ff8fab"

@@ -19,9 +19,9 @@
 </script>
 
 <Tab>
-    <IconTextInput icon="user" title="Username" pattern={"[a-zA-Z0-9_]{1,16}"} bind:value={username} maxLength={16}>
-        <IconButton icon="random" title="Random" on:click={generateRandomUsername}/>
+    <IconTextInput icon="user" title="用户名" pattern={"[a-zA-Z0-9_]{1,16}"} bind:value={username} maxLength={16}>
+        <IconButton icon="random" title="随机" on:click={generateRandomUsername}/>
     </IconTextInput>
-    <SwitchSetting title="Use online UUID" bind:value={online}/>
-    <ButtonSetting title="Login" on:click={login} listenForEnter={true} inset={true}/>
+    <SwitchSetting title="使用在线 UUID" bind:value={online}/>
+    <ButtonSetting title="登录" on:click={login} listenForEnter={true} inset={true}/>
 </Tab>

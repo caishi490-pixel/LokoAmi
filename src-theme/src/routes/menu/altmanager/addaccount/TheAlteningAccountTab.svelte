@@ -22,7 +22,7 @@
 </script>
 
 <Tab>
-    <IconTextInput icon="user" title="Token" bind:value={token}/>
-    <ButtonSetting {disabled} title="Add Account" on:click={addAccount} listenForEnter={true} inset={true} {loading}/>
-    <ButtonSetting title="Get Account Token" on:click={() => browse("THE_ALTENING")} secondary={true}/>
+    <IconTextInput icon="user" title="令牌" bind:value={token}/>
+    <ButtonSetting {disabled} title="添加账号" on:click={addAccount} listenForEnter={true} inset={true} {loading}/>
+    <ButtonSetting title="获取账号令牌" on:click={() => browse("THE_ALTENING")} secondary={true}/>
 </Tab>

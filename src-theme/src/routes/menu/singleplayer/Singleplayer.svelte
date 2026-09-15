@@ -70,9 +70,9 @@
 <Menu>
     <OptionBar>
         <Search on:search={handleSearch}/>
-        <MultiSelect title="Game Mode" options={["Survival", "Creative", "Adventure", "Spectator"]}
+        <MultiSelect title="游戏模式" options={["Survival", "Creative", "Adventure", "Spectator"]}
                      bind:values={gameModes}/>
-        <MultiSelect title="Difficulty" options={["Peaceful", "Easy", "Normal", "Hard"]} bind:values={difficulties}/>
+        <MultiSelect title="难度" options={["Peaceful", "Easy", "Normal", "Hard"]} bind:values={difficulties}/>
     </OptionBar>
 
     <MenuList sortable={false} on:sort={handleWorldSort}>
@@ -95,12 +95,12 @@
                 </svelte:fragment>
 
                 <svelte:fragment slot="active-visible">
-                    <MenuListItemButton title="Delete" icon="trash" on:click={() => removeWorld(world.name)}/>
-                    <MenuListItemButton title="Edit" icon="pen-2" on:click={() => editWorld(world.name)}/>
+                    <MenuListItemButton title="删除" icon="trash" on:click={() => removeWorld(world.name)}/>
+                    <MenuListItemButton title="编辑" icon="pen-2" on:click={() => editWorld(world.name)}/>
                 </svelte:fragment>
 
                 <svelte:fragment slot="always-visible">
-                    <MenuListItemButton title="Open" icon="play" on:click={() => openWorld(world.name)}/>
+                    <MenuListItemButton title="打开" icon="play" on:click={() => openWorld(world.name)}/>
                 </svelte:fragment>
             </MenuListItem>
         {/each}
@@ -108,11 +108,11 @@
 
     <BottomButtonWrapper>
         <ButtonContainer>
-            <IconTextButton icon="icon-plus-circle.svg" title="Add" on:click={() => openScreen("create_world")}/>
+            <IconTextButton icon="icon-plus-circle.svg" title="添加" on:click={() => openScreen("create_world")}/>
         </ButtonContainer>
 
         <ButtonContainer>
-            <IconTextButton icon="icon-back.svg" title="Back" on:click={() => openScreen("title")}/>
+            <IconTextButton icon="icon-back.svg" title="返回" on:click={() => openScreen("title")}/>
         </ButtonContainer>
     </BottomButtonWrapper>
 </Menu>

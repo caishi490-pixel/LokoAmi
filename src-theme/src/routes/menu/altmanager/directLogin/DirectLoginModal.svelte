@@ -28,6 +28,6 @@
     }
 </script>
 
-<Modal title="Direct Login" bind:visible={visible}>
+<Modal title="直接登录" bind:visible={visible}>
     <Tabs {tabs} {activeTab} on:changeTab={handleChangeTab}/>
 </Modal>

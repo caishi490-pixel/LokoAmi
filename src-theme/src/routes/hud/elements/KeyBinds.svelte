@@ -57,7 +57,7 @@
   }
 
   .header {
-    background-color: rgba($keybinds-base-color, 0.68);
+    background-color: rgba($panel-color, 0.90);
     padding: 7px 10px;
     display: flex;
     justify-content: space-between;
@@ -75,7 +75,7 @@
   }
 
   .entries {
-    background-color: rgba($scoreboard-base-color, 0.5);
+    background-color: rgba($panel-color, 0.90);
     padding: 6px 10px;
     color: $keybinds-text-color;
 

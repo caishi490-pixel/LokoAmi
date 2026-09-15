@@ -8,7 +8,7 @@
     }>();
 </script>
 
-<input class="search" type="text" placeholder="Search..." bind:value={value}
+<input class="search" type="text" placeholder="搜索…" bind:value={value}
        on:input={() => dispatch("search", {query: value})} spellcheck="false">
 
 <style lang="scss">

@@ -34,13 +34,13 @@
 </script>
 
 <div class="reconnect">
-    <ButtonSetting title="Reconnect" on:click={reconnectToServer}
+    <ButtonSetting title="重新连接" on:click={reconnectToServer}
                    disabled={$isLoggingIn}/>
-    <ButtonSetting title="Restore initial session" on:click={restoreSession}
+    <ButtonSetting title="恢复初始会话" on:click={restoreSession}
                    disabled={$isLoggingIn}/>
-    <ButtonSetting title="Reconnect with random account" on:click={reconnectWithRandomAccount}
+    <ButtonSetting title="用随机账号重连" on:click={reconnectWithRandomAccount}
                    disabled={premiumAccounts.length === 0 || $isLoggingIn}/>
-    <ButtonSetting title="Reconnect with random username" on:click={reconnectWithRandomUsername}
+    <ButtonSetting title="用随机用户名重连" on:click={reconnectWithRandomUsername}
                    disabled={$isLoggingIn}/>
 </div>
 

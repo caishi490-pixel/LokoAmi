@@ -55,14 +55,14 @@
     });
 </script>
 
-<Modal title="Edit Proxy" bind:visible={visible}>
+<Modal title="编辑代理" bind:visible={visible}>
     <IconTextInput title="Host:Port" icon="server" pattern=".+:[0-9]+" bind:value={hostPort}/>
-    <SingleSelect title="Proxy Type" options={["HTTP", "SOCKS5"]} bind:value={proxyType}/>
-    <SwitchSetting title="Requires Authentication" bind:value={requiresAuthentication}/>
+    <SingleSelect title="代理类型" options={["HTTP", "SOCKS5"]} bind:value={proxyType}/>
+    <SwitchSetting title="需要认证" bind:value={requiresAuthentication}/>
     {#if requiresAuthentication}
-        <IconTextInput title="Username" icon="user" bind:value={username}/>
-        <IconTextInput title="Password" icon="lock" type="password" bind:value={password}/>
+        <IconTextInput title="用户名" icon="user" bind:value={username}/>
+        <IconTextInput title="密码" icon="lock" type="password" bind:value={password}/>
     {/if}
-    <SwitchSetting title="Forward Microsoft Authentication" bind:value={forwardAuthentication}/>
-    <ButtonSetting title="Edit Proxy" {disabled} on:click={editProxy} listenForEnter={true} {loading}/>
+    <SwitchSetting title="转发微软验证" bind:value={forwardAuthentication}/>
+    <ButtonSetting title="编辑代理" {disabled} on:click={editProxy} listenForEnter={true} {loading}/>
 </Modal>
