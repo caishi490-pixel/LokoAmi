@@ -19,3 +19,8 @@
 .bak-*/
 *.bak-*
 build-log.txt
+
+# --- 离线构建（assemble -Poffline）用的 JCEF 运行时载荷 ---
+# 约 330 MB，远超 GitHub 单文件 100 MB 上限，只作为发布附件分发，不进仓库。
+# 需要离线构建时，把 JCEF commit 目录的内容放到 mcef-offline/mcef/ 下即可。
+/mcef-offline/

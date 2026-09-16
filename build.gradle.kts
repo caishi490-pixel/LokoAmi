@@ -394,6 +394,14 @@ tasks.jar {
         }
     }
 
+    // Offline build (`./gradlew assemble -Poffline`): bundle the JCEF runtime so the client works
+    // without ever contacting mcef's download hosts. The payload is gitignored (it is ~330 MB) and
+    // mirrors a JCEF commit directory below `mcef/`, which is where CefBrowserBackend extracts it.
+    if (project.hasProperty("offline")) {
+        logger.lifecycle("Offline build: bundling the JCEF runtime from mcef-offline/")
+        from("mcef-offline")
+    }
+
     from(files(mappingFiles.get())) {
         include("mappings/mappings.tiny")
     }
